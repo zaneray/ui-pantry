@@ -1,0 +1,7 @@
+{
+  "name": "@zaneray/vue-base-counter",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  }
+}
