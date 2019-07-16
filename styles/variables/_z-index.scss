@@ -1,0 +1,63 @@
+$z-index-gap: 100;
+$z-index-level-below-page: 100;
+$z-index-level-page: $z-index-level-below-page + $z-index-gap;
+$z-index-level-footer: $z-index-level-page + $z-index-gap;
+$z-index-level-header: $z-index-level-footer + $z-index-gap;
+$z-index-level-sidebar: $z-index-level-header + $z-index-gap;
+$z-index-level-modal: $z-index-level-sidebar + $z-index-gap;
+$z-index-level-loading: $z-index-level-modal + $z-index-gap;
+$z-index-level-super: $z-index-level-modal + $z-index-gap;
+
+//Create Z-index map here, by page section
+//Below Page
+
+
+
+//Page
+$main-page-z-index: $z-index-level-page;
+$prismic-edit-z-index:$z-index-level-modal + 1;
+$image-banner-content-z-index: $main-page-z-index + 1;
+$social-sticky-z-index: $z-index-level-page + 5;
+
+$z-index-bg: $main-page-z-index - $z-index-gap;
+$z-index-intro: $main-page-z-index;
+$z-index-pledge: $z-index-intro + 5;
+$z-index-social: $z-index-pledge + 5;
+$z-index-map: $z-index-social + 5;
+$z-index-about: $z-index-map + 5;
+$z-index-clouds: $z-index-bg;
+
+
+
+$callout-bg-z-index: $main-page-z-index;
+$callout-content-z-index: $callout-bg-z-index + 1;
+
+$home-carousel-z-index: $main-page-z-index;
+$home-carousel-slide-z-index: $home-carousel-z-index + 10;
+$home-carousel-slide-active-z-index: $home-carousel-slide-z-index + 1;
+$home-carousel-nav-z-index: $home-carousel-z-index + 20;
+
+
+  //Footer
+$footer-z-index: $z-index-level-footer;
+
+
+
+//Header
+$masthead-z-index: $z-index-level-header;
+$masthead-logo-z-index: $masthead-z-index + 10;
+$masthead-link-z-index: $masthead-z-index + 10;
+$subnav-z-index: $masthead-z-index + 5;
+$subnav-image-z-index: $masthead-z-index + 4;
+
+
+
+//Sidebar
+
+
+
+//Modal
+$global-modal-z-index: $z-index-level-modal;
+
+
+//Super

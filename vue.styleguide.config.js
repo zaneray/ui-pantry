@@ -21,8 +21,12 @@ module.exports = {
         },
         // Other loaders that are needed for your components
         {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader'
+          test: /\.(css?|scss)(\?.*)?$/,
+          loaders: [
+            "vue-style-loader",
+            "css-loader",
+            "sass-loader"
+          ]
         }
       ]
     },
