@@ -1,0 +1,98 @@
+@import "../../../../styles/imports";
+
+$sg-color-primary: #25687d;
+$sg-color-secondary: #da902d;
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-family-heading;
+
+    a {
+        font-family: $font-family-heading;
+    }
+}
+
+
+a,
+label {
+    font-family: Helvetica;
+}
+
+main[class^="rsg--content"] {
+    padding: 0;
+}
+
+section[class^="rsg--root"] > div[class^="rsg--wrapper"],
+header[class^="rsg--header"] {
+    width: 100%;
+    background-color: $color-darker;
+    padding: 40px 30px;
+    line-height: 1;
+    color: #fff;
+}
+
+div[class^="rsg--pathline"],
+div[class^="rsg--pathline"] button,
+div[class^="rsg--wrapper"] a {
+    color: #fff;
+}
+
+article[class^="rsg--root"],
+div[class^="rsg--docs"],
+div[class^="rsg--tabs"] {
+    padding: 15px 30px;
+    background: $color-lightest;
+}
+
+div[class^="rsg--tabs"] + button,
+li[class^='rsg--item'] ul[class^='rsg--list'],
+footer[class^="rsg--footer"] {
+    display: none;
+}
+
+div[class^='rsg--root']{
+    margin-bottom: 60px;
+}
+
+button[class^='rsg--button']{
+    text-transform: none;
+}
+
+li[class^='rsg--item'].vueds-active ul[class^='rsg--list']{
+    display: block;
+}
+
+a[class*='rsg--heading']{
+    font-size: 18px !important;
+}
+
+a[class^='rsg--link']{
+    display: block;
+    width: 100% !important;
+    color: $sg-color-primary;
+}
+
+.vueds-active > a[class*='rsg--heading'] {
+    font-weight: bold;
+}
+
+.vueds-active[class*='rsg--isChild'] > a {
+    color: $sg-color-secondary !important;
+}
+
+
+.rsg--sidebar-4 {
+    background: $color-light !important;
+}
+
+.rsg--root-10 {
+    background: $color-lightest !important;
+}
+
+

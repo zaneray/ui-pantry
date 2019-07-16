@@ -1,0 +1,10 @@
+{
+  "name": "@zaneray/vue-base-text-input",
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@zaneray/vue-base-input-wrapper": "^0.1.0"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "zaneray-ui-pantry",
   "private": true,
   "scripts": {
     "vue:styleguide": "vue-styleguidist server --open --config ./vue.styleguide.config.js",
