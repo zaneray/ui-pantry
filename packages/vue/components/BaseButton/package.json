@@ -1,5 +1,5 @@
 {
-  "name": "@zaneray/vue/base-button",
+  "name": "@zaneray/vue-base-button",
   "version": "0.0.0",
   "publishConfig": {
     "access": "public"
