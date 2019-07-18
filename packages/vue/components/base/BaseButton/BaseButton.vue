@@ -11,7 +11,7 @@
 
 <script>
   /**
-   *
+   * BaseButton is a simple button component built to handle all use cases of a basic button
    */
 
   export default {
@@ -20,7 +20,7 @@
       /**
        * Theme of button to display (default, action, info, transparent, negative)
        */
-      buttonTheme: {
+      theme: {
         type: String,
         default: 'default',
         validator: function (value) {
@@ -112,7 +112,7 @@
     computed: {
       btnClass() {
         return [
-          'btn', `btn-${this.size}`, `btn-${this.buttonTheme}`,
+          'btn', `btn-${this.size}`, `btn-${this.theme}`,
           {
             'disabled': this.disabled,
             'active': this.active,
@@ -244,10 +244,10 @@
     #### Button Themes
     ```jsx
     <BaseButton :label="'Default'" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Action'" button-theme="action" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Info'" button-theme="info" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Transparent'" button-theme="transparent" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Negative'" button-theme="negative" style="margin-bottom: 10px"></BaseButton>
+    <BaseButton :label="'Action'" theme="action" style="margin-bottom: 10px"></BaseButton>
+    <BaseButton :label="'Info'" theme="info" style="margin-bottom: 10px"></BaseButton>
+    <BaseButton :label="'Transparent'" theme="transparent" style="margin-bottom: 10px"></BaseButton>
+    <BaseButton :label="'Negative'" theme="negative" style="margin-bottom: 10px"></BaseButton>
     ```
 
     #### Button Sizes
