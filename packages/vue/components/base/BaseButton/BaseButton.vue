@@ -14,8 +14,7 @@
    * BaseButton is a simple button component built to handle all use cases of a basic button
    */
 
-  export default {
-    name: "BaseButton",
+  export const buttonProps = {
     props: {
       /**
        * Theme of button to display (default, action, info, transparent, negative)
@@ -108,7 +107,12 @@
         type: Boolean,
         default: false
       }
-    },
+    }
+  }
+
+  export default {
+    name: "BaseButton",
+    mixins: [buttonProps],
     computed: {
       btnClass() {
         return [
@@ -126,7 +130,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../../styles/imports';
+    @import '../../styles/imports';
 
     .btn {
         display: block;

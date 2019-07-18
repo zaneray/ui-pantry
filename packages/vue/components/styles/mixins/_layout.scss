@@ -1,0 +1,112 @@
+//these create a flexibile gutter system that is viewport based at smaller sizes and rem based at very large sizes.
+
+@mixin column-gutter($gutter: $gutter, $size: 2) {
+    padding-left: $gutter/$size;
+    padding-right: $gutter/$size;
+    @media(min-width: $screen-xl) {
+        padding-left: $gutter-large/$size;
+        padding-right: $gutter-large/$size;
+    }
+}
+
+@mixin row-gutter($gutter: $gutter, $size: -2) {
+    margin-left: $gutter/$size;
+    margin-right: $gutter/$size;
+    @media(min-width: $screen-xl) {
+        margin-left: $gutter-large/$size;
+        margin-right: $gutter-large/$size;
+    }
+}
+
+//This is a mixing to create the flexible container padding. larger vw based at mobile vw based at medium, rem based at xl
+@mixin container-padding() {
+    padding-left: $container-padding-sm;
+    padding-right: $container-padding-sm;
+    @media (min-width: $screen-sm) {
+        padding-left: $container-padding;
+        padding-right: $container-padding;
+    }
+    @media (min-width: $screen-xl) {
+        padding-left: $container-padding-lg;
+        padding-right: $container-padding-lg;
+    }
+}
+
+/*
+This is just use to reduce code in the component padding mixin
+ */
+
+@mixin component-padding-config($position, $margin) {
+    @if $position == top {
+        padding-top: $margin;
+    } @else if $position == bottom {
+        padding-bottom: $margin;
+    } @else {
+        padding-top: $margin;
+        padding-bottom: $margin;
+    }
+}
+
+
+/*
+Used for default component padding with options to just set it for the top or bottom of an element
+ */
+
+@mixin component-padding($position: null) {
+    @include component-padding-config($position, $component-padding-small);
+
+    @media (min-width: $screen-sm) {
+        @include component-padding-config($position, $component-padding-medium);
+    }
+
+    @media (min-width: $screen-lg) {
+        @include component-padding-config($position, $component-padding-large);
+    }
+}
+
+
+/*
+This is just use to reduce code in the component margin mixin
+ */
+
+@mixin component-margin-config($position, $margin) {
+    @if $position == top {
+        margin-top: $margin;
+    } @else if $position == bottom {
+        margin-bottom: $margin;
+    } @else {
+        margin-top: $margin;
+        margin-bottom: $margin;
+    }
+}
+
+
+/*
+Used for default component margin with options to just set it for the top or bottom of an element
+ */
+
+@mixin component-margin($position) {
+    @include component-margin-config($position, $component-padding-small);
+
+    @media (min-width: $screen-sm) {
+        @include component-margin-config($position, $component-padding-medium);
+    }
+
+    @media (min-width: $screen-lg) {
+        @include component-margin-config($position, $component-padding-large);
+    }
+}
+
+@mixin company-logos() {
+    width: 68px;
+    height: 110px;
+    margin: 0 $margin-small;
+    @media(min-width: $screen-md) {
+        width: 100px;
+        height: 130px;
+    }
+}
+
+
+
+

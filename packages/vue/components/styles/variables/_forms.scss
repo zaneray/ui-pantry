@@ -1,0 +1,24 @@
+$input-border-color: $color-medium;
+$input-border-color-focus: $color-darker;
+$input-padding-vertical-sm: .5em;
+$input-padding-horizontal-sm: .5em;
+$input-padding-vertical: .75em;
+$input-padding-horizontal: 1em;
+$input-padding-vertical-lg: 1em;
+$input-padding-horizontal-lg: 1.5em;
+
+$input-padding-sm:  $input-padding-vertical-sm $input-padding-horizontal-sm;
+$input-padding: $input-padding-vertical $input-padding-horizontal;
+$input-padding-lg: $input-padding-vertical-lg $input-padding-horizontal-lg;
+
+/*$button-padding-sm:  $input-padding-vertical-sm ($input-padding-horizontal-sm * 2.5);
+$button-padding:  $input-padding-vertical ($input-padding-horizontal * 2.5);
+$button-padding-lg:  $input-padding-vertical-lg ($input-padding-horizontal-lg * 2.5);*/
+
+
+$button-padding-sm:  calc(#{$input-padding-vertical-sm} + 1px) ($input-padding-horizontal-sm * 2.5);
+$button-padding:  calc(#{$input-padding-vertical} + 1px) ($input-padding-horizontal * 2.5);
+$button-padding-lg:  calc(#{$input-padding-vertical-lg} + 1px) ($input-padding-horizontal-lg * 2.5);
+
+$input-font-size: $font-size-small;
+$input-default-width: 15rem;

@@ -1,0 +1,26 @@
+$logo-height-sm:     3.125rem;       //50px/16
+$logo-width-sm:      7.8rem;         //124.8px (7.8 * 16)
+$logo-height-md:     3.75rem;        //55px (10 * 16)
+$logo-width-md:      12.5rem;        //150px (10 * 16)
+$logo-height:        4.5rem;         //72px (4.5 * 16)
+$logo-width:         15rem;          //240px (15 * 16)
+
+$masthead-height-sm: $logo-height-sm + ($margin-base * 2);
+$masthead-height-md: $logo-height-sm + ($margin-base * 2);
+$masthead-height: $logo-height + ($margin-base * 2);
+
+$gutter: 2.2222vw; // 32px @ 1440
+$gutter-large: 2rem; //32px
+$container-padding-sm: 6.4vw; //24px/375px
+$container-padding: 5vw;
+$container-padding-lg: 4.5rem;
+
+$container-width: 105rem; //1680px
+
+$container-width-narrow: calc(36rem + #{$container-padding * 2}); // 720px + container-padding * 2
+$column-width: 100%/12;
+
+$intro-height: 480px;
+$intro-height-md:520px;
+$intro-height-lg:68vh;
+
