@@ -110,7 +110,7 @@
     }
   }
 
-  export default {
+  export const BaseButton = {
     name: "BaseButton",
     mixins: [buttonProps],
     computed: {
