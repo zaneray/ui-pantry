@@ -16,7 +16,7 @@
 
 <script>
   import {inputShared} from "../../../mixins/inputShared";
-  import BaseInputWrapper from "@zaneray/vue-base-input-wrapper/BaseInputWrapper.vue";
+  import BaseInputWrapper from '../BaseInputWrapper/BaseInputWrapper.vue';
 
   export default {
     name: "BaseTextInput",

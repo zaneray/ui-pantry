@@ -8,6 +8,7 @@ module.exports = {
     path.join(__dirname, '/packages/vue/styleguide/theme/script.js'),
     path.join(__dirname, '/packages/vue/styleguide/theme/styles.scss'),
   ],
+  styleguideDir: './styleguide/vue',
   theme: {
     maxWidth: "100%",
     sidebarWidth: 300
