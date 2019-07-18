@@ -127,6 +127,8 @@
       }
     },
   }
+
+  export default BaseButton
 </script>
 
 <style scoped lang="scss">
