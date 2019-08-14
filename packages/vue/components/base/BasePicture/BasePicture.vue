@@ -48,3 +48,12 @@
         width: 100%;
     }
 </style>
+
+<docs>
+    ### Examples
+
+    #### Basic Picture
+    ```jsx
+    <base-picture :mobile-img="images.banner_image.mobile.url" :desktop-img="images.banner_image.url" :alt-text="images.banner_image.alt" />
+    ```
+</docs>

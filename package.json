@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "vue:styleguide": "vue-styleguidist server --open --config ./vue.styleguide.config.js",
-    "vue:styleguide:build": "vue-styleguidist build --config ./vue.styleguide.config.js"
+    "vue:styleguide:build": "vue-styleguidist build --config ./vue.styleguide.config.js",
+    "publish": "lerna publish"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

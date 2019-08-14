@@ -21,6 +21,156 @@ Vue.mixin({
             long: 'orem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dictum finibus mi at molestie. Integer aliquet ultricies cursus. Mauris suscipit velit quis metus gravida, semper porttitor metus posuere. Donec bibendum vel tortor id auctor.'
           }
         },
+        images: {
+          banner_image: {
+            alt: 'Image Alt Text',
+            dimensions: {
+              width: 1920,
+              height: 960
+            },
+            url: '/static/fpo/1920x960-dark.jpg',
+            half: {
+              dimensions: {
+                width: 800,
+                height: 800
+              },
+              url: '/static/fpo/1920x560-dark.jpg'
+            },
+            mobile: {
+              dimensions: {
+                width: 800,
+                height: 800
+              },
+              url: '/static/fpo/800x800-dark.jpg'
+            },
+            mobile_half: {
+              dimensions: {
+                width: 800,
+                height: 400
+              },
+              url: '/static/fpo/800x400-dark.jpg'
+            },
+            vertical: {
+              dimensions: {
+                width: 1920,
+                height: 960
+              }
+            }
+          },
+          banner_image_light: {
+            alt: 'Image Alt Text',
+            dimensions: {
+              width: 1920,
+              height: 960
+            },
+            url: '/static/fpo/1920x960-light.jpg',
+            half: {
+              dimensions: {
+                width: 800,
+                height: 800
+              },
+              url: '/static/fpo/1920x560-light.jpg'
+            },
+            mobile: {
+              dimensions: {
+                width: 800,
+                height: 800
+              },
+              url: '/static/fpo/800x800-light.jpg'
+            },
+            mobile_half: {
+              dimensions: {
+                width: 800,
+                height: 400
+              },
+              url: '/static/fpo/800x400-light.jpg'
+            },
+            vertical: {
+              dimensions: {
+                width: 1920,
+                height: 960
+              }
+            }
+          },
+          galleryItems: {
+            caption: 'This is a caption',
+            image: {
+              url: '/static/fpo/gallery-lg.jpg',
+              alt: 'This is gallery image alt text',
+              dimensions: {
+                width: 1600,
+                height: 1067
+              },
+              sm: {
+                url: '/static/fpo/gallery-sm.jpg',
+                alt: 'This is a Small Image',
+                dimensions: {
+                  width: 600,
+                  height: 400
+                }
+              },
+              md: {
+                url: '/static/fpo/gallery-md.jpg',
+                alt: 'This is a Medium Image',
+                dimensions: {
+                  width: 900,
+                  height: 600
+                }
+              },
+              lg: {
+                url: '/static/fpo/gallery-lg.jpg',
+                alt: 'This is a Large Image',
+                dimensions: {
+                  width: 1600,
+                  height: 1067
+                }
+              }
+            }
+          },
+          galleryItemsNoCaption: {
+            image: {
+              caption: null,
+              url: '/static/fpo/gallery-lg.jpg',
+              alt: 'This is gallery image alt text',
+              dimensions: {
+                width: 1600,
+                height: 1067
+              },
+              sm: {
+                url: '/static/fpo/gallery-sm.jpg',
+                alt: 'This is a Small Image',
+                dimensions: {
+                  width: 600,
+                  height: 400
+                }
+              },
+              md: {
+                url: '/static/fpo/gallery-md.jpg',
+                alt: 'This is a Medium Image',
+                dimensions: {
+                  width: 900,
+                  height: 600
+                }
+              },
+              lg: {
+                url: '/static/fpo/gallery-lg.jpg',
+                alt: 'This is a Large Image',
+                dimensions: {
+                  width: 1600,
+                  height: 1067
+                }
+              }
+            }
+          },
+          thumbnail: {
+            url: '/static/fpo/thumbnail.jpg',
+            alt: 'Alt text about this thumbnail',
+            dimensions: {
+              width: 410,
+              height: 266
+            }
+          }
+        },
         selectOptions: [
           { label: 'Option 1', value: 1},
           { label: 'Option 2', value: 2},
