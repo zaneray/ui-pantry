@@ -1,23 +1,8 @@
 @import "../../../../styles/imports";
+@import "../../../../styles/normalize.scss";
 
 $sg-color-primary: #25687d;
 $sg-color-secondary: #da902d;
-
-
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: $font-family-heading;
-
-    a {
-        font-family: $font-family-heading;
-    }
-}
-
 
 a,
 label {
