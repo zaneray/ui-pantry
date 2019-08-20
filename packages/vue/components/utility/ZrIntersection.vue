@@ -10,7 +10,7 @@
    * See the IntersectionObserver API documentation for more details on options: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
    */
   export default {
-    name: "Intersection",
+    name: "ZrIntersection",
     props: {
       /**
        * Option that defines the margin at which intersection takes place.  See MDN documentation (link above) for more details.

@@ -110,8 +110,8 @@
     }
   }
 
-  export const BaseButton = {
-    name: "BaseButton",
+  export const ZrButton = {
+    name: "ZrButton",
     mixins: [buttonProps],
     computed: {
       btnClass() {
@@ -128,11 +128,11 @@
     },
   }
 
-  export default BaseButton
+  export default ZrButton
 </script>
 
 <style scoped lang="scss">
-    @import '../../styles/imports';
+    @import '../styles/imports';
 
     .btn {
         display: block;
@@ -249,30 +249,30 @@
 
     #### Button Themes
     ```jsx
-    <BaseButton :label="'Default'" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Action'" theme="action" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Info'" theme="info" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Transparent'" theme="transparent" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton :label="'Negative'" theme="negative" style="margin-bottom: 10px"></BaseButton>
+    <ZrButton :label="'Default'" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton :label="'Action'" theme="action" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton :label="'Info'" theme="info" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton :label="'Transparent'" theme="transparent" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton :label="'Negative'" theme="negative" style="margin-bottom: 10px"></ZrButton>
     ```
 
     #### Button Sizes
     ```jsx
-    <BaseButton label="Small" size="sm" style="margin-bottom: 10px"></BaseButton>
-    <BaseButton label="Default" style="margin-bottom: 10px"></BaseButton>
-    <base-button label="Large" size="lg" style="margin-bottom: 10px"></base-button>
+    <ZrButton label="Small" size="sm" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton label="Default" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton label="Large" size="lg" style="margin-bottom: 10px"></ZrButton>
     ```
 
     #### Button States
     ```jsx
-    <BaseButton label="Disabled" disabled style="margin-bottom: 10px"></BaseButton>
-    <BaseButton label="Loading" loading style="margin-bottom: 10px"></BaseButton>
+    <ZrButton label="Disabled" disabled style="margin-bottom: 10px"></ZrButton>
+    <ZrButton label="Loading" loading style="margin-bottom: 10px"></ZrButton>
     ```
     #### Button Display Options
     ```jsx
-    <BaseButton label="Full Width" full style="margin-bottom: 10px"></BaseButton>
-    <BaseButton label="Button Inline 1" inline></BaseButton>
-    <BaseButton label="Button Inline 2" inline></BaseButton>
+    <ZrButton label="Full Width" full style="margin-bottom: 10px"></ZrButton>
+    <ZrButton label="Button Inline 1" inline></ZrButton>
+    <ZrButton label="Button Inline 2" inline></ZrButton>
     ```
 
 </docs>

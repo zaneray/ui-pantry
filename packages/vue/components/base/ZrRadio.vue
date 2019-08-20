@@ -13,10 +13,10 @@
 </template>
 
 <script>
-  import {inputShared} from "../../../mixins/inputShared";
+  import {inputShared} from "../../mixins/inputShared";
 
   export default {
-    name: "BaseRadio",
+    name: "ZrRadio",
     inheritAttrs: false,
     mixins: [inputShared],
     props: {
@@ -47,7 +47,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../../styles/imports';
+    @import '../../../../styles/imports';
 
     $radio-outer-width: 1.5em;
     $radio-inner-width: 1em;
@@ -113,12 +113,12 @@
 
     #### Default Radio
     ```jsx
-    <base-radio label="Radio Label" value="1" id="radio1"></base-radio>
+    <ZrRadio label="Radio Label" value="1" id="radio1"></ZrRadio>
     ```
 
     #### Selected Radio
     ```jsx
-    <base-radio label="Label Here" value="2" id="radio2" selected></base-radio>
+    <ZrRadio label="Label Here" value="2" id="radio2" selected></ZrRadio>
     ```
 </docs>
 

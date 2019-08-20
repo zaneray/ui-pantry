@@ -16,10 +16,14 @@
 </template>
 
 <script>
-  import BasePicture from '../base/BasePicture/BasePicture.vue';
+  import BasePicture from '../base/ZrPicture.vue';
+
+  /**
+   * A responsive hero banner component that displays a background hero with a slot for content over the banner
+   */
 
   export default {
-    name: "HeroBanner",
+    name: "ZrHeroBanner",
     components: {BasePicture},
     props: {
       desktopImg: {
@@ -85,7 +89,15 @@
     }
 
     .hero-content {
-        padding: $margin-large;
+        padding: $margin-smedium;
+
+        @media (min-width: $screen-md) {
+            padding: $margin-medium;
+        }
+
+        @media (min-width: $screen-lg) {
+            padding: $margin-large;
+        }
     }
 </style>
 
@@ -94,18 +106,18 @@
 
     #### HeroBanner with defaults
     ```jsx
-    <hero-banner :desktop-img="images.banner_image.url"
+    <ZrHeroBanner :desktop-img="images.banner_image.url"
                  :mobile-img="images.banner_image.mobile.url"
                  alt-text="Text about the image"
                  class="light-text">
         <h1>Hi I am a Title</h1>
         <h3>I am a subtitle</h3>
-    </hero-banner>
+    </ZrHeroBanner>
     ```
 
     #### HeroBanner right and bottom aligned
     ```jsx
-    <hero-banner :desktop-img="images.banner_image.url"
+    <ZrHeroBanner :desktop-img="images.banner_image.url"
                  :mobile-img="images.banner_image.mobile.url"
                  alt-text="Text about the image"
                  vertical-position="bottom"
@@ -113,7 +125,7 @@
                  class="light-text">
         <h1>Hi I am a Title</h1>
         <h3>I am a subtitle</h3>
-        <BaseButton :label="'Learn More'" size="sm" theme="action" style="margin-top: 20px"></BaseButton>
-    </hero-banner>
+        <ZrButton :label="'Learn More'" size="sm" theme="action" style="margin-top: 20px"></ZrButton>
+    </ZrHeroBanner>
     ```
 </docs>

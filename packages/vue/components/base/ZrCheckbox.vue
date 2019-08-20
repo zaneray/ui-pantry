@@ -13,10 +13,10 @@
 </template>
 
 <script>
-  import {inputShared} from "../../../mixins/inputShared";
+  import {inputShared} from "../../mixins/inputShared";
 
   export default {
-    name: "BaseCheckbox",
+    name: "ZrCheckbox",
     inheritAttrs: false,
     mixins: [inputShared],
     props: {
@@ -47,7 +47,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../../styles/imports';
+    @import '../../../../styles/imports';
 
     $checkbox-width: 1.5em;
 
@@ -112,12 +112,12 @@
 
     #### Default Checkbox
     ```jsx
-    <base-checkbox label="Checkbox Label" value="1" id="check1"></base-checkbox>
+    <ZrCheckbox label="Checkbox Label" value="1" id="check1"></ZrCheckbox>
     ```
 
     #### Selected Checkbox
     ```jsx
-    <base-checkbox label="Label Here" value="2" id="check2" selected></base-checkbox>
+    <ZrCheckbox label="Label Here" value="2" id="check2" selected></ZrCheckbox>
     ```
 </docs>
 

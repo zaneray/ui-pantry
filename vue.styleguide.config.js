@@ -1,5 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path');
+const styleguidePath = 'packages/vue/styleguide/';
+const componentPath = 'packages/vue/components/';
 
 module.exports = {
   require: [
@@ -16,8 +18,46 @@ module.exports = {
   pagePerSection: true,
   usageMode: 'expand',
   exampleMode: 'expand',
-  components: 'packages/vue/components/**/[A-Z]*.vue',
-  ignore: ['**/node_modules/**/[A-Z]*.vue'],
+  sections: [
+    {
+      name: 'Introduction',
+      content: `${styleguidePath}docs/introduction.md`,
+      sectionDepth: 1
+    },
+    {
+      name: "Core Styles",
+      content: `${styleguidePath}docs/core-styles.md`,
+      components: () => [
+        `${styleguidePath}components/SgColors.vue`,
+        `${styleguidePath}components/SgType.vue`
+      ],
+      sectionDepth: 1,
+      exampleMode: "hide",
+      usageMode: "hide"
+    },
+    {
+      name: 'Base Components',
+      content: `${componentPath}base/base-components.md`,
+      components: `${componentPath}base/**/[A-Z]*.vue`,
+      sectionDepth: 2
+    },
+    {
+      name: 'Layout Components',
+      components: `${componentPath}layout/**/[A-Z]*.vue`,
+      sectionDepth: 2
+    },
+    {
+      name: 'Patterns',
+      components: `${componentPath}patterns/**/[A-Z]*.vue`,
+      sectionDepth: 2
+    },
+    {
+      name: 'Utility Components',
+      components: `${componentPath}utility/**/[A-Z]*.vue`,
+      sectionDepth: 2
+    }
+  ],
+  ignore: ['**/node_modules/**/*.vue'],
   webpackConfig: {
     module: {
       rules: [

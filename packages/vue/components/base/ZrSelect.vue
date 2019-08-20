@@ -20,10 +20,10 @@
 </template>
 
 <script>
-  import BaseInputWrapper from "../BaseInputWrapper/BaseInputWrapper.vue";
+  import BaseInputWrapper from "./ZrInputWrapper.vue";
 
   export default {
-    name: "BaseSelect",
+    name: "ZrSelect",
     components: {BaseInputWrapper},
     props: {
       /**
@@ -92,7 +92,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../../styles/imports';
+  @import '../../../../styles/imports';
   $select-icon-width: 2.5em;
 
   .select-wrapper {
@@ -151,16 +151,16 @@
 <docs>
     ### Basic Select
     ```jsx
-    <base-select label="Basic Select" :options="selectOptions" id="basic-select"></base-select>
+    <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select"></ZrSelect>
     ```
 
     ### Select with placeholder
     ```jsx
-    <base-select label="Placeholder Select" :options="selectOptions" placeholder="Placeholder text" id="Placeholder-select"></base-select>
+    <ZrSelect label="Placeholder Select" :options="selectOptions" placeholder="Placeholder text" id="Placeholder-select"></ZrSelect>
     ```
 
     ### Select with preselected value
     ```jsx
-    <base-select label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></base-select>
+    <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
     ```
 </docs>

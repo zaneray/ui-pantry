@@ -6,16 +6,16 @@
 </template>
 
 <script>
-  import {inputShared} from "../../../mixins/inputShared";
+  import {inputShared} from "../../mixins/inputShared";
 
   export default {
-    name: "BaseInputWrapper",
+    name: "ZrInputWrapper",
     mixins: [inputShared]
   }
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../../styles/imports';
+    @import '../../../../styles/imports';
 
     .input-wrapper {
         display: block;

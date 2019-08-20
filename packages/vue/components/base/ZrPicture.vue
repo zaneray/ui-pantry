@@ -11,7 +11,7 @@
    */
 
   export default {
-    name: "BasePicture",
+    name: "ZrPicture",
     props: {
       mobileImg: {
         type: String,
@@ -54,6 +54,8 @@
 
     #### Basic Picture
     ```jsx
-    <base-picture :mobile-img="images.banner_image.mobile.url" :desktop-img="images.banner_image.url" :alt-text="images.banner_image.alt" />
+    <ZrPicture :mobile-img="images.banner_image.mobile.url"
+               :desktop-img="images.banner_image.url"
+               :alt-text="images.banner_image.alt" />
     ```
 </docs>

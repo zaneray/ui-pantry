@@ -16,7 +16,7 @@
    * A custom counter component used to allow a user to increment a number
    */
   export default {
-    name: "BaseCounter",
+    name: "ZrCounter",
     data() {
       return {
         count: 0,
@@ -93,7 +93,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../../styles/imports';
+  @import '../../../../styles/imports';
   $counter-background-color: $color-darker;
 
   .counter-wrapper-outer {
@@ -159,21 +159,21 @@
 <docs>
   ### Basic Counter
   ```jsx
-  <BaseCounter></BaseCounter>
+  <ZrCounter></ZrCounter>
   ```
 
   ### Counter with Label
   ```jsx
-  <BaseCounter :count-label="'Bag'"></BaseCounter>
+  <ZrCounter :count-label="'Bag'"></ZrCounter>
   ```
 
   ### Counter with Label and initial value
   ```jsx
-  <BaseCounter :value="3" :count-label="'Hat'"></BaseCounter>
+  <ZrCounter :value="3" :count-label="'Hat'"></ZrCounter>
   ```
 
   ### Counter with min and max
   ```jsx
-  <BaseCounter :min="4" :max="11"></BaseCounter>
+  <ZrCounter :min="4" :max="11"></ZrCounter>
   ```
 </docs>

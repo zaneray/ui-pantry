@@ -15,11 +15,11 @@
 </template>
 
 <script>
-  import {inputShared} from "../../../mixins/inputShared";
-  import BaseInputWrapper from '../BaseInputWrapper/BaseInputWrapper.vue';
+  import {inputShared} from "../../mixins/inputShared";
+  import BaseInputWrapper from './ZrInputWrapper.vue';
 
   export default {
-    name: "BaseTextInput",
+    name: "ZrInput",
     components: {
       BaseInputWrapper
     },
@@ -74,7 +74,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../../styles/imports';
+  @import '../../../../styles/imports';
 
   input {
     display: block;
@@ -122,34 +122,34 @@
 <docs>
   ### Default input with Label
   ```jsx
-  <base-text-input
+  <ZrInput
     label="Full Name"
     placeholder="Example: John S. Smith"
     id="full-name"
   >
-  </base-text-input>
+  </ZrInput>
   ```
 
 
   ### Default input Number
   ```jsx
-  <base-text-input
+  <ZrInput
     label="Enter a Number"
     type="number"
     id="full-name"
   >
-  </base-text-input>
+  </ZrInput>
   ```
 
 
   ### full width Input without a label
   ```jsx
-  <base-text-input
+  <ZrInput
     placeholder="First Name"
     id="first-name"
     full
   >
-  </base-text-input>
+  </ZrInput>
   ```
 
 
@@ -157,16 +157,16 @@
   ### Stacked inputs with a submit
   ```jsx
   <form>
-    <base-text-input
+    <ZrInput
       label="First Name"
       id="first-name"
     >
-    </base-text-input>
-    <base-text-input
+    </ZrInput>
+    <ZrInput
       label="Last Name"
       id="first-name"
     >
-    </base-text-input>
+    </ZrInput>
   </form>
   ```
 
