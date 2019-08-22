@@ -36,9 +36,14 @@ div[class^="rsg--tabs"] {
 }
 
 div[class^="rsg--tabs"] + button,
-li[class^='rsg--item'] ul[class^='rsg--list'],
 footer[class^="rsg--footer"] {
     display: none;
+}
+
+a[class^='rsg--link'] {
+    &:active {
+        font-weight: bold;
+    }
 }
 
 div[class^='rsg--root']{

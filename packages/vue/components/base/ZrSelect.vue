@@ -21,31 +21,15 @@
 
 <script>
   import BaseInputWrapper from "./ZrInputWrapper.vue";
+  import { inputShared } from "../../mixins/inputShared";
 
   export default {
     name: "ZrSelect",
     components: {BaseInputWrapper},
+    mixins: [
+      inputShared
+    ],
     props: {
-      /**
-       * This value populates the id attribute AND the name attribute, if omitted
-       */
-      id: {
-        type: [String, Number],
-        required: true
-      },
-      /**
-       * This value populates the name attribute of the input
-       */
-      name: {
-        type: String,
-      },
-      /**
-       * Label to display above the select
-       */
-      label: {
-        type: String,
-        default: ''
-      },
       /**
        * Preselected value
        */
@@ -70,17 +54,12 @@
         type: Array,
         required: true
       },
+      /**
+       * Placeholder text to display before first selection is made
+       */
       placeholder: {
         type: String,
         default: ''
-      },
-      required: {
-        type: Boolean,
-        default: false
-      },
-      full: {
-        type: Boolean,
-        default: false
       }
     },
     methods: {

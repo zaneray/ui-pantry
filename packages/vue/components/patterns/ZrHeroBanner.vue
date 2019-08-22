@@ -24,7 +24,9 @@
 
   export default {
     name: "ZrHeroBanner",
-    components: {BasePicture},
+    components: {
+      BasePicture
+    },
     props: {
       desktopImg: {
         type: String,
@@ -52,7 +54,7 @@
           return ['left', 'center', 'right'].includes(value)
         }
       }
-    },
+    }
   }
 </script>
 

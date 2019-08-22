@@ -12,17 +12,12 @@
 </template>
 
 <script>
+
   /**
    * A custom counter component used to allow a user to increment a number
    */
   export default {
     name: "ZrCounter",
-    data() {
-      return {
-        count: 0,
-        showError: false
-      }
-    },
     props: {
       /**
        * Initial number for the counter to start at
@@ -55,6 +50,12 @@
       errorMessage: {
         type: String,
         default: 'That is too many.'
+      }
+    },
+    data() {
+      return {
+        count: 0,
+        showError: false
       }
     },
     computed: {

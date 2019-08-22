@@ -9,31 +9,36 @@
    * A component that detects when it is intersected with the viewport, using the IntersectionObserver API.
    * See the IntersectionObserver API documentation for more details on options: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
    */
-  export default {
-    name: "ZrIntersection",
+
+  export const zrIntersectionProps = {
     props: {
       /**
        * Option that defines the margin at which intersection takes place.  See MDN documentation (link above) for more details.
        */
-      rootMargin: {
+        rootMargin: {
         type: String,
         default: '0px'
       },
       /**
        * Option that defines the threshold of the component that needs to come into view before intersection event fires.  See MDN documentation (link above) for more details
        */
-      threshold: {
+        threshold: {
         type: String,
         default: '0'
       },
       /**
        * Defines if the intersection event will only fire once
        */
-      once: {
+        once: {
         type: Boolean,
         default: true
       },
     },
+  };
+
+  export default {
+    name: "ZrIntersection",
+    mixins: [zrIntersectionProps],
     data() {
       return {
         observer: null,
@@ -84,9 +89,9 @@
     ```jsx
     let intersectedLabel = 'not yet';
 
-    <Intersection style="margin-top: 50vh" @intersected="intersectedLabel = 'true'">
+    <ZrIntersection style="margin-top: 50vh" @intersected="intersectedLabel = 'true'">
         <h2>Intersection: {{intersectedLabel}}</h2>
-    </Intersection>
+    </ZrIntersection>
     ```
 
     ### Intersection with rootMargin offset
@@ -94,8 +99,8 @@
     ```jsx
     let rootMarginLabel = 'not yet';
 
-    <Intersection style="margin-top: 20vh" @intersected="rootMarginLabel = 'true'" rootMargin="-200px">
+    <ZrIntersection style="margin-top: 20vh" @intersected="rootMarginLabel = 'true'" rootMargin="-200px">
         <h2>Intersection: {{rootMarginLabel}}</h2>
-    </Intersection>
+    </ZrIntersection>
     ```
 </docs>

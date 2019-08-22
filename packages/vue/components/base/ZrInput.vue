@@ -42,7 +42,9 @@
         type: [String, Number],
         default: ''
       },
-
+      /**
+       * Visually hide the input label
+       */
       labelHidden: {
         type: Boolean,
         default: false

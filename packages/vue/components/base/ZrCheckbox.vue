@@ -15,24 +15,25 @@
 <script>
   import {inputShared} from "../../mixins/inputShared";
 
+  /**
+   * A custom checkbox component.  @change event fires on checkbox change
+   */
+
   export default {
     name: "ZrCheckbox",
     inheritAttrs: false,
     mixins: [inputShared],
     props: {
+      /**
+       * Value to associate with the checkbox
+       */
       value: {
         type: [String, Number],
         required: true
       },
-      label: {
-        type: String,
-        required: true
-      },
-      id: {
-        type: String,
-        required: true
-      },
-      name: String,
+      /**
+       * Whether or not the checkbox is selected by default
+       */
       selected: {
         type: Boolean,
         default: false

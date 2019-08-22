@@ -11,10 +11,11 @@
 
 <script>
   /**
-   * BaseButton is a simple button component built to handle all use cases of a basic button
+   * BaseButton is a robust button component built to handle all use cases of a basic button
    */
 
-  export const buttonProps = {
+  export default {
+    name: "ZrButton",
     props: {
       /**
        * Theme of button to display (default, action, info, transparent, negative)
@@ -107,12 +108,7 @@
         type: Boolean,
         default: false
       }
-    }
-  }
-
-  export const ZrButton = {
-    name: "ZrButton",
-    mixins: [buttonProps],
+    },
     computed: {
       btnClass() {
         return [
@@ -127,8 +123,6 @@
       }
     },
   }
-
-  export default ZrButton
 </script>
 
 <style scoped lang="scss">

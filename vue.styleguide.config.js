@@ -24,28 +24,28 @@ module.exports = {
       content: `${styleguidePath}docs/introduction.md`,
       sectionDepth: 1
     },
-    {
-      name: "Core Styles",
-      content: `${styleguidePath}docs/core-styles.md`,
-      components: () => [
-        `${styleguidePath}components/SgColors.vue`,
-        `${styleguidePath}components/SgType.vue`
-      ],
-      sectionDepth: 1,
-      exampleMode: "hide",
-      usageMode: "hide"
-    },
+    // {
+    //   name: "Core Styles",
+    //   content: `${styleguidePath}docs/core-styles.md`,
+    //   components: () => [
+    //     `${styleguidePath}components/SgColors.vue`,
+    //     `${styleguidePath}components/SgType.vue`
+    //   ],
+    //   sectionDepth: 1,
+    //   exampleMode: "hide",
+    //   usageMode: "hide"
+    // },
     {
       name: 'Base Components',
       content: `${componentPath}base/base-components.md`,
       components: `${componentPath}base/**/[A-Z]*.vue`,
       sectionDepth: 2
     },
-    {
-      name: 'Layout Components',
-      components: `${componentPath}layout/**/[A-Z]*.vue`,
-      sectionDepth: 2
-    },
+    // {
+    //   name: 'Layout Components',
+    //   components: `${componentPath}layout/**/[A-Z]*.vue`,
+    //   sectionDepth: 2
+    // },
     {
       name: 'Patterns',
       components: `${componentPath}patterns/**/[A-Z]*.vue`,

@@ -18,21 +18,20 @@
   export default {
     name: "ZrRadio",
     inheritAttrs: false,
-    mixins: [inputShared],
+    mixins: [
+      inputShared
+    ],
     props: {
+      /**
+       * Value to associate with the radio input
+       */
       value: {
         type: [String, Number],
         required: true
       },
-      label: {
-        type: String,
-        required: true
-      },
-      id: {
-        type: String,
-        required: true
-      },
-      name: String,
+      /**
+       * Whether or not the radio is selected by default
+       */
       selected: {
         type: Boolean,
         default: false

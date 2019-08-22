@@ -13,20 +13,33 @@
   export default {
     name: "ZrPicture",
     props: {
+      /**
+       * Mobile image url to render
+       */
       mobileImg: {
         type: String,
         required: true
       },
+      /**
+       * Desktop image url to render
+       */
       desktopImg: {
         type: String,
         required: true
       },
+      /**
+       * Breakpoint (pixels) at which to switch between mobile and desktop image
+       */
       breakpoint: {
         type: Number,
         default: 768
       },
+      /**
+       * Alternative text to display for the image
+       */
       altText: {
-        type: String
+        type: String,
+        required: true
       }
     },
     computed: {
