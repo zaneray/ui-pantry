@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import {inputShared} from "../mixins/inputShared";
+  import {inputShared} from "../../mixins/inputShared";
 
   /**
    * A custom checkbox component.  @change event fires on checkbox change
@@ -48,7 +48,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../styles/imports';
+    @import '../../../../../styles/imports';
 
     $checkbox-width: 1.5em;
 

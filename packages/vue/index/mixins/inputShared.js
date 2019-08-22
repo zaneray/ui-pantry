@@ -1,6 +1,6 @@
 /**
  * @mixin
- * This mixin sets up all shared properties between the input wrapper and all base input components
+ * This mixin sets up all shared properties between the input wrapper and all base input index
  */
 
 export const inputShared = {

@@ -126,7 +126,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../styles/imports';
+    @import '../../styles/imports';
 
     .btn {
         display: block;

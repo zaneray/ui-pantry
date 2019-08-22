@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import {inputShared} from "../mixins/inputShared";
+  import {inputShared} from "../../mixins/inputShared";
   import BaseInputWrapper from './ZrInputWrapper.vue';
 
   export default {
@@ -76,7 +76,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../styles/imports';
+  @import '../../../../../styles/imports';
 
   input {
     display: block;

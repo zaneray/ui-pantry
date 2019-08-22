@@ -21,7 +21,7 @@
 
 <script>
   import BaseInputWrapper from "./ZrInputWrapper.vue";
-  import { inputShared } from "../mixins/inputShared";
+  import { inputShared } from "../../mixins/inputShared";
 
   export default {
     name: "ZrSelect",
@@ -71,7 +71,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../styles/imports';
+  @import '../../../../../styles/imports';
   $select-icon-width: 2.5em;
 
   .select-wrapper {

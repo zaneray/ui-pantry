@@ -59,7 +59,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../styles/imports';
+    @import '../../styles/imports';
 
     .hero-banner {
         position: relative;

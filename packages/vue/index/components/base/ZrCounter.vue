@@ -94,7 +94,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../styles/imports';
+  @import '../../../../../styles/imports';
   $counter-background-color: $color-darker;
 
   .counter-wrapper-outer {

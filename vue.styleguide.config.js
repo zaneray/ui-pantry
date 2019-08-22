@@ -1,7 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path');
 const styleguidePath = 'packages/vue/styleguide/';
-const componentPath = 'packages/vue/components/';
+const componentPath = 'packages/vue/index/components/';
 
 module.exports = {
   require: [
@@ -27,9 +27,9 @@ module.exports = {
     // {
     //   name: "Core Styles",
     //   content: `${styleguidePath}docs/core-styles.md`,
-    //   components: () => [
-    //     `${styleguidePath}components/SgColors.vue`,
-    //     `${styleguidePath}components/SgType.vue`
+    //   index: () => [
+    //     `${styleguidePath}index/SgColors.vue`,
+    //     `${styleguidePath}index/SgType.vue`
     //   ],
     //   sectionDepth: 1,
     //   exampleMode: "hide",
@@ -43,7 +43,7 @@ module.exports = {
     },
     // {
     //   name: 'Layout Components',
-    //   components: `${componentPath}layout/**/[A-Z]*.vue`,
+    //   index: `${componentPath}layout/**/[A-Z]*.vue`,
     //   sectionDepth: 2
     // },
     {
@@ -73,7 +73,7 @@ module.exports = {
           exclude: /node_modules/,
           loader: 'babel-loader'
         },
-        // Other loaders that are needed for your components
+        // Other loaders that are needed for your index
         {
           test: /\.(css?|scss)(\?.*)?$/,
           loaders: [

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import {inputShared} from "../mixins/inputShared";
+  import {inputShared} from "../../mixins/inputShared";
 
   export default {
     name: "ZrInputWrapper",
@@ -15,7 +15,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../styles/imports';
+    @import '../../../../../styles/imports';
 
     .input-wrapper {
         display: block;
