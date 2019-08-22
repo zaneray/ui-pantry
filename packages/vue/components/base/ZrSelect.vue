@@ -21,7 +21,7 @@
 
 <script>
   import BaseInputWrapper from "./ZrInputWrapper.vue";
-  import { inputShared } from "../../mixins/inputShared";
+  import { inputShared } from "../mixins/inputShared";
 
   export default {
     name: "ZrSelect",

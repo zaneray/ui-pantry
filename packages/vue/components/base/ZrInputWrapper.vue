@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import {inputShared} from "../../mixins/inputShared";
+  import {inputShared} from "../mixins/inputShared";
 
   export default {
     name: "ZrInputWrapper",

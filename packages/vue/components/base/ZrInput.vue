@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import {inputShared} from "../../mixins/inputShared";
+  import {inputShared} from "../mixins/inputShared";
   import BaseInputWrapper from './ZrInputWrapper.vue';
 
   export default {
