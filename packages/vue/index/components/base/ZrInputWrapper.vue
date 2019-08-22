@@ -15,7 +15,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../../styles/imports';
+    @import '../../styles/imports';
 
     .input-wrapper {
         display: block;

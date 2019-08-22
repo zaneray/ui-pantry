@@ -71,7 +71,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../../styles/imports';
+  @import '../../styles/imports';
   $select-icon-width: 2.5em;
 
   .select-wrapper {

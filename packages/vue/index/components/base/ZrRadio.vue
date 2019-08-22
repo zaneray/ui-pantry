@@ -46,7 +46,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../../../../styles/imports';
+    @import '../../styles/imports';
 
     $radio-outer-width: 1.5em;
     $radio-inner-width: 1em;
