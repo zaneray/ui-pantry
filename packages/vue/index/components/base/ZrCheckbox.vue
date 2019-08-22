@@ -24,6 +24,7 @@
     inheritAttrs: false,
     mixins: [inputShared],
     props: {
+      ...inputShared.props,
       /**
        * Value to associate with the checkbox
        */

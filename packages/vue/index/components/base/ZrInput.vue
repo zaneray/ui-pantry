@@ -25,6 +25,7 @@
     },
     mixins: [inputShared],
     props: {
+      ...inputShared.props,
       /**
        * input type options. `text` (default), `email`, `password`, `search`, `number`
        */

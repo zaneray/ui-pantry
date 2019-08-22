@@ -30,6 +30,7 @@
       inputShared
     ],
     props: {
+      ...inputShared.props,
       /**
        * Preselected value
        */

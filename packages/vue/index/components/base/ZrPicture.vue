@@ -6,6 +6,7 @@
 </template>
 
 <script>
+
   /**
    * Picture component for displaying multiple versions of an image responsively
    */
