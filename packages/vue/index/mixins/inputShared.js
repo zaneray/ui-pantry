@@ -23,7 +23,7 @@ export const inputShared = {
      */
     label: {
       type: String,
-      default: ''
+      required: true
     },
     /**
      * Populates the title attribute of the input, which drives HTML tooltip and validation language
