@@ -31,7 +31,7 @@
        */
         once: {
         type: Boolean,
-        default: true
+        default: false
       },
     },
   };
@@ -47,26 +47,27 @@
     },
     mounted() {
       const intersectionOptions = {
+        root: null,
         rootMargin: this.rootMargin,
         threshold: this.threshold
       };
 
       this.observer = new IntersectionObserver(entries => {
-        const entry = entries[0];
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.intersected = true;
+            /**
+             * Event that fires when intersection occurs
+             *
+             * @type {intersectionObserver event}
+             */
+            this.$emit('intersected', entry);
 
-        if (entry.isIntersecting) {
-          this.intersected = true;
-          /**
-           * Event that fires when intersection occurs
-           *
-           * @type {intersectionObserver event}
-           */
-          this.$emit('intersected', entry);
-
-          if (this.once) {
-            this.observer.disconnect();
+            if (this.once) {
+              this.observer.disconnect();
+            }
           }
-        }
+        })
       }, intersectionOptions);
 
       this.observer.observe(this.$el);
@@ -87,10 +88,10 @@
     #### Default Intersection
     ##### Scroll down to see default Intersection take place.  Upon intersection, the displayed intersection label will be changed
     ```jsx
-    let intersectedLabel = 'not yet';
+    let intersectedLabel = 1;
 
-    <ZrIntersection style="margin-top: 50vh" @intersected="intersectedLabel = 'true'">
-        <h2>Intersection: {{intersectedLabel}}</h2>
+    <ZrIntersection @intersected="intersectedLabel++" rootMargin="100%">
+        <h2 :style="{paddingBottom: '50vh', border: '1px solid black', margin: '20px'}">Intersection: {{intersectedLabel}}</h2>
     </ZrIntersection>
     ```
 
@@ -99,7 +100,7 @@
     ```jsx
     let rootMarginLabel = 'not yet';
 
-    <ZrIntersection style="margin-top: 20vh" @intersected="rootMarginLabel = 'true'" rootMargin="-200px">
+    <ZrIntersection style="margin-top: 20vh" @intersected="rootMarginLabel = 'true'" rootMargin="-200px" once>
         <h2>Intersection: {{rootMarginLabel}}</h2>
     </ZrIntersection>
     ```
