@@ -1,11 +1,11 @@
 <template>
     <nuxt-link v-if="nuxtLink" :class="btnClass" :to="nuxtLink" :title="title">{{label}}</nuxt-link>
     <a v-else-if="link" :class="btnClass" :href="link" :target="externalLink ? '_blank' : '_self'" :title="title">
-        <span v-if="!loading">{{label}}</span><span v-else class="loading"></span>
+        <span v-if="!loading">{{label}}</span><span v-else class="loading" aria-label="loading"></span>
     </a>
     <button v-else :class="btnClass" :type="type" :title="title" :disabled="disabled">
         <span v-if="!loading">{{label}}</span>
-        <span v-else class="loading"></span>
+        <span v-else class="loading" aria-label="loading"></span>
     </button>
 </template>
 
