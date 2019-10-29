@@ -54,6 +54,6 @@
 
     #### Simple image with default props
     ```jsx
-    <ZrImage :image-src="images.thumbnail.url" :alt-text="text.sentence" />
+    <ZrImage :image-src="images.thumbnail.url" :alt-text="text.string.short" />
     ```
 </docs>
