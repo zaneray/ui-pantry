@@ -1,11 +1,10 @@
 <template>
   <base-input-wrapper :id="id" :full="full">
-    <label v-if="label" :class="{'visuallyhidden': labelHidden}" :for="id">{{label}}</label>
+    <label :class="{'visuallyhidden': labelHidden}" :for="id">{{label}}</label>
     <input :type="type"
            :id="id"
            :name="name ? name : id"
            :value="value"
-           :aria-label="!label ? placeholder : !label"
            :placeholder="placeholder"
            :title="title"
            :required="required"
@@ -119,6 +118,16 @@
     @include font-label();
     line-height: 1rem;
   }
+
+  label.visuallyhidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+  }
 </style>
 
 
@@ -139,17 +148,19 @@
   <ZrInput
     label="Enter a Number"
     type="number"
-    id="full-name"
+    id="input-number"
   >
   </ZrInput>
   ```
 
 
-  ### full width Input without a label
+  ### Full width input with a hidden label
   ```jsx
   <ZrInput
+    label="First Name"
+    labelHidden="true"
     placeholder="First Name"
-    id="first-name"
+    id="input-hidden-label"
     full
   >
   </ZrInput>
@@ -162,12 +173,12 @@
   <form>
     <ZrInput
       label="First Name"
-      id="first-name"
+      id="input-stacked-1"
     >
     </ZrInput>
     <ZrInput
       label="Last Name"
-      id="first-name"
+      id="input-stacked-2"
     >
     </ZrInput>
   </form>
