@@ -1,5 +1,5 @@
 <template>
-    <modal :name="modalName">
+    <modal :name="modalName" class="zr-modal">
         <slot></slot>
     </modal>
 </template>
@@ -9,6 +9,10 @@
   import Vmodal from 'vue-js-modal';
 
   Vue.use(Vmodal);
+
+  /**
+   * A base modal component that leverages the vue-js-modal documented here: https://www.npmjs.com/package/vue-js-modal
+   */
 
   export default {
     name: "ZrModal",
@@ -22,7 +26,13 @@
 </script>
 
 <style scoped lang="scss">
+    @import '../../styles/imports';
 
+    .zr-modal {
+        &.v--modal-overlay {
+            background: rgba($color-darker, 0.6);
+        }
+    }
 </style>
 
 <docs>
