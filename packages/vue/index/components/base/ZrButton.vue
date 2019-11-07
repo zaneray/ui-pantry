@@ -4,8 +4,10 @@
         <span v-if="!loading">{{label}}</span><span v-else class="loading"></span>
     </a>
     <button v-else :class="btnClass" :type="type" :title="title" :disabled="disabled">
-        <span v-if="!loading">{{label}}</span>
-        <span v-else class="loading"></span>
+        <span class="label">{{label}}</span>
+        <span class="loading-container">
+            <span class="loading-indicator"></span>
+        </span>
     </button>
 </template>
 
@@ -117,7 +119,8 @@
             'disabled': this.disabled,
             'active': this.active,
             'full-width': this.full,
-            'inline': this.inline
+            'inline': this.inline,
+            'loading': this.loading
           }
         ];
       }
@@ -129,16 +132,14 @@
     @import '../../styles/imports';
 
     .btn {
+        position: relative;
         display: block;
         padding: $button-padding;
-        text-transform: uppercase;
-        font-size: 16px;
+        font-size: 1rem;
         font-family: sans-serif;
-        font-weight: bold;
         color: $color-lightest;
         cursor: pointer;
         user-select: none;
-        min-width: $input-default-width;
         text-align: center;
         background-color: $color-darker;
         border: 2px solid transparent;
@@ -226,8 +227,32 @@
     }
 
     .loading {
-        height: $font-size-base;
-        width: $font-size-base;
+        .label {
+            opacity: 0;
+        }
+
+        .loading-container {
+            opacity: 1;
+        }
+    }
+
+    .label {
+        opacity: 1;
+        transition: opacity $transition-base;
+    }
+
+    .loading-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        opacity: 0;
+        transition: opacity $transition-base;
+    }
+
+    .loading-indicator {
+        height: 1em;
+        width: 1em;
         border-radius: 50%;
         border: 3px solid $color-white;
         border-left-color: transparent;
