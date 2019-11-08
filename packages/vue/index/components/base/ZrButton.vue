@@ -38,10 +38,7 @@
        */
       size: {
         type: String,
-        default: 'md',
-        validator: function (value) {
-          return ['sm', 'md', 'lg', 'responsive'].includes(value)
-        }
+        default: 'md'
       },
       /**
        * Relative path of route to link to internally via vue-router, on click of the button
