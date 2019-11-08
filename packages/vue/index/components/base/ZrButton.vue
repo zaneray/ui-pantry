@@ -20,14 +20,11 @@
     name: "ZrButton",
     props: {
       /**
-       * Theme of button to display (default, action, info, transparent, negative)
+       * Theme of button to display.  This adds a class of ".btn-{{theme}}", which can be used to scope styles
        */
       theme: {
         type: String,
-        default: 'default',
-        validator: function (value) {
-          return ['default', 'action', 'info', 'transparent', 'negative'].includes(value)
-        }
+        default: 'default'
       },
       /**
        * Text to be displayed inside the button
@@ -227,6 +224,8 @@
     }
 
     .loading {
+        pointer-events: none;
+
         .label {
             opacity: 0;
         }
@@ -259,7 +258,6 @@
         border-top-color: transparent;
         display: inline-block;
         animation: SPIN 1s infinite cubic-bezier(.48,.17,.49,.78);
-        cursor: wait;
     }
 </style>
 
