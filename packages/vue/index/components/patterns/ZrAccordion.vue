@@ -11,6 +11,7 @@
                     v-on:before-leave="beforeLeave" v-on:leave="leave">
             <div class="accordion-content"
                  v-show="accordionExpanded"
+                 ref="content"
                  :aria-hidden="!accordionExpanded ? 'true' : 'false'"
                  :id="contentId">
                 <div class="accordion-content-inner">
@@ -56,6 +57,11 @@
         return this.name.replace(/\s+/g, '-').toLowerCase();
       }
     },
+    watch: {
+      expanded(newValue) {
+        this.accordionExpanded = newValue;
+      }
+    },
     methods: {
       toggleAccordion() {
         this.accordionExpanded = !this.accordionExpanded;
@@ -73,6 +79,10 @@
       leave: function(el) {
         el.style.height = '0';
       }
+    },
+    mounted() {
+      const contentEl = this.$refs.content;
+      contentEl.style.height = contentEl.scrollHeight + 'px';
     }
   }
 </script>
@@ -120,7 +130,6 @@
     }
 
     .accordion-content {
-        border-bottom: 1px solid $color-black;
         overflow: hidden;
         transition: $transition-base;
     }
@@ -140,16 +149,22 @@
     </zr-accordion>
     ```
 
-    #### Expanded to start
+    #### Expanded to start, with remote toggle
     ```jsx
-    <zr-accordion name="test2" header="A Diffent Accordion" :expanded="true">
-        <h5>A heading</h5>
-        <ul>
-            <li>Any</li>
-            <li>Markup</li>
-            <li>You</li>
-            <li>Want</li>
-        </ul>
-    </zr-accordion>
+    const toggle= true;
+    <div>
+        <button @click="toggle = !toggle" :style="{marginBottom: '10px'}">Toggle Accordion</button>
+        <zr-accordion name="test2" header="A Diffent Accordion" :expanded="toggle">
+            <h5>A heading</h5>
+            <ul>
+                <li>Any</li>
+                <li>Markup</li>
+                <li>You</li>
+                <li>Want</li>
+            </ul>
+        </zr-accordion>
+    </div>
+
+
     ```
 </docs>
