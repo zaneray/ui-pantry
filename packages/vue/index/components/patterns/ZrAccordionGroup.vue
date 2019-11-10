@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import ZrAccordion from "./ZrAccordion";
+  import ZrAccordion from "./ZrAccordion.vue";
 
   /**
    * Displays a group of accordions, based up the accordionContent prop that needs to be in the following form:
