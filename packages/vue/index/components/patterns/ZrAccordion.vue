@@ -14,6 +14,7 @@
                  v-show="accordionExpanded"
                  ref="content"
                  :aria-hidden="!accordionExpanded ? 'true' : 'false'"
+                 :style="accordionTransition"
                  :id="contentId">
                 <div class="accordion-content-inner">
                     <slot></slot>
@@ -38,24 +39,50 @@
       }
     },
     props: {
+      /**
+       * Text to display as accordion header
+       */
       header: {
         type: String,
         default: 'Accordion Header',
         required: true
       },
+      /**
+       * Name to identify this accordion by
+       */
       name: {
         type: String,
         default: '',
         required: true
       },
+      /**
+       * Whether or not the accordion is expanded
+       */
       expanded: {
         type: Boolean,
         default: false
       },
+      /**
+       * Time, in milliseconds, that the accordion animation will take
+       */
+      duration: {
+        type: Number,
+        default: 200
+      },
+      /**
+       * Easing function for the accordion animation to follow
+       */
+      easing: {
+        type: String,
+        default: 'ease-out'
+      }
     },
     computed: {
       contentId() {
         return this.name.replace(/\s+/g, '-').toLowerCase();
+      },
+      accordionTransition() {
+        return `transition: height ${this.duration}ms ${this.easing}`;
       }
     },
     watch: {
@@ -168,7 +195,12 @@
             </ul>
         </zr-accordion>
     </div>
+    ```
 
-
+    #### Custom transition options
+    ```jsx
+    <zr-accordion name="test3" header="Custom transition" :duration="500" easing="cubic-bezier(0.250, 0.250, 0.785, 0.325)">
+        <div v-html="text.paragraphs"></div>
+    </zr-accordion>
     ```
 </docs>
