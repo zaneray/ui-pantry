@@ -130,7 +130,6 @@
         display: block;
         padding: $button-padding;
         font-size: 1rem;
-        font-family: sans-serif;
         color: $color-lightest;
         cursor: pointer;
         user-select: none;
