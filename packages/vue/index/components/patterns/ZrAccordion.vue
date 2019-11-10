@@ -1,10 +1,11 @@
 <template>
     <div class="accordion-container">
-        <button class="accordion-header"
+        <button :class="['accordion-header', {'expanded': accordionExpanded}]"
                 @click="toggleAccordion"
                 :aria-controls="contentId"
                 :aria-expanded="accordionExpanded  ? 'true' : 'false'">
-            <span>{{header}}</span>
+            {{header}}
+            <span class="accordion-indicator"></span>
         </button>
         <transition name="accordion"
                     v-on:before-enter="beforeEnter" v-on:enter="enter"
@@ -97,19 +98,22 @@
         width: 100%;
         margin: 0;
         padding: $margin-base 1.5rem $margin-base 0;
-        line-height: 0;
+        line-height: 1;
         text-align: left;
         border: none;
         border-top: 1px solid $color-black;
         border-bottom: 1px solid $color-black;
         cursor: pointer;
+    }
+
+    .accordion-indicator {
 
         &:before,
         &:after {
             content: '';
             position: absolute;
             right: 0;
-            top: 50%;
+            top: calc(50% - 1px);
             display: block;
             width: 1em;
             height: 2px;
@@ -121,7 +125,7 @@
             transform: rotate(90deg);
         }
 
-        &[aria-expanded="true"] {
+        [aria-expanded="true"] & {
             &:before,
             &:after {
                 transform: rotate(180deg);
