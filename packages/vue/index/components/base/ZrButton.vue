@@ -1,10 +1,11 @@
 <template>
-    <nuxt-link v-if="nuxtLink" :class="btnClass" :to="nuxtLink" :title="title">{{label}}</nuxt-link>
-    <a v-else-if="link" :class="btnClass" :href="link" :target="externalLink ? '_blank' : '_self'" :title="title">
-        <span v-if="!loading">{{label}}</span><span v-else class="loading"></span>
-    </a>
-    <button v-else :class="btnClass" :type="type" :title="title" :disabled="disabled">
-        <span class="label">{{label}}</span>
+    <button :class="btnClass"
+            :type="type"
+            :title="title"
+            :disabled="disabled">
+        <span class="label">
+            <slot></slot>
+        </span>
         <span class="loading-container">
             <span class="loading-indicator"></span>
         </span>
@@ -27,37 +28,11 @@
         default: 'default'
       },
       /**
-       * Text to be displayed inside the button
-       */
-      label: {
-        type: String,
-        required: true
-      },
-      /**
        * Size of button to be displayed
        */
       size: {
         type: String,
         default: 'md'
-      },
-      /**
-       * Relative path of route to link to internally via vue-router, on click of the button
-       */
-      nuxtLink: {
-        type: String
-      },
-      /**
-       * Url to link to using a standard href
-       */
-      link: {
-        type: String
-      },
-      /**
-       * When using a link, this determines if that link will open in an external tab or not
-       */
-      externalLink: {
-        type: Boolean,
-        default: false
       },
       /**
        * Type of button to render (button, reset, submit)
@@ -127,13 +102,15 @@
 
     .btn {
         position: relative;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: $button-padding;
         font-size: 1rem;
         color: $color-lightest;
         cursor: pointer;
         user-select: none;
-        text-align: center;
         background-color: $color-darker;
         border: 2px solid transparent;
         transition: all 0.25s ease-out;
@@ -215,7 +192,7 @@
     }
 
     .inline {
-        display: inline-block;
+        display: inline-flex;
         width: auto;
     }
 
@@ -262,30 +239,30 @@
 
     #### Button Themes
     ```jsx
-    <ZrButton :label="'Default'" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Action'" theme="action" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Info'" theme="info" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Transparent'" theme="transparent" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Negative'" theme="negative" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton style="margin-bottom: 10px">Default</ZrButton>
+    <ZrButton theme="action" style="margin-bottom: 10px">Action</ZrButton>
+    <ZrButton theme="info" style="margin-bottom: 10px">Info</ZrButton>
+    <ZrButton theme="transparent" style="margin-bottom: 10px">Transparent</ZrButton>
+    <ZrButton theme="negative" style="margin-bottom: 10px">Negative</ZrButton>
     ```
 
     #### Button Sizes
     ```jsx
-    <ZrButton label="Small" size="sm" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Default" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Large" size="lg" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton size="sm" style="margin-bottom: 10px">Small</ZrButton>
+    <ZrButton style="margin-bottom: 10px">Default</ZrButton>
+    <ZrButton size="lg" style="margin-bottom: 10px">Large</ZrButton>
     ```
 
     #### Button States
     ```jsx
-    <ZrButton label="Disabled" disabled style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Loading" loading style="margin-bottom: 10px"></ZrButton>
+    <ZrButton disabled style="margin-bottom: 10px">Disabled</ZrButton>
+    <ZrButton loading style="margin-bottom: 10px">Loading</ZrButton>
     ```
     #### Button Display Options
     ```jsx
-    <ZrButton label="Full Width" full style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Button Inline 1" inline></ZrButton>
-    <ZrButton label="Button Inline 2" inline></ZrButton>
+    <ZrButton full style="margin-bottom: 10px">Full Width</ZrButton>
+    <ZrButton inline>Inline 1</ZrButton>
+    <ZrButton inline>Inline 2</ZrButton>
     ```
 
 </docs>
