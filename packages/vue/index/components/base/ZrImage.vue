@@ -1,5 +1,13 @@
 <template>
-    <img :src="imageSrc" :alt="altText" />
+  <div>
+    <img v-if="lazy" v-lazy :data-src="imageSrc"
+         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+         :alt="altText" :class="imageClass" class="lazy-image"/>
+    <img v-else :src="imageSrc" :alt="altText" :class="imageClass"/>
+    <noscript inline-template>
+      <img :src="imageSrc" :alt="altText" :class="imageClass"/>
+    </noscript>
+  </div>
 </template>
 
 <script>
@@ -29,7 +37,7 @@
        */
       lazy: {
         type: Boolean,
-        default: true
+        default: false
       },
       /**
        * If lazy loading, whether or not to fade the image in on load
@@ -43,16 +51,23 @@
 </script>
 
 <style scoped lang="scss">
-    img {
-        width: 100%;
-    }
+  img {
+    width: 100%;
+  }
 </style>
 
 <docs>
-    ### Examples
+  ### Examples
 
-    #### Simple image with default props
-    ```jsx
-    <ZrImage :image-src="images.thumbnail.url" :alt-text="text.sentence" />
-    ```
+  #### Simple image with default props
+  ```jsx
+  <ZrImage :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  ```
+
+  #### Simple image with lazy loading
+  ```jsx
+  <ZrImage :lazy="true" :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  ```
+
+
 </docs>
