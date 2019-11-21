@@ -1,11 +1,27 @@
 <template>
-    <picture>
-        <source :srcset="desktopImg" :media="breakpointQuery">
-        <img :src="mobileImg" :alt="altText" />
+  <div>
+    <picture v-if="lazy" v-lazy>
+      <source :data-src="desktopImg" :media="breakpointQuery"
+              srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="/>
+      <img :data-src="mobileImg" :alt="altText"
+           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="/>
     </picture>
+    <picture v-else>
+      <source :srcset="desktopImg" :media="breakpointQuery"/>
+      <img :src="mobileImg" :alt="altText"/>
+    </picture>
+    <noscript inline-template>
+      <picture>
+        <source :srcset="desktopImg" :media="breakpointQuery"/>
+        <img :src="mobileImg" :alt="altText"/>
+      </picture>
+    </noscript>
+  </div>
 </template>
 
 <script>
+
+  import '../../directives/lazyLoad'
 
   /**
    * Picture component for displaying multiple versions of an image responsively
@@ -41,7 +57,14 @@
       altText: {
         type: String,
         required: true
-      }
+      },
+      /**
+       * Whether or not the image should lazy load
+       */
+      lazy: {
+        type: Boolean,
+        default: true
+      },
     },
     computed: {
       breakpointQuery() {
@@ -52,24 +75,35 @@
 </script>
 
 <style scoped lang="scss">
-    picture {
-        width: 100%;
-        display: block;
-    }
+  picture {
+    width: 100%;
+    display: block;
+  }
 
-    img {
-        display: block;
-        width: 100%;
-    }
+  img {
+    display: block;
+    width: 100%;
+  }
 </style>
 
 <docs>
-    ### Examples
+  ### Examples
 
-    #### Basic Picture
-    ```jsx
-    <ZrPicture :mobile-img="images.banner_image.mobile.url"
-               :desktop-img="images.banner_image.url"
-               :alt-text="images.banner_image.alt" />
-    ```
+  #### Basic Picture
+  ```jsx
+  <ZrPicture :lazy="false"
+             :mobile-img="images.banner_image.mobile.url"
+             :desktop-img="images.banner_image.url"
+             :alt-text="images.banner_image.alt"/>
+  ```
+
+  #### Basic Picture with lazy loading
+  ```jsx
+  <ZrPicture :lazy="true"
+             :mobile-img="images.banner_image.mobile.url"
+             :desktop-img="images.banner_image.url"
+             :alt-text="images.banner_image.alt"/>
+  ```
+
+
 </docs>
