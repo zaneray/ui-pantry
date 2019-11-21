@@ -11,6 +11,9 @@
 </template>
 
 <script>
+
+  import '../../directives/lazyLoad'
+
   /**
    * BaseImage is a rock solid image component that requires alt text, and handles lazy loading by default.
    */
@@ -26,6 +29,13 @@
         default: ''
       },
       /**
+       * Class to be attached to image
+       */
+      imageClass: {
+        type: String,
+        required: false
+      },
+      /**
        * A string describing what is in the image.
        */
       altText: {
@@ -37,7 +47,7 @@
        */
       lazy: {
         type: Boolean,
-        default: false
+        default: true
       },
       /**
        * If lazy loading, whether or not to fade the image in on load
@@ -61,7 +71,7 @@
 
   #### Simple image with default props
   ```jsx
-  <ZrImage :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  <ZrImage :lazy="false" :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
   ```
 
   #### Simple image with lazy loading

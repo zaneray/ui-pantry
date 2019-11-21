@@ -1,8 +1,10 @@
 <template>
   <div>
     <picture v-if="lazy" v-lazy>
-      <source :data-src="desktopImg" :media="breakpointQuery" srcset=""/>
-      <img :data-src="mobileImg" :alt="altText" src=""/>
+      <source :data-src="desktopImg" :media="breakpointQuery"
+              srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="/>
+      <img :data-src="mobileImg" :alt="altText"
+           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="/>
     </picture>
     <picture v-else>
       <source :srcset="desktopImg" :media="breakpointQuery"/>
@@ -18,6 +20,8 @@
 </template>
 
 <script>
+
+  import '../../directives/lazyLoad'
 
   /**
    * Picture component for displaying multiple versions of an image responsively
@@ -59,7 +63,7 @@
        */
       lazy: {
         type: Boolean,
-        default: false
+        default: true
       },
     },
     computed: {
@@ -87,7 +91,8 @@
 
   #### Basic Picture
   ```jsx
-  <ZrPicture :mobile-img="images.banner_image.mobile.url"
+  <ZrPicture :lazy="false"
+             :mobile-img="images.banner_image.mobile.url"
              :desktop-img="images.banner_image.url"
              :alt-text="images.banner_image.alt"/>
   ```
