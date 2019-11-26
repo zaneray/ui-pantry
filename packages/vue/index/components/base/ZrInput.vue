@@ -1,6 +1,6 @@
 <template>
   <base-input-wrapper v-bind="$props">
-    <label v-if="label" :class="{'visuallyhidden': labelHidden}" :for="id">{{label}}</label>
+    <label v-if="label" :class="{'visually-hidden': labelHidden}" :for="id">{{label}}</label>
     <input :type="type"
            :id="id"
            :name="name ? name : id"
@@ -118,6 +118,10 @@
 
     @include font-label();
     line-height: 1rem;
+
+    &.visually-hidden {
+      display: none;
+    }
   }
 </style>
 
@@ -150,6 +154,8 @@
   <ZrInput
     placeholder="First Name"
     id="first-name"
+    label="No Label"
+    :label-hidden="true"
     full
   >
   </ZrInput>
