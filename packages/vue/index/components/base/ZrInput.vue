@@ -1,5 +1,5 @@
 <template>
-  <base-input-wrapper :id="id" :full="full">
+  <base-input-wrapper v-bind="$props">
     <label v-if="label" :class="{'visuallyhidden': labelHidden}" :for="id">{{label}}</label>
     <input :type="type"
            :id="id"
