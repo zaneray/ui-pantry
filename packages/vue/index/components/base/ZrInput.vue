@@ -154,7 +154,7 @@
   ```
 
   ### Valid Input
-  (See parent class)
+  (See 'valid' class on parent on input)
   ```jsx
   <ZrInput
     label="Full Name"
