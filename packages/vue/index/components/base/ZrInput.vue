@@ -108,6 +108,10 @@
       padding: $input-padding-lg;
       font-size: $font-size-medium;
     }
+
+    .invalid & {
+      border-color: red;
+    }
   }
 
   label {
@@ -137,6 +141,29 @@
   </ZrInput>
   ```
 
+  ### Invalid Input
+  ```jsx
+  <ZrInput
+    label="Full Name"
+    placeholder="Example: John S. Smith"
+    id="full-name"
+    :invalid="true"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  ```
+
+  ### Valid Input
+  (See parent class)
+  ```jsx
+  <ZrInput
+    label="Full Name"
+    placeholder="Example: John S. Smith"
+    id="full-name"
+    :valid="true"
+  >
+  </ZrInput>
+  ```
 
   ### Default input Number
   ```jsx

@@ -1,7 +1,8 @@
 <template>
-    <div :class="['input-wrapper', {'full-width': full}]">
+    <div :class="['input-wrapper', {'full-width': full, 'valid': valid, 'invalid': invalid} ]">
         <p v-if="required && requiredLabel" class="required-label">Required</p>
         <slot></slot>
+        <p v-if="invalid" class="invalid-message">{{validationMessage}}</p>
     </div>
 </template>
 

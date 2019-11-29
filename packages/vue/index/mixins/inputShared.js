@@ -57,6 +57,12 @@ export const inputShared = {
      */
     validationMessage: {
       type: String
+    },
+    valid: {
+      type: Boolean
+    },
+    invalid: {
+      type: Boolean
     }
   },
   mounted() {
