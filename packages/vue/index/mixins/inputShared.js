@@ -58,9 +58,15 @@ export const inputShared = {
     validationMessage: {
       type: String
     },
+    /**
+     * Whether the input is valid based on value inputted
+     */
     valid: {
       type: Boolean
     },
+    /**
+     * Whether the input is invalid based on value inputted
+     */
     invalid: {
       type: Boolean
     }

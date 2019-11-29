@@ -110,7 +110,7 @@
     }
 
     .invalid & {
-      border-color: red;
+      border-color: $color-warning;
     }
   }
 
@@ -142,6 +142,7 @@
   ```
 
   ### Invalid Input
+  #### <sub><sup>(See 'invalid' class on parent)</sup></sub>
   ```jsx
   <ZrInput
     label="Full Name"
@@ -154,7 +155,7 @@
   ```
 
   ### Valid Input
-  (See 'valid' class on parent on input)
+  #### <sub><sup>(See 'valid' class on parent)</sup></sub>
   ```jsx
   <ZrInput
     label="Full Name"
@@ -175,7 +176,6 @@
   </ZrInput>
   ```
 
-
   ### full width Input without a label
   ```jsx
   <ZrInput
@@ -187,8 +187,6 @@
   >
   </ZrInput>
   ```
-
-
 
   ### Stacked inputs with a submit
   ```jsx

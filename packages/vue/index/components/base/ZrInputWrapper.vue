@@ -26,6 +26,10 @@
         &.full-width {
             width: 100%;
         }
+
+        .invalid-message {
+            color: $color-warning;
+        }
     }
 
     .required-label {
