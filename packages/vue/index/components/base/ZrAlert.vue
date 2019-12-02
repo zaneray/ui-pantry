@@ -31,8 +31,8 @@
 
     .alert {
         position: relative;
-        padding: .75rem 1.25rem;
-        margin-bottom: 1rem;
+        margin-bottom: $margin-base;
+        padding: $margin-base;
         border: 1px solid transparent;
         border-radius: .25rem;
 
