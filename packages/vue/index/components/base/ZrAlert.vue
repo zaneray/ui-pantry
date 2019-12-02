@@ -1,5 +1,5 @@
 <template>
-    <div class="alert alert-info" :class="{'alert alert--primary': type === 'primary', 'alert alert--secondary': type === 'secondary', 'alert alert--success': type === 'success', 'alert alert--danger': type === 'danger', 'alert alert--warning': type === 'warning'}" role="alert">
+    <div :class="{'alert alert--primary': type === 'primary', 'alert alert--secondary': type === 'secondary', 'alert alert--success': type === 'success', 'alert alert--danger': type === 'danger', 'alert alert--warning': type === 'warning'}" role="alert">
         {{message}}
     </div>
 </template>
