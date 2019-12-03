@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'alert alert--primary': type === 'primary', 'alert alert--secondary': type === 'secondary', 'alert alert--success': type === 'success', 'alert alert--danger': type === 'danger', 'alert alert--warning': type === 'warning'}" role="alert">
+    <div :class="`alert alert--${type}`" role="alert">
         {{message}}
     </div>
 </template>
@@ -9,11 +9,11 @@
       name: "ZrAlert",
       props: {
         /**
-         * alert type options `primary`, `secondary`, `success`, `danger`, `warning`
+         * alert type options `primary` is default, `secondary`, `success`, `danger`, `warning`
          */
         type: {
           type: String,
-          required: true
+          default: 'primary'
         },
         /**
          * text string to be displayed
@@ -31,7 +31,6 @@
 
     .alert {
         position: relative;
-        margin-bottom: $margin-base;
         padding: $margin-base;
         border: 1px solid transparent;
         border-radius: .25rem;
@@ -71,7 +70,7 @@
 <docs>
     ### Primary Alert
     ```jsx
-    <ZrAlert message="This is a primary alert" type="primary"></ZrAlert>
+    <ZrAlert message="This is a primary alert"></ZrAlert>
     ```
 
     ### Secondary Alert
