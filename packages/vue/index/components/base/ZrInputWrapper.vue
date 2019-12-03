@@ -27,6 +27,29 @@
             width: 100%;
         }
 
+        &.required {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+
+            .required-label {
+                order: 2;
+            }
+
+            label {
+                order: 1;
+            }
+
+            input {
+                order: 3;
+            }
+
+            .invalid-message {
+                order: 4;
+            }
+        }
+
         .invalid-message {
             color: $color-warning;
         }
