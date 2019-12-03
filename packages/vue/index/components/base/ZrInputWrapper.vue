@@ -30,7 +30,7 @@
         &.required {
             display: flex;
             flex-wrap: wrap;
-            align-items: baseline;
+            align-items: end;
             justify-content: space-between;
 
             .required-label {
