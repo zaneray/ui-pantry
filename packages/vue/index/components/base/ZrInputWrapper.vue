@@ -15,6 +15,8 @@
   }
 </script>
 
+
+
 <style scoped lang="scss">
     @import '../../styles/imports';
 
@@ -30,7 +32,6 @@
         &.required {
             display: flex;
             flex-wrap: wrap;
-            align-items: end;
             justify-content: space-between;
 
             .required-label {
@@ -43,6 +44,7 @@
 
             input {
                 order: 3;
+                width: 100%;
             }
 
             .invalid-message {
