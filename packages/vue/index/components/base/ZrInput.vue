@@ -154,6 +154,19 @@
   </ZrInput>
   ```
 
+  ### Required input with invalid message
+  ```jsx
+  <ZrInput
+    label="Full Name"
+    placeholder="Example: John S. Smith"
+    id="full-name"
+    :required="true"
+    :invalid="true"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  ```
+
   ### Valid Input
   #### <sub><sup>(See 'valid' class on parent)</sup></sub>
   ```jsx
