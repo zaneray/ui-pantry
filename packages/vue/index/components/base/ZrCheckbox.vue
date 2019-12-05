@@ -54,19 +54,24 @@
     $checkbox-width: 1.5em;
 
     input {
-        position: absolute;
-        width: 0;
-        height: 0;
-        opacity: 0;
-        margin: 0;
-        padding: 0;
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      margin: 0;
+      padding: 0;
 
-        &:checked + label {
-            &:after {
-                opacity: 1;
-                transform: rotate(-50deg) scale(1);
-            }
+      &:focus + label:before {
+        outline: 1px dotted $color-default-focus-ring;
+        outline: 5px auto -webkit-focus-ring-color;
+      }
+
+      &:checked + label {
+        &:after {
+          opacity: 1;
+          transform: rotate(-50deg) scale(1);
         }
+      }
     }
 
     label {
