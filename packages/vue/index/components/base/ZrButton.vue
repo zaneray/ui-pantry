@@ -1,11 +1,14 @@
 <template>
-    <nuxt-link v-if="nuxtLink" :class="btnClass" :to="nuxtLink" :title="title">{{label}}</nuxt-link>
-    <a v-else-if="link" :class="btnClass" :href="link" :target="externalLink ? '_blank' : '_self'" :title="title">
-        <span v-if="!loading">{{label}}</span><span v-else class="loading" aria-label="loading"></span>
-    </a>
-    <button v-else :class="btnClass" :type="type" :title="title" :disabled="disabled">
-        <span v-if="!loading">{{label}}</span>
-        <span v-else class="loading" aria-label="loading"></span>
+    <button :class="btnClass"
+            :type="type"
+            :title="title"
+            :disabled="disabled">
+        <span class="label">
+            <slot></slot>
+        </span>
+        <span class="loading-container">
+            <span class="loading-indicator"></span>
+        </span>
     </button>
 </template>
 
@@ -18,50 +21,18 @@
     name: "ZrButton",
     props: {
       /**
-       * Theme of button to display (default, action, info, transparent, negative)
+       * Theme of button to display.  This adds a class of ".btn-{{theme}}", which can be used to scope styles
        */
       theme: {
         type: String,
-        default: 'default',
-        validator: function (value) {
-          return ['default', 'action', 'info', 'transparent', 'negative'].includes(value)
-        }
-      },
-      /**
-       * Text to be displayed inside the button
-       */
-      label: {
-        type: String,
-        required: true
+        default: 'default'
       },
       /**
        * Size of button to be displayed
        */
       size: {
         type: String,
-        default: 'md',
-        validator: function (value) {
-          return ['sm', 'md', 'lg', 'responsive'].includes(value)
-        }
-      },
-      /**
-       * Relative path of route to link to internally via vue-router, on click of the button
-       */
-      nuxtLink: {
-        type: String
-      },
-      /**
-       * Url to link to using a standard href
-       */
-      link: {
-        type: String
-      },
-      /**
-       * When using a link, this determines if that link will open in an external tab or not
-       */
-      externalLink: {
-        type: Boolean,
-        default: false
+        default: 'md'
       },
       /**
        * Type of button to render (button, reset, submit)
@@ -117,7 +88,8 @@
             'disabled': this.disabled,
             'active': this.active,
             'full-width': this.full,
-            'inline': this.inline
+            'inline': this.inline,
+            'loading': this.loading
           }
         ];
       }
@@ -129,17 +101,16 @@
     @import '../../styles/imports';
 
     .btn {
-        display: block;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: $button-padding;
-        text-transform: uppercase;
-        font-size: 16px;
-        font-family: sans-serif;
-        font-weight: bold;
+        font-size: 1rem;
         color: $color-lightest;
         cursor: pointer;
         user-select: none;
-        min-width: $input-default-width;
-        text-align: center;
         background-color: $color-darker;
         border: 2px solid transparent;
         transition: all 0.25s ease-out;
@@ -234,7 +205,6 @@
         border-top-color: transparent;
         display: inline-block;
         animation: SPIN 1s infinite cubic-bezier(.48,.17,.49,.78);
-        cursor: wait;
     }
 </style>
 

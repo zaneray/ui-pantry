@@ -1,5 +1,5 @@
 <template>
-    <base-input-wrapper :full="full">
+    <base-input-wrapper v-bind="$props">
         <label v-if="label" :for="id">{{label}}</label>
         <div class="select-wrapper">
             <select :id="id"
