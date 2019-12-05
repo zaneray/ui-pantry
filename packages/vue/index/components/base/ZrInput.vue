@@ -154,12 +154,31 @@
   </ZrInput>
   ```
 
-  ### Required input with invalid message
+  ### Multiple input's with invalid messages
   ```jsx
   <ZrInput
-    label="Full Name"
-    placeholder="Example: John S. Smith"
-    id="full-name"
+    label="Email"
+    placeholder="Email"
+    value="creative@zaneray.com"
+    id="email"
+    :required="true"
+    :invalid="false"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  <ZrInput
+    label="First Name"
+    placeholder="Example: John"
+    id="first-name"
+    :required="true"
+    :invalid="true"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  <ZrInput
+    label="Last Name"
+    placeholder="Smith"
+    id="last-name"
     :required="true"
     :invalid="true"
     validation-message="invalid input"
