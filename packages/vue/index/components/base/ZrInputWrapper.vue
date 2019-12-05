@@ -20,7 +20,9 @@
 
     .input-wrapper {
         display: block;
-        margin-bottom: $margin-base;
+        position: relative;
+        margin-bottom: $margin-small;
+        padding-bottom: $margin-smedium;
         width: $input-default-width;
 
         &.full-width {
@@ -51,6 +53,10 @@
         }
 
         .invalid-message {
+            position: absolute;
+            bottom: 0;
+            margin: 0;
+            font-size: $font-size-xsmall;
             color: $color-warning;
         }
     }
