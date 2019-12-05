@@ -141,7 +141,7 @@
   <ZrInput
     label="Full Name"
     placeholder="Example: John S. Smith"
-    id="full-name"
+    id="full-name-1"
   >
   </ZrInput>
   ```
@@ -152,14 +152,14 @@
   <ZrInput
     label="Full Name"
     placeholder="Example: John S. Smith"
-    id="full-name"
+    id="full-name-2"
     :invalid="true"
     validation-message="invalid input"
   >
   </ZrInput>
   ```
 
-  ### Multiple input's with invalid messages
+  ### Multiple inputs with invalid messages
   ```jsx
   <ZrInput
     label="Email"
@@ -197,7 +197,7 @@
   <ZrInput
     label="Full Name"
     placeholder="Example: John S. Smith"
-    id="full-name"
+    id="full-name-4"
     :valid="true"
   >
   </ZrInput>
@@ -221,18 +221,6 @@
     :labelHidden="true"
     placeholder="First Name"
     id="input-hidden-label"
-    full
-  >
-  </ZrInput>
-  ```
-
-  ### full width Input without a label
-  ```jsx
-  <ZrInput
-    placeholder="First Name"
-    id="first-name"
-    label="No Label"
-    :label-hidden="true"
     full
   >
   </ZrInput>
