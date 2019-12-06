@@ -143,4 +143,9 @@
     ```jsx
     <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
     ```
+
+    ### Select with required attribute
+    ```jsx
+    <ZrSelect label="Required Select" :options="selectOptions" :value="1" id="Preselected-select" :required="true"></ZrSelect>
+    ```
 </docs>
