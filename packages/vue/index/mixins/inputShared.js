@@ -69,6 +69,12 @@ export const inputShared = {
      */
     invalid: {
       type: Boolean
+    },
+    /**
+     * To indicate to the screen-reader whether the input is valid or invalid
+     */
+    ariaInvalid: {
+      type: Boolean
     }
   },
   mounted() {
@@ -86,4 +92,4 @@ export const inputShared = {
       };
     }
   }
-}
+};

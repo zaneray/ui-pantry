@@ -6,6 +6,7 @@
                     :name="name ? name : id"
                     :value="value"
                     :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
+                    :aria-invalid="ariaInvalid"
                     :required="required"
                     @change="updateValue">
                 <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
@@ -159,5 +160,10 @@
     ### Invalid Select
     ```jsx
     <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :required="true" :invalid="true"></ZrSelect>
+    ```
+
+    ### Select `aria-invalid`
+    ```jsx
+    <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :aria-invalid="true" :invalid="true"></ZrSelect>
     ```
 </docs>
