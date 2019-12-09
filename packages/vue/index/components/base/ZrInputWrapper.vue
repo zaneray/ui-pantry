@@ -42,7 +42,8 @@
                 order: 1;
             }
 
-            input {
+            input,
+            .select-wrapper {
                 order: 3;
                 width: 100%;
             }
