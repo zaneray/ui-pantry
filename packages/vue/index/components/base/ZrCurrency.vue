@@ -4,11 +4,11 @@
 
 <script>
   /**
-   * Displays price formatted to a given currency and locale
+   * Displays price formatted to a given currency and locale.  This uses the Javascript Intl.NumberFormat utility: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
    */
 
   export default {
-    name: "ZrPrice",
+    name: "ZrCurrency",
     props: {
       /**
        * Numeric dollar value to display in the price
@@ -50,19 +50,19 @@
 
   #### Default price display
   ```jsx
-  <zr-price :value="188"></zr-price>
+  <zr-currency :value="188"></zr-currency>
   ```
 
   #### Price with cents
   ```jsx
-  <zr-price :value="188.95"></zr-price>
+  <zr-currency :value="188.95"></zr-currency>
   ```
 
   #### Prices in different currencies
   ```jsx
-  <zr-price :value="1234567" currency-code="CAD" locale="ca-FR" :style="{display: 'block'}"></zr-price>
-  <zr-price :value="1234567" currency-code="JPY" locale="ja-JP" :style="{display: 'block'}"></zr-price>
-  <zr-price :value="1234567" currency-code="EUR" :style="{display: 'block'}"></zr-price>
+  <zr-currency :value="1234567" currency-code="CAD" locale="ca-FR" :style="{display: 'block'}"></zr-currency>
+  <zr-currency :value="1234567" currency-code="JPY" locale="ja-JP" :style="{display: 'block'}"></zr-currency>
+  <zr-currency :value="1234567" currency-code="EUR" :style="{display: 'block'}"></zr-currency>
   ```
 </docs>
 
