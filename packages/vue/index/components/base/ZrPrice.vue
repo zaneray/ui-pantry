@@ -60,9 +60,9 @@
 
   #### Prices in different currencies
   ```jsx
-  <zr-price :value="188" currency-code="CAD" :style="{display: 'block'}"></zr-price>
-  <zr-price :value="188" currency-code="JPY" :style="{display: 'block'}"></zr-price>
-  <zr-price :value="188" currency-code="EUR" :style="{display: 'block'}"></zr-price>
+  <zr-price :value="1234567" currency-code="CAD" locale="ca-FR" :style="{display: 'block'}"></zr-price>
+  <zr-price :value="1234567" currency-code="JPY" locale="ja-JP" :style="{display: 'block'}"></zr-price>
+  <zr-price :value="1234567" currency-code="EUR" :style="{display: 'block'}"></zr-price>
   ```
 </docs>
 
