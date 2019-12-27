@@ -83,18 +83,18 @@
         default: false
       },
       /**
-       * Link to follow on click. Renders an <a> instead of <button>
+       * Path to follow on click.  Renders a link element instead of button
        */
-      href: {
+      linkPath: {
         type: String,
         default: null
       },
       /**
-       * Path to follow on click.  Renders <router-link> or <nuxt-link> (if nuxt prop is true) instead of <button>
+       * Defines whether this is an external link.  If true, renders an 'a' tag.  If false, renders router-link or nuxt-link (if supporting "to" prop exists)
        */
-      to: {
-        type: String,
-        default: null
+      externalLink: {
+        type: Boolean,
+        default: false
       },
       /**
        * Whether to render <nuxt-link> instead of <router-link> when using the 'to' prop
@@ -128,25 +128,25 @@
         ];
       },
       componentType() {
-        if (this.to) {
+        if (this.linkPath) {
+          if (this.externalLink) {
+            return 'a'
+          }
           return this.nuxt ? 'nuxt-link' : 'router-link'
-        } else if (this.href) {
-          return 'a'
         } else {
           return 'button'
         }
       },
-      finalTarget() {
-        return this.href ? this.target : null
-      },
       btnLinkProps() {
         const linkProps = {};
 
-        if (this.to) {
-          linkProps.to = this.to;
-        } else if (this.href) {
-          linkProps.href = this.href;
-          linkProps.target = this.finalTarget
+        if (this.linkPath) {
+          if (this.externalLink) {
+            linkProps.href = this.linkPath;
+            linkProps.target = this.target
+          } else {
+            linkProps.to = this.linkPath;
+          }
         }
 
         return linkProps
@@ -330,8 +330,8 @@
     #### Button Link Types
     ```jsx
     <ZrButton style="margin-bottom: 10px">Button</ZrButton>
-    <ZrButton href="www.google.com" style="margin-bottom: 10px">Standard Link</ZrButton>
-    <ZrButton to="/product/path" style="margin-bottom: 10px">Router Link</ZrButton>
-    <ZrButton to="/product/path" nuxt>Nuxt Link</ZrButton>
+    <ZrButton link-path="www.google.com" external-link style="margin-bottom: 10px">Standard Link</ZrButton>
+    <ZrButton link-path="/product/path" style="margin-bottom: 10px">Router Link</ZrButton>
+    <ZrButton link-path="/product/path" nuxt>Nuxt Link</ZrButton>
     ```
 </docs>
