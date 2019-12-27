@@ -1,6 +1,11 @@
 <template>
-    <button :class="btnClass"
+    <component
+            :is="componentType"
+            :class="btnClass"
             :type="type"
+            :href="href"
+            :to="to"
+            :target="finalTarget"
             :title="title"
             :disabled="disabled">
         <span class="label">
@@ -9,7 +14,7 @@
         <span class="loading-container">
             <span class="loading-indicator"></span>
         </span>
-    </button>
+    </component>
 </template>
 
 <script>
@@ -39,7 +44,7 @@
        */
       type: {
         type: String,
-        default: 'button',
+        default: null,
         validator: function (value) {
           return ['button', 'reset', 'submit'].indexOf(value) !== -1
         }
@@ -56,7 +61,7 @@
        */
       title: {
         type: String,
-        default: ''
+        default: null
       },
       /**
        * Gives button a width of 100% of its parent container
@@ -78,6 +83,37 @@
       loading: {
         type: Boolean,
         default: false
+      },
+      /**
+       * Link to follow on click. Renders an <a> instead of <button>
+       */
+      href: {
+        type: String,
+        default: null
+      },
+      /**
+       * Path to follow on click.  Renders <router-link> or <nuxt-link> (if nuxt prop is true) instead of <button>
+       */
+      to: {
+        type: String,
+        default: null
+      },
+      /**
+       * Whether to render <nuxt-link> instead of <router-link> when using the 'to' prop
+       */
+      nuxt: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Target for traditional link
+       */
+      target: {
+        type: String,
+        default: '_self',
+        validator: function (value) {
+          return ['_self', '_blank', '_parent', '_top'].includes(value)
+        }
       }
     },
     computed: {
@@ -92,6 +128,18 @@
             'loading': this.loading
           }
         ];
+      },
+      componentType() {
+        if (this.to) {
+          return this.nuxt ? 'nuxt-link' : 'router-link'
+        } else if (this.href) {
+          return 'a'
+        } else {
+          return 'button'
+        }
+      },
+      finalTarget() {
+        return this.href ? this.target : null
       }
     },
   }
@@ -101,11 +149,15 @@
     @import '../../styles/imports';
 
     .btn {
+        appearance: none;
+        -webkit-appearance: none;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: fit-content;
         text-align: center;
+        text-decoration: none;
         padding: $button-padding;
         font-size: 1rem;
         color: $color-lightest;
@@ -265,4 +317,11 @@
     <ZrButton inline>Inline 2</ZrButton>
     ```
 
+    #### Button Link Types
+    ```jsx
+    <ZrButton style="margin-bottom: 10px">Button</ZrButton>
+    <ZrButton href="www.google.com" style="margin-bottom: 10px">Standard Link</ZrButton>
+    <ZrButton to="/product/path" style="margin-bottom: 10px">Router Link</ZrButton>
+    <ZrButton to="/product/path" nuxt>Nuxt Link</ZrButton>
+    ```
 </docs>
