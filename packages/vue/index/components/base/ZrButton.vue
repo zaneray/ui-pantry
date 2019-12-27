@@ -3,9 +3,7 @@
             :is="componentType"
             :class="btnClass"
             :type="type"
-            :href="href"
-            :to="to"
-            :target="finalTarget"
+            v-bind="btnLinkProps"
             :title="title"
             :disabled="disabled">
         <span class="label">
@@ -140,7 +138,19 @@
       },
       finalTarget() {
         return this.href ? this.target : null
-      }
+      },
+      btnLinkProps() {
+        const linkProps = {};
+
+        if (this.to) {
+          linkProps.to = this.to;
+        } else if (this.href) {
+          linkProps.href = this.href;
+          linkProps.target = this.finalTarget
+        }
+
+        return linkProps
+      },
     },
   }
 </script>
