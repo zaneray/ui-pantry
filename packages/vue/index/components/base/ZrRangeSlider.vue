@@ -1,10 +1,22 @@
 <template>
-  <div class="range" :class="{'dual-range': JSON.parse(isDualSlider)}">
+  <div class="range" :class="{'dual-range': isDualSlider}">
+
+    <div
+      v-if="!isDualSlider"
+      class="range-display"
+      :style="{ left: 0, width: range1Model * rangePercentageRatio + '%' }">
+    </div>
+
+    <div
+      v-if="isDualSlider"
+      class="range-display"
+      :style="{ left: (range1Model - minValue) * rangePercentageRatio + '%', width: (range2Model - range1Model) * rangePercentageRatio + '%' }">
+    </div>
 
     <input
       type="range"
       :min="minValue"
-      :max="JSON.parse(isDualSlider) ? maxValue - stepSize : maxValue"
+      :max="isDualSlider ? maxValue - stepSize : maxValue"
       :step="stepSize"
       :aria-valuemin="minValue"
       :aria-valuemax="maxValue - stepSize"
@@ -12,11 +24,11 @@
       ref="rangeSliderMin"
       v-model="range1Model"
       @change="rangeChanged"
-      @input="JSON.parse(isDualSlider) ? checkRangeValid('min') : ''"
+      @input="isDualSlider ? checkRangeValid('min') : ''"
     >
 
     <input
-      v-if="JSON.parse(isDualSlider)"
+      v-if="isDualSlider"
       type="range"
       :min="minValue + stepSize"
       :max="maxValue"
@@ -31,7 +43,7 @@
       class="dualInput"
     >
     <div class="label-min">{{labelMin}}{{range1Model}}</div>
-    <div class="label-max" v-if="JSON.parse(isDualSlider)">{{labelMax}}{{range2Model}}</div>
+    <div class="label-max" v-if="isDualSlider">{{labelMax}}{{range2Model}}</div>
   </div>
 
 </template>
@@ -43,14 +55,15 @@
     data: function () {
       return {
         range1Model: 0,
-        range2Model: 0
+        range2Model: 0,
+        rangePercentageRatio: 1
       }
     },
     props: {
       /** Show dual range selection (min / max) */
       isDualSlider: {
-        type: String,
-        default: 'false'
+        type: Boolean,
+        default: false
       },
       /** Value for Range 1 */
       rangeSliderMin: {
@@ -97,13 +110,14 @@
     beforeMount() {
       this.range1Model = this.$props.rangeSliderMin;
       this.range2Model = this.$props.rangeSliderMax;
+      this.rangePercentageRatio = 100 / (this.$props.maxValue - this.$props.minValue);
     },
     methods: {
       rangeChanged() {
         console.log('range change');
         this.$refs.rangeSliderMin.setAttribute('aria-valuenow', this.range1Model);
         // if dual slides also set value now for 2nd input range
-        if (JSON.parse(this.$props.isDualSlider)) {
+        if (this.$props.isDualSlider) {
           this.$refs.rangeSliderMax.setAttribute('aria-valuenow', this.range2Model);
           this.$emit('change', [this.range1Model, this.range2Model]);
           return;
@@ -137,7 +151,8 @@
 <style scoped lang="scss">
   @import '../../styles/imports';
 
-  $trackBackGround: rgb(0, 113, 186);
+  $trackBackGround: rgb(153, 153, 153);
+  $trackColor: rgb(0, 113, 186);
   $trackHeight: 4px;
   $thumbWidth: 20px;
   $thumbHeight: 20px;
@@ -186,7 +201,7 @@
       &::-webkit-slider-thumb {
         pointer-events: all;
         position: relative;
-        z-index: 1;
+        z-index: 2;
         outline: 0;
         -webkit-appearance: none;
         width: $thumbWidth;
@@ -194,18 +209,18 @@
         border: none;
         appearance: none;
         cursor: pointer;
-        background: url('/static/fpo/slider-right.svg');
+        background: url('/static/fpo/slider-right.svg') no-repeat;
       }
 
       &:first-of-type::-webkit-slider-thumb {
-        background: url('/static/fpo/slider-left.svg');
+        background: url('/static/fpo/slider-left.svg') no-repeat;
       }
 
       /* styling for moz thumb */
       &::-moz-range-thumb {
         pointer-events: all;
         position: relative;
-        z-index: 1;
+        z-index: 2;
         outline: 0;
         -webkit-appearance: none;
         width: $thumbWidth;
@@ -217,26 +232,26 @@
       }
 
       &:first-of-type::-moz-range-thumb {
-        background: url('/static/fpo/slider-left.svg');
+        background: url('/static/fpo/slider-left.svg') no-repeat;
       }
 
       /* styling for ms thumb */
       &::-ms-thumb {
         pointer-events: all;
         position: relative;
-        z-index: 1;
+        z-index: 2;
         outline: 0;
         -webkit-appearance: none;
         width: $thumbWidth;
         height: $thumbHeight;
         border: none;
         appearance: none;
-        background: url('/static/fpo/slider-right.svg');
+        background: url('/static/fpo/slider-right.svg') no-repeat;
         cursor: pointer;
       }
 
       &:first-of-type::-ms-thumb {
-        background: url('/static/fpo/slider-left.svg');
+        background: url('/static/fpo/slider-left.svg') no-repeat;
       }
 
     }
@@ -252,6 +267,7 @@
 
     // reposition thumb image for dual range display
     &.dual-range {
+
       input[type="range"] {
         &::-webkit-slider-thumb {
           left: $thumbWidth / 2
@@ -262,11 +278,11 @@
         }
 
         &::-moz-range-thumb {
-          left: $thumbWidth / 2
+          border: 1px solid transparent;
         }
 
         &:first-of-type::-moz-range-thumb {
-          left: -$thumbWidth / 2
+          border: 1px solid transparent;
         }
 
         &::-ms-thumb {
@@ -277,6 +293,14 @@
           left: -$thumbWidth / 2
         }
       }
+    }
+
+    .range-display {
+      position: absolute;
+      height: $trackHeight;
+      background: $trackColor;
+      top: 2px;
+      z-index: 1;
     }
 
   }
@@ -294,17 +318,22 @@
 
   #### Default Slider Dual
   ```jsx
-  <ZrRangeSlider is-dual-slider="true"/>
-  ```
-
-  #### Default Slider Dual
-  ```jsx
-  <ZrRangeSlider is-dual-slider="true"/>
+  <ZrRangeSlider is-dual-slider/>
   ```
 
   #### Slider Dual preset values
   ```jsx
-  <ZrRangeSlider is-dual-slider="true" range-slider-min="25" range-slider-max="76"/>
+  <ZrRangeSlider is-dual-slider :range-slider-min="25" :range-slider-max="76"/>
+  ```
+
+  #### Slider Dual preset values
+  ```jsx
+  <ZrRangeSlider is-dual-slider :range-slider-min="600" :range-slider-max="900" :min-value="500" :max-value="18000"/>
+  ```
+
+  #### Slider preset values
+  ```jsx
+  <ZrRangeSlider :range-slider-min="60" :min-value="0" :max-value="350"/>
   ```
 
 </docs>
