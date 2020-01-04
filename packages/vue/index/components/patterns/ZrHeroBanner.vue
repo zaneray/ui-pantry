@@ -59,48 +59,50 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../styles/imports';
+  @import '../../styles/imports';
 
-    .hero-banner {
-        position: relative;
+  .hero-banner {
+    position: relative;
+    width: 100%;
+  }
+
+  /deep/ img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-content-wrapper {
+    position: relative;
+    display: flex;
+    min-height: 30vw;
+    padding: $margin-smedium;
+
+    @media (min-width: $screen-md) {
+      padding: $margin-medium;
     }
 
-    .hero-content-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-
-        &.center {
-            justify-content: center;
-        }
-
-        &.right {
-            justify-content: flex-end;
-        }
-
-        &.middle {
-            align-items: center;
-        }
-
-        &.bottom {
-            align-items: flex-end;
-        }
+    @media (min-width: $screen-lg) {
+      padding: $margin-large;
     }
 
-    .hero-content {
-        padding: $margin-smedium;
-
-        @media (min-width: $screen-md) {
-            padding: $margin-medium;
-        }
-
-        @media (min-width: $screen-lg) {
-            padding: $margin-large;
-        }
+    &.center {
+        justify-content: center;
     }
+
+    &.right {
+        justify-content: flex-end;
+    }
+
+    &.middle {
+        align-items: center;
+    }
+
+    &.bottom {
+        align-items: flex-end;
+    }
+  }
 </style>
 
 <docs>
@@ -112,7 +114,7 @@
                  :mobile-img="images.banner_image.mobile.url"
                  alt-text="Text about the image"
                  class="light-text">
-        <h1>Hi I am a Title</h1>
+        <h2>Hi I am a Title</h2>
         <h3>I am a subtitle</h3>
     </ZrHeroBanner>
     ```
@@ -125,9 +127,9 @@
                  vertical-position="bottom"
                  horizontal-position="right"
                  class="light-text">
-        <h1>Hi I am a Title</h1>
+        <h2>Hi I am a Title</h2>
         <h3>I am a subtitle</h3>
-        <ZrButton :label="'Learn More'" size="sm" theme="action" style="margin-top: 20px"></ZrButton>
+        <ZrButton size="sm" theme="action" style="margin-top: 20px">Learn More</ZrButton>
     </ZrHeroBanner>
     ```
 </docs>

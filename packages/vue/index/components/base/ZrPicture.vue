@@ -1,10 +1,8 @@
 <template>
-  <div :class="{'image-fill': fill}">
+  <div>
     <picture v-if="lazy" v-lazy>
-      <source :data-src="desktopImg" :media="breakpointQuery"
-              srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="/>
-      <img :data-src="mobileImg" :alt="altText"
-           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="/>
+      <source :data-src="desktopImg" :media="breakpointQuery" :srcset="defaultImage">
+      <img :data-src="mobileImg" :alt="altText" :src="defaultImage" :class="{'fade-image': fade}" />
     </picture>
     <picture v-else>
       <source :srcset="desktopImg" :media="breakpointQuery"/>
@@ -20,7 +18,6 @@
 </template>
 
 <script>
-
   import '../../directives/lazyLoad'
 
   /**
@@ -66,11 +63,18 @@
         default: true
       },
       /**
-       * Whether or not the image should fill its parent container
+       * Whether or not to fade the image in if/when lazy loaded
        */
-      fill: {
+      fade: {
         type: Boolean,
-        default: false
+        default: true
+      },
+      /**
+       * Default image to show
+       */
+      defaultImage: {
+        type: String,
+        default: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
       }
     },
     computed: {
@@ -82,25 +86,18 @@
 </script>
 
 <style scoped lang="scss">
-  .image-fill {
-    width: 100%;
-    height: 100%;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  picture {
-    width: 100%;
-    display: block;
-  }
-
   img {
     display: block;
     width: 100%;
+
+    &.lazy-image.fade-image {
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+
+      &.img-loaded {
+        opacity: 1;
+      }
+    }
   }
 </style>
 
