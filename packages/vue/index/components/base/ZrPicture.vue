@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{'image-fill': fill}">
     <picture v-if="lazy" v-lazy>
       <source :data-src="desktopImg" :media="breakpointQuery"
               srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="/>
@@ -65,6 +65,13 @@
         type: Boolean,
         default: true
       },
+      /**
+       * Whether or not the image should fill its parent container
+       */
+      fill: {
+        type: Boolean,
+        default: false
+      }
     },
     computed: {
       breakpointQuery() {
@@ -75,6 +82,17 @@
 </script>
 
 <style scoped lang="scss">
+  .image-fill {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   picture {
     width: 100%;
     display: block;
