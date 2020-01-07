@@ -115,7 +115,9 @@
         return `${(this.range2Model - this.range1Model) * this.rangePercentageRatio}%`
       },
       isDualSlider: function () {
-        return !!(this.minValue && this.maxValue);
+        // min Value
+        const minValBoolean = typeof this.minValue === 'number';
+        return minValBoolean && this.maxValue;
       }
     },
     beforeMount() {
