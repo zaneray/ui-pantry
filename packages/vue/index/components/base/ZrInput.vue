@@ -1,6 +1,6 @@
 <template>
-  <base-input-wrapper :id="id" :full="full">
-    <label v-if="label" :class="{'visuallyhidden': labelHidden}" :for="id">{{label}}</label>
+  <base-input-wrapper v-bind="$props">
+    <label v-if="label" :class="{'visually-hidden': labelHidden}" :for="id">{{label}}</label>
     <input :type="type"
            :id="id"
            :name="name ? name : id"
@@ -108,6 +108,10 @@
       padding: $input-padding-lg;
       font-size: $font-size-medium;
     }
+
+    .invalid & {
+      border-color: $color-warning;
+    }
   }
 
   label {
@@ -118,6 +122,10 @@
 
     @include font-label();
     line-height: 1rem;
+
+    &.visually-hidden {
+      display: none;
+    }
   }
 </style>
 
@@ -133,6 +141,62 @@
   </ZrInput>
   ```
 
+  ### Invalid Input
+  #### <sub><sup>(See 'invalid' class on parent)</sup></sub>
+  ```jsx
+  <ZrInput
+    label="Full Name"
+    placeholder="Example: John S. Smith"
+    id="full-name"
+    :invalid="true"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  ```
+
+  ### Multiple input's with invalid messages
+  ```jsx
+  <ZrInput
+    label="Email"
+    placeholder="Email"
+    value="creative@zaneray.com"
+    id="email"
+    :required="true"
+    :invalid="false"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  <ZrInput
+    label="First Name"
+    placeholder="Example: John"
+    id="first-name"
+    :required="true"
+    :invalid="true"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  <ZrInput
+    label="Last Name"
+    placeholder="Smith"
+    id="last-name"
+    :required="true"
+    :invalid="true"
+    validation-message="invalid input"
+  >
+  </ZrInput>
+  ```
+
+  ### Valid Input
+  #### <sub><sup>(See 'valid' class on parent)</sup></sub>
+  ```jsx
+  <ZrInput
+    label="Full Name"
+    placeholder="Example: John S. Smith"
+    id="full-name"
+    :valid="true"
+  >
+  </ZrInput>
+  ```
 
   ### Default input Number
   ```jsx
@@ -144,18 +208,17 @@
   </ZrInput>
   ```
 
-
   ### full width Input without a label
   ```jsx
   <ZrInput
     placeholder="First Name"
     id="first-name"
+    label="No Label"
+    :label-hidden="true"
     full
   >
   </ZrInput>
   ```
-
-
 
   ### Stacked inputs with a submit
   ```jsx

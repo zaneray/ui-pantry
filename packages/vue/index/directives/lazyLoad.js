@@ -29,7 +29,7 @@ Vue.directive('lazy', function (el, binding, vnode) {
     const observerOptions = {
       disableFade: directiveProperties.disableFade ? directiveProperties.disableFade : false,
       root: directiveProperties.root ? directiveProperties.root : null,
-      rootMargin: directiveProperties.rootMargin ? directiveProperties.rootMargin : '0px 0px 500px 0px',
+      rootMargin: directiveProperties.rootMargin ? directiveProperties.rootMargin : '500px',
       threshold: directiveProperties.threshold ? directiveProperties.threshold : 0
     };
 

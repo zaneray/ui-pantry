@@ -1,8 +1,7 @@
 <template>
   <div>
     <img v-if="lazy" v-lazy :data-src="imageSrc"
-         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-         :alt="altText" :class="imageClass" class="lazy-image"/>
+         :src="defaultImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" />
     <img v-else :src="imageSrc" :alt="altText" :class="imageClass"/>
     <noscript inline-template>
       <img :src="imageSrc" :alt="altText" :class="imageClass"/>
@@ -55,6 +54,13 @@
       fade: {
         type: Boolean,
         default: true
+      },
+      /**
+       * Default image to show
+       */
+      defaultImage: {
+        type: String,
+        default: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
       }
     },
   }
@@ -63,6 +69,15 @@
 <style scoped lang="scss">
   img {
     width: 100%;
+
+    &.lazy-image.fade-image {
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+
+      &.img-loaded {
+        opacity: 1;
+      }
+    }
   }
 </style>
 
