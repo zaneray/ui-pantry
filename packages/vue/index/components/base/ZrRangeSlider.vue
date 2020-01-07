@@ -4,13 +4,12 @@
 
     <input
       type="range"
-      :min="minValue"
-      :max="maxValue"
+      :min="rangeSlideMin"
+      :max="rangeSlideMax"
       :step="stepSize"
-      :aria-valuemin="minValue"
-      :aria-valuemax="maxValue"
+      :aria-valuemin="rangeSlideMin"
+      :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range1Model"
-      ref="rangeSliderMin"
       v-model="range1Model"
       @change="rangeChanged"
       @input="isDualSlider ? checkRangeValid('min') : ''"
@@ -19,13 +18,12 @@
     <input
       v-if="isDualSlider"
       type="range"
-      :min="minValue"
-      :max="maxValue"
+      :min="rangeSlideMin"
+      :max="rangeSlideMax"
       :step="stepSize"
-      :aria-valuemin="minValue"
-      :aria-valuemax="maxValue"
+      :aria-valuemin="rangeSlideMin"
+      :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range2Model"
-      ref="rangeSliderMax"
       v-model="range2Model"
       @change="rangeChanged"
       @input="checkRangeValid('max')"
@@ -65,22 +63,15 @@
       }
     },
     props: {
-      /** Show dual range selection (min / max) */
-      isDualSlider: {
-        type: Boolean,
-        default: false
-      },
       /** Value for Range 1 */
-      rangeSliderMin: {
+      minValue: {
         type: Number,
-        required: false,
-        default: 0
+        required: false
       },
       /** Value for Range 2 */
-      rangeSliderMax: {
+      maxValue: {
         type: Number,
-        required: false,
-        default: 100
+        required: false
       },
       /** Min Label */
       labelMin: {
@@ -95,13 +86,13 @@
         default: ''
       },
       /** Min Value */
-      minValue: {
+      rangeSlideMin: {
         type: Number,
         required: false,
         default: 0
       },
       /** Max Value */
-      maxValue: {
+      rangeSlideMax: {
         type: Number,
         required: false,
         default: 100
@@ -115,26 +106,27 @@
     },
     computed: {
       singleRangeWidth: function () {
-        return this.range1Model * this.rangePercentageRatio + '%'
+        return `${this.range1Model * this.rangePercentageRatio}%`
       },
       dualRangeLeft: function () {
-        return (this.range1Model - this.minValue) * this.rangePercentageRatio + '%'
+        return `${(this.range1Model - this.rangeSlideMin) * this.rangePercentageRatio}%`
       },
       dualRangeWidth: function () {
-        return (this.range2Model - this.range1Model) * this.rangePercentageRatio + '%'
+        return `${(this.range2Model - this.range1Model) * this.rangePercentageRatio}%`
+      },
+      isDualSlider: function () {
+        return !!(this.minValue && this.maxValue);
       }
     },
     beforeMount() {
-      this.range1Model = this.$props.rangeSliderMin;
-      this.range2Model = this.$props.rangeSliderMax;
-      this.rangePercentageRatio = 100 / (this.$props.maxValue - this.$props.minValue);
+      this.range1Model = this.minValue;
+      this.range2Model = this.maxValue;
+      this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
     },
     methods: {
       rangeChanged() {
-        this.$refs.rangeSliderMin.setAttribute('aria-valuenow', this.range1Model);
         // if dual slides also set value now for 2nd input range
-        if (this.$props.isDualSlider) {
-          this.$refs.rangeSliderMax.setAttribute('aria-valuenow', this.range2Model);
+        if (this.isDualSlider) {
           this.$emit('change', [this.range1Model, this.range2Model]);
           return;
         }
@@ -142,21 +134,17 @@
       },
       checkRangeValid(activeRangeSlider) {
 
-        const minValue = parseInt(this.range1Model);
-        const maxValue = parseInt(this.range2Model);
+        const minValueCurrent = parseInt(this.range1Model);
+        const maxValueCurrent = parseInt(this.range2Model);
 
         // case min range active
-        if (activeRangeSlider === 'min') {
-          if (minValue >= maxValue) {
-            this.range1Model = maxValue - this.stepSize
-          }
+        if (activeRangeSlider === 'min' && minValueCurrent >= maxValueCurrent) {
+          this.range1Model = maxValueCurrent - this.stepSize
         }
 
         // case max range active
-        if (activeRangeSlider === 'max') {
-          if (maxValue <= minValue) {
-            this.range2Model = minValue + this.stepSize;
-          }
+        if (activeRangeSlider === 'max' && maxValueCurrent <= minValueCurrent) {
+          this.range2Model = minValueCurrent + this.stepSize;
         }
 
       }
@@ -306,24 +294,19 @@
   <ZrRangeSlider/>
   ```
 
-  #### Default Slider Dual
+  #### Slider Dual preset values
   ```jsx
-  <ZrRangeSlider is-dual-slider/>
+  <ZrRangeSlider :min-value="10" :max-value="70"/>
   ```
 
   #### Slider Dual preset values
   ```jsx
-  <ZrRangeSlider is-dual-slider :range-slider-min="10" :range-slider-max="70"/>
-  ```
-
-  #### Slider Dual preset values
-  ```jsx
-  <ZrRangeSlider is-dual-slider :range-slider-min="600" :range-slider-max="12000" :min-value="500" :max-value="18000"/>
+  <ZrRangeSlider :min-value="600" :max-value="12000" :range-slide-min="500" :range-slide-max="18000"/>
   ```
 
   #### Slider preset values
   ```jsx
-  <ZrRangeSlider :range-slider-min="60" :min-value="0" :max-value="350"/>
+  <ZrRangeSlider :min-value="60" :max-value="300" :range-slide-min="0" :range-slide-max="350"/>
   ```
 
 </docs>
