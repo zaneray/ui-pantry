@@ -2,7 +2,7 @@
   <div class="counter-wrapper-outer">
     <div class="counter-wrapper">
       <button class="stepper stepper-negative" @click="increment(-1)">-</button>
-      <div class="total">{{count}}{{displayLabel}}</div>
+      <div class="total" :class="{'total-label': displayLabel !== ''}">{{count}}{{displayLabel}}</div>
       <button class="stepper stepper-positive" @click="increment(1)">+</button>
     </div>
     <div v-if="showError" class="counter-error">
@@ -95,7 +95,7 @@
 
 <style scoped lang="scss">
   @import '../../styles/imports';
-  $counter-background-color: $color-darker;
+  $counter-background-color: $color-light;
 
   .counter-wrapper-outer {
     position: relative;
@@ -110,24 +110,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3rem;
+    width: 1.75rem;
     background-color: $counter-background-color;
     color: $color-white;
     font-weight: bold;
     font-size: $font-size-large;
     appearance: none;
+
+    @media (min-width: $screen-sm) {
+      width: 2rem;
+      font-size: 1rem;
+    }
   }
 
   .total {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5rem;
+    width: 2rem;
     height: 3rem;
     border-top: 2px solid $counter-background-color;
     border-bottom: 2px solid $counter-background-color;
     font-family: sans-serif;
+    font-size: 0.85rem;
     font-weight: $font-weight-bold;
+
+    @media (min-width: $screen-sm) {
+      width: 2.5rem;
+      font-size: 1rem;
+    }
+
+    &-label {
+      width: 5rem;
+    }
   }
 
   .counter-error {
