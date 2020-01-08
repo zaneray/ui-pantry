@@ -10,7 +10,7 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range1Model"
-      v-model="range1Model"
+      v-model.number="range1Model"
       @change="rangeChanged"
       @input="isDualSlider ? checkRangeValid('min') : ''"
     >
@@ -24,7 +24,7 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range2Model"
-      v-model="range2Model"
+      v-model.number="range2Model"
       @change="rangeChanged"
       @input="checkRangeValid('max')"
       class="dualInput"
@@ -128,16 +128,11 @@
     },
     methods: {
       rangeChanged() {
-        this.range1Model = parseInt(this.range1Model);
-        this.range2Model = parseInt(this.range2Model);
-
         // if dual slides also set value now for 2nd input range
         if (this.isDualSlider) {
           this.$emit('change', [this.range1Model, this.range2Model]);
-          console.log([this.range1Model, this.range2Model])
           return;
         }
-        console.log(this.range1Model)
         this.$emit('change', this.range1Model);
       },
       checkRangeValid(activeRangeSlider) {
