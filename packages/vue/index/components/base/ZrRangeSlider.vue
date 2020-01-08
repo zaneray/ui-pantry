@@ -66,7 +66,8 @@
       /** Value for Range 1 */
       minValue: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
       },
       /** Value for Range 2 */
       maxValue: {
@@ -127,12 +128,17 @@
     },
     methods: {
       rangeChanged() {
+        this.range1Model = parseInt(this.range1Model);
+        this.range2Model = parseInt(this.range2Model);
+
         // if dual slides also set value now for 2nd input range
         if (this.isDualSlider) {
           this.$emit('change', [this.range1Model, this.range2Model]);
+          console.log([this.range1Model, this.range2Model])
           return;
         }
-        this.$emit('change', this.value);
+        console.log(this.range1Model)
+        this.$emit('change', this.range1Model);
       },
       checkRangeValid(activeRangeSlider) {
 
