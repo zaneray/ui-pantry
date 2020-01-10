@@ -214,11 +214,14 @@
         border: none;
         appearance: none;
         cursor: pointer;
-        background: url('/static/fpo/slider-right.png') no-repeat;
+        background-color: $trackColor;
+        border-radius: 50%;
+        // or use background image, like below
+        // background: url('/assets/images/slider-right.png') no-repeat;
       }
 
       &:first-of-type::-webkit-slider-thumb {
-        background: url('/static/fpo/slider-left.png') no-repeat;
+        // background: url('/assets/images/slider-left.png') no-repeat;
       }
 
       /* styling for moz thumb */
@@ -233,11 +236,12 @@
         border: 1px solid transparent;
         appearance: none;
         cursor: pointer;
-        background: url('/static/fpo/slider-right.png') no-repeat;
+        background-color: $trackColor;
+        border-radius: 50%;
       }
 
       &:first-of-type::-moz-range-thumb {
-        background: url('/static/fpo/slider-left.png') no-repeat;
+        // background: url('/packages/vue/index/assets/images/slider-left.png') no-repeat;
       }
 
       /* styling for ms thumb */
@@ -251,12 +255,13 @@
         height: $thumbHeight;
         border: none;
         appearance: none;
-        background: url('/static/fpo/slider-right.png') no-repeat;
         cursor: pointer;
+        background-color: $trackColor;
+        border-radius: 50%;
       }
 
       &:first-of-type::-ms-thumb {
-        background: url('/static/fpo/slider-left.png') no-repeat;
+        // background: url('/packages/vue/index/assets/images/slider-left.png') no-repeat;
       }
 
     }
