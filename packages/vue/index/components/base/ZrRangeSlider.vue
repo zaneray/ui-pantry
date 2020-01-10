@@ -10,7 +10,7 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range1Model"
-      v-model="range1Model"
+      v-model.number="range1Model"
       @change="rangeChanged"
       @input="isDualSlider ? checkRangeValid('min') : ''"
     >
@@ -24,7 +24,7 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range2Model"
-      v-model="range2Model"
+      v-model.number="range2Model"
       @change="rangeChanged"
       @input="checkRangeValid('max')"
       class="dualInput"
@@ -66,7 +66,8 @@
       /** Value for Range 1 */
       minValue: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
       },
       /** Value for Range 2 */
       maxValue: {
@@ -132,7 +133,7 @@
           this.$emit('change', [this.range1Model, this.range2Model]);
           return;
         }
-        this.$emit('change', this.value);
+        this.$emit('change', this.range1Model);
       },
       checkRangeValid(activeRangeSlider) {
 
