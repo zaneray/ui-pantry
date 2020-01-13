@@ -39,7 +39,8 @@
        */
       altText: {
         type: String,
-        required: true
+        required: true,
+        default: ""
       },
       /**
        * Whether or not the image should lazy load
@@ -86,12 +87,12 @@
 
   #### Simple image with default props
   ```jsx
-  <ZrImage :lazy="false" :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  <ZrImage :lazy="false" :image-src="images.thumbnail.url" :alt-text="text.string.short"/>
   ```
 
   #### Simple image with lazy loading
   ```jsx
-  <ZrImage :lazy="true" :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  <ZrImage :lazy="true" :image-src="images.thumbnail.url" :alt-text="text.string.short"/>
   ```
 
 

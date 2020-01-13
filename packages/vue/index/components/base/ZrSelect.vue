@@ -1,27 +1,27 @@
 <template>
-    <base-input-wrapper v-bind="$props">
-        <label v-if="label" :for="id">{{label}}</label>
-        <div class="select-wrapper">
-            <select :id="id"
-                    :name="name ? name : id"
-                    :value="value"
-                    :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
-                    :required="required"
-                    @change="updateValue">
-                <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
-                <option v-for="option of options"
-                        :value="option.value"
-                        :key="option.value">
-                    {{option.label}}
-                </option>
-            </select>
-        </div>
-    </base-input-wrapper>
+  <base-input-wrapper v-bind="$props">
+    <label :for="id">{{label}}</label>
+    <div class="select-wrapper">
+      <select :id="id"
+              :name="name ? name : id"
+              :value="value"
+              :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
+              :required="required"
+              @change="updateValue">
+        <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
+        <option v-for="option of options"
+                :value="option.value"
+                :key="option.value">
+          {{option.label}}
+        </option>
+      </select>
+    </div>
+  </base-input-wrapper>
 </template>
 
 <script>
   import BaseInputWrapper from "./ZrInputWrapper.vue";
-  import { inputShared } from "../../mixins/inputShared";
+  import {inputShared} from "../../mixins/inputShared";
 
   export default {
     name: "ZrSelect",
@@ -136,28 +136,28 @@
 </style>
 
 <docs>
-    ### Basic Select
-    ```jsx
-    <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select"></ZrSelect>
-    ```
+  ### Basic Select
+  ```jsx
+  <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select"></ZrSelect>
+  ```
 
-    ### Select with placeholder
-    ```jsx
-    <ZrSelect label="Placeholder Select" :options="selectOptions" placeholder="Placeholder text" id="Placeholder-select"></ZrSelect>
-    ```
+  ### Select with placeholder
+  ```jsx
+  <ZrSelect label="Placeholder Select" :options="selectOptions" placeholder="Placeholder text" id="Placeholder-select"></ZrSelect>
+  ```
 
-    ### Select with preselected value
-    ```jsx
-    <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
-    ```
+  ### Select with preselected value
+  ```jsx
+  <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
+  ```
 
-    ### Select with required attribute
-    ```jsx
-    <ZrSelect label="Required Select" :options="selectOptions" :value="1" id="Preselected-select" :required="true"></ZrSelect>
-    ```
+  ### Select with required attribute
+  ```jsx
+  <ZrSelect label="Required Select" :options="selectOptions" :value="1" id="Preselected-select" :required="true"></ZrSelect>
+  ```
 
-    ### Invalid Select
-    ```jsx
-    <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :required="true" :invalid="true"></ZrSelect>
-    ```
+  ### Invalid Select
+  ```jsx
+  <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :required="true" :invalid="true"></ZrSelect>
+  ```
 </docs>

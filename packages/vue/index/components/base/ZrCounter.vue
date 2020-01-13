@@ -1,6 +1,6 @@
 <template>
   <div class="counter-wrapper-outer">
-    <div class="counter-wrapper">
+    <div class="counter-wrapper" :aria-label="accessibleLabel">
       <button class="stepper stepper-negative" @click="increment(-1)">-</button>
       <div class="total">{{count}}{{displayLabel}}</div>
       <button class="stepper stepper-positive" @click="increment(1)">+</button>
@@ -31,6 +31,13 @@
        */
       countLabel: {
         type: String
+      },
+      /**
+       * Component label announced by assistive technology.
+      */
+      accessibleLabel: {
+        type: String,
+        default: 'Select quantity.'
       },
       /**
        * Minimum value that the counter can have

@@ -1,18 +1,18 @@
 <template>
-    <component
+  <component
             :is="componentType"
             :class="btnClass"
             :type="type"
             v-bind="btnLinkProps"
             :title="title"
             :disabled="disabled">
-        <span class="label">
-            <slot></slot>
-        </span>
-        <span class="loading-container">
-            <span class="loading-indicator"></span>
-        </span>
-    </component>
+    <span class="label">
+      <slot></slot>
+    </span>
+    <span class="loading-container">
+      <span class="loading-indicator"></span>
+    </span>
+  </component>
 </template>
 
 <script>
@@ -31,7 +31,7 @@
         default: 'default'
       },
       /**
-       * Size of button to be displayed
+       * Size of button to be displayed. This adds a class of ".btn-{{size}}" which can be used to scope styles
        */
       size: {
         type: String,
@@ -156,176 +156,188 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../../styles/imports';
+  @import '../../styles/imports';
 
     .btn {
-        appearance: none;
-        -webkit-appearance: none;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: fit-content;
-        text-align: center;
-        text-decoration: none;
-        padding: $button-padding;
-        font-size: 1rem;
-        color: $color-lightest;
-        cursor: pointer;
-        user-select: none;
-        background-color: $color-darker;
-        border: 2px solid transparent;
-        transition: all 0.25s ease-out;
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      text-align: center;
+      text-decoration: none;
+      padding: $button-padding;
+      font-size: 1rem;
+      color: $color-lightest;
+      cursor: pointer;
+      user-select: none;
+      background-color: $color-darker;
+      border: 2px solid transparent;
+      transition: all 0.25s ease-out;
 
-        &:hover, &.active {
-            background-color: $color-darkest;
-        }
-
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: $color-darkest;
     }
+  }
 
-    .btn-default {
-        background-color: $color-primary;
+  .btn-default {
+    background-color: $color-primary;
 
-        &:hover, &.active {
-            background-color: $color-primary-dark;
-        }
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: $color-primary-dark;
     }
+  }
 
-    .btn-action {
-        background-color: $color-action;
+  .btn-action {
+    background-color: $color-action;
 
-        &:hover, &.active {
-            background-color: $color-action-dark;
-        }
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: $color-action-dark;
     }
+  }
 
-    .btn-info {
-        background-color: $color-info;
+  .btn-info {
+    background-color: $color-info;
 
-        &:hover, &.active {
-            background-color: darken($color-info, 10%);
-        }
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: darken($color-info, 10%);
     }
+  }
 
-    .btn-negative {
-        background-color: $color-white;
-        color: $color-darkest;
+  .btn-negative {
+    background-color: $color-white;
+    color: $color-darkest;
 
-        &:hover, &.active {
-            background-color: darken($color-white, 10%);
-        }
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: darken($color-white, 10%);
     }
+  }
 
-    .btn-transparent {
-        background-color: transparent;
-        border-color: $color-darker;
-        color: $color-darker;
+  .btn-transparent {
+    background-color: transparent;
+    border-color: $color-darker;
+    color: $color-darker;
 
-        &:hover, &.active {
-            background-color: rgba(0, 0, 0, .05);
-        }
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: rgba(0, 0, 0, .05);
     }
+  }
 
-    .btn-sm {
-        padding: $button-padding-sm;
+  .btn-sm {
+    padding: $button-padding-sm;
+  }
+
+  .btn-lg {
+    padding: $button-padding-lg;
+    font-size: $font-size-medium;
+  }
+
+  .btn-responsive {
+    min-width: 0;
+    padding: $button-padding-sm;
+
+    @media(min-width: $screen-sm) {
+      min-width: $input-default-width;
+      padding: $button-padding;
     }
+  }
 
-    .btn-lg {
-        padding: $button-padding-lg;
-        font-size: $font-size-medium;
-    }
+  .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-    .btn-responsive {
-        min-width: 0;
-        padding: $button-padding-sm;
-        @media(min-width: $screen-sm) {
-            min-width: $input-default-width;
-            padding: $button-padding;
-        }
-    }
+  .full-width {
+    width: 100%;
+  }
 
-    .disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
+  .inline {
+    display: inline-block;
+    width: auto;
+  }
 
-    .full-width {
-        width: 100%;
-    }
-
-    .inline {
-        display: inline-flex;
-        width: auto;
-    }
-
-    .loading {
-        pointer-events: none;
-
-        .label {
-            opacity: 0;
-        }
-
-        .loading-container {
-            opacity: 1;
-        }
-    }
+  .loading {
+    pointer-events: none;
 
     .label {
-        opacity: 1;
-        transition: opacity $transition-base;
+      opacity: 0;
     }
 
     .loading-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        opacity: 0;
-        transition: opacity $transition-base;
+      opacity: 1;
     }
+  }
 
-    .loading-indicator {
-        height: 1em;
-        width: 1em;
-        border-radius: 50%;
-        border: 3px solid $color-white;
-        border-left-color: transparent;
-        border-top-color: transparent;
-        display: inline-block;
-        animation: SPIN 1s infinite cubic-bezier(.48,.17,.49,.78);
-    }
+  .label {
+    opacity: 1;
+    transition: opacity $transition-base;
+  }
+
+  .loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  .loading-indicator {
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    border: 3px solid $color-white;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    display: inline-block;
+    animation: SPIN 1s infinite cubic-bezier(.48,.17,.49,.78);
+  }
 </style>
 
 <docs>
-    ### Examples
+  ### Examples
 
-    #### Button Themes
-    ```jsx
-    <ZrButton style="margin-bottom: 10px">Default</ZrButton>
-    <ZrButton theme="action" style="margin-bottom: 10px">Action</ZrButton>
-    <ZrButton theme="info" style="margin-bottom: 10px">Info</ZrButton>
-    <ZrButton theme="transparent" style="margin-bottom: 10px">Transparent</ZrButton>
-    <ZrButton theme="negative" style="margin-bottom: 10px">Negative</ZrButton>
-    ```
+  #### Button Themes
+  ```jsx
+  <ZrButton :label="'Default'" style="margin-bottom: 10px"></ZrButton>
+  <ZrButton :label="'Action'" theme="action" style="margin-bottom: 10px"></ZrButton>
+  <ZrButton :label="'Info'" theme="info" style="margin-bottom: 10px"></ZrButton>
+  <ZrButton :label="'Transparent'" theme="transparent" style="margin-bottom: 10px"></ZrButton>
+  <ZrButton :label="'Negative'" theme="negative" style="margin-bottom: 10px"></ZrButton>
+  ```
 
-    #### Button Sizes
-    ```jsx
-    <ZrButton size="sm" style="margin-bottom: 10px">Small</ZrButton>
-    <ZrButton style="margin-bottom: 10px">Default</ZrButton>
-    <ZrButton size="lg" style="margin-bottom: 10px">Large</ZrButton>
-    ```
+  #### Button Sizes
+  ```jsx
+  <ZrButton label="Small" size="sm" style="margin-bottom: 10px"></ZrButton>
+  <ZrButton label="Default" style="margin-bottom: 10px"></ZrButton>
+  <ZrButton label="Large" size="lg" style="margin-bottom: 10px"></ZrButton>
+  ```
 
-    #### Button States
-    ```jsx
-    <ZrButton disabled style="margin-bottom: 10px">Disabled</ZrButton>
-    <ZrButton loading style="margin-bottom: 10px">Loading</ZrButton>
-    ```
-    #### Button Display Options
-    ```jsx
-    <ZrButton full style="margin-bottom: 10px">Full Width</ZrButton>
-    <ZrButton inline>Inline 1</ZrButton>
-    <ZrButton inline>Inline 2</ZrButton>
-    ```
+  #### Button States
+  ```jsx
+  <ZrButton label="Disabled" disabled style="margin-bottom: 10px"></ZrButton>
+  <ZrButton label="Loading" loading style="margin-bottom: 10px"></ZrButton>
+  ```
+  #### Button Display Options
+  ```jsx
+  <ZrButton label="Full Width" full style="margin-bottom: 10px"></ZrButton>
+  <ZrButton label="Button Inline 1" inline></ZrButton>
+  <ZrButton label="Button Inline 2" inline></ZrButton>
+  ```
 
     #### Button Link Types
     ```jsx
