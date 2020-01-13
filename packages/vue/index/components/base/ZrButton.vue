@@ -254,7 +254,7 @@
     }
 
     .inline {
-        display: inline-block;
+        display: inline-flex;
         width: auto;
     }
 
