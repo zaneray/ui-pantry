@@ -1,15 +1,18 @@
 <template>
-  <button :class="btnClass"
-          :type="type"
-          :title="title"
-          :disabled="disabled">
+  <component
+            :is="componentType"
+            :class="btnClass"
+            :type="type"
+            v-bind="btnLinkProps"
+            :title="title"
+            :disabled="disabled">
     <span class="label">
       <slot></slot>
     </span>
     <span class="loading-container">
       <span class="loading-indicator"></span>
     </span>
-  </button>
+  </component>
 </template>
 
 <script>
@@ -39,7 +42,7 @@
        */
       type: {
         type: String,
-        default: 'button',
+        default: null,
         validator: function (value) {
           return ['button', 'reset', 'submit'].indexOf(value) !== -1
         }
@@ -56,7 +59,7 @@
        */
       title: {
         type: String,
-        default: ''
+        default: null
       },
       /**
        * Gives button a width of 100% of its parent container
@@ -77,50 +80,108 @@
        */
       loading: {
         type: Boolean,
-      default: false
+        default: false
+      },
+      /**
+       * Path to follow on click.  Renders a link element instead of button
+       */
+      linkPath: {
+        type: String,
+        default: null
+      },
+      /**
+       * Defines whether this is an external link.  If true, renders an 'a' tag.  If false, renders router-link or nuxt-link (if supporting "to" prop exists)
+       */
+      externalLink: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Whether to render <nuxt-link> instead of <router-link> when using the 'to' prop
+       */
+      nuxt: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Target for traditional link
+       */
+      target: {
+        type: String,
+        default: '_self',
+        validator: function (value) {
+          return ['_self', '_blank', '_parent', '_top'].includes(value)
+        }
       }
     },
-  computed: {
-    btnClass() {
-      return [
-        'btn', `btn-${this.size}`, `btn-${this.theme}`,
-        {
-          'disabled': this.disabled,
-          'active': this.active,
-          'full-width': this.full,
-          'inline': this.inline,
-          'loading': this.loading
+    computed: {
+      btnClass() {
+        return [
+          'btn', `btn-${this.size}`, `btn-${this.theme}`,
+          {
+            'disabled': this.disabled,
+            'active': this.active,
+            'full-width': this.full,
+            'inline': this.inline,
+            'loading': this.loading
+          }
+        ];
+      },
+      componentType() {
+        if (this.linkPath) {
+          if (this.externalLink) {
+            return 'a'
+          }
+          return this.nuxt ? 'nuxt-link' : 'router-link'
+        } else {
+          return 'button'
         }
-      ];
-    }
-  },
+      },
+      btnLinkProps() {
+        const linkProps = {};
+
+        if (this.linkPath) {
+          if (this.externalLink) {
+            linkProps.href = this.linkPath;
+            linkProps.target = this.target
+          } else {
+            linkProps.to = this.linkPath;
+          }
+        }
+
+        return linkProps
+      },
+    },
   }
 </script>
 
 <style scoped lang="scss">
   @import '../../styles/imports';
 
-  .btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: $button-padding;
-    font-size: 1rem;
-    color: $color-lightest;
-    cursor: pointer;
-    user-select: none;
-    background-color: $color-darker;
-    border: 2px solid transparent;
-    transition: all 0.25s ease-out;
+    .btn {
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      text-align: center;
+      text-decoration: none;
+      padding: $button-padding;
+      font-size: 1rem;
+      color: $color-lightest;
+      cursor: pointer;
+      user-select: none;
+      background-color: $color-darker;
+      border: 2px solid transparent;
+      transition: all 0.25s ease-out;
 
     &:hover,
     &:focus,
     &.active {
       background-color: $color-darkest;
     }
-
   }
 
   .btn-default {
@@ -188,6 +249,7 @@
   .btn-responsive {
     min-width: 0;
     padding: $button-padding-sm;
+
     @media(min-width: $screen-sm) {
       min-width: $input-default-width;
       padding: $button-padding;
@@ -209,14 +271,40 @@
   }
 
   .loading {
-    height: $font-size-base;
-    width: $font-size-base;
+    pointer-events: none;
+
+    .label {
+      opacity: 0;
+    }
+
+    .loading-container {
+      opacity: 1;
+    }
+  }
+
+  .label {
+    opacity: 1;
+    transition: opacity $transition-base;
+  }
+
+  .loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  .loading-indicator {
+    height: 1em;
+    width: 1em;
     border-radius: 50%;
     border: 3px solid $color-white;
     border-left-color: transparent;
     border-top-color: transparent;
     display: inline-block;
-    animation: SPIN 1s infinite cubic-bezier(.48, .17, .49, .78);
+    animation: SPIN 1s infinite cubic-bezier(.48,.17,.49,.78);
   }
 </style>
 
@@ -251,4 +339,11 @@
   <ZrButton label="Button Inline 2" inline></ZrButton>
   ```
 
+    #### Button Link Types
+    ```jsx
+    <ZrButton style="margin-bottom: 10px">Button</ZrButton>
+    <ZrButton link-path="www.google.com" external-link style="margin-bottom: 10px">Standard Link</ZrButton>
+    <ZrButton link-path="/product/path" style="margin-bottom: 10px">Router Link</ZrButton>
+    <ZrButton link-path="/product/path" nuxt>Nuxt Link</ZrButton>
+    ```
 </docs>
