@@ -1,5 +1,5 @@
 <template>
-  <base-input-wrapper v-bind="$props">
+  <base-input-wrapper v-bind="$props" :class="{'has-focused': focused, 'has-value': value !== '' }">
     <label v-if="label" :class="{'visually-hidden': labelHidden}" :for="id">{{label}}</label>
     <input :type="type"
            :id="id"
@@ -9,7 +9,9 @@
            :title="title"
            :required="required"
            :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
-           @input="updateValue"/>
+           @input="updateValue"
+           @focus="focused=true"
+           @blur="focused=false" />
   </base-input-wrapper>
 </template>
 
@@ -23,6 +25,11 @@
       BaseInputWrapper
     },
     mixins: [inputShared],
+    data() {
+      return {
+        focused: false;
+      }
+    },
     props: {
       ...inputShared.props,
       /**
