@@ -1,6 +1,6 @@
 <template>
   <base-input-wrapper v-bind="$props">
-    <label :for="id">{{label}}</label>
+    <label v-if="label"  :for="id">{{label}}</label>
     <div class="select-wrapper">
       <select :id="id"
               :name="name ? name : id"
@@ -91,6 +91,13 @@
       background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGFBMVEUAAAAZJCYWISIYIyQYIiUWIiIYIyQYIiXh0rToAAAACHRSTlMA/hTRqiinvwFkb0sAAABCSURBVHjajchBDsAgDAPBOJDw/x+XVN0icQGfPGs3i+2GEqeiLCXWLENzvdzrDfP2ls/NjfKbgimYglfBq2Dm+LwHguMA235EdKYAAAAASUVORK5CYII=") center no-repeat;
       pointer-events: none;
     }
+
+    .invalid & {
+      select {
+        color: $color-warning;
+        border-color: $color-warning;
+      }
+    }
   }
 
   select {
@@ -139,8 +146,18 @@
   <ZrSelect label="Placeholder Select" :options="selectOptions" placeholder="Placeholder text" id="Placeholder-select"></ZrSelect>
   ```
 
-  ### Select with preselected value
-  ```jsx
-  <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
-  ```
+    ### Select with preselected value
+    ```jsx
+    <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
+    ```
+
+    ### Select with required attribute
+    ```jsx
+    <ZrSelect label="Required Select" :options="selectOptions" :value="1" id="Preselected-select" :required="true"></ZrSelect>
+    ```
+
+    ### Invalid Select
+    ```jsx
+    <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :required="true" :invalid="true"></ZrSelect>
+    ```
 </docs>
