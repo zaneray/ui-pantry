@@ -1,18 +1,18 @@
 <template>
-    <component
+  <component
             :is="componentType"
             :class="btnClass"
             :type="type"
             v-bind="btnLinkProps"
             :title="title"
             :disabled="disabled">
-        <span class="label">
-            <slot></slot>
-        </span>
-        <span class="loading-container">
-            <span class="loading-indicator"></span>
-        </span>
-    </component>
+    <span class="label">
+      <slot></slot>
+    </span>
+    <span class="loading-container">
+      <span class="loading-indicator"></span>
+    </span>
+  </component>
 </template>
 
 <script>
@@ -323,8 +323,8 @@
     #### Button Display Options
     ```jsx
     <ZrButton full style="margin-bottom: 10px">Full Width</ZrButton>
-    <ZrButton inline>Inline 1</ZrButton>
-    <ZrButton inline>Inline 2</ZrButton>
+    <ZrButton inline>Button Inline 1</ZrButton>
+    <ZrButton inline>Button Inline 2</ZrButton>
     ```
 
     #### Button Link Types

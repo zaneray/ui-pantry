@@ -5,7 +5,6 @@
            :id="id"
            :name="name ? name : id"
            :value="value"
-           :aria-label="!label ? placeholder : !label"
            :placeholder="placeholder"
            :title="title"
            :required="required"
@@ -124,7 +123,13 @@
     line-height: 1rem;
 
     &.visually-hidden {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
     }
   }
 </style>
@@ -136,7 +141,7 @@
   <ZrInput
     label="Full Name"
     placeholder="Example: John S. Smith"
-    id="full-name"
+    id="full-name-1"
   >
   </ZrInput>
   ```
@@ -147,14 +152,14 @@
   <ZrInput
     label="Full Name"
     placeholder="Example: John S. Smith"
-    id="full-name"
+    id="full-name-2"
     :invalid="true"
     validation-message="invalid input"
   >
   </ZrInput>
   ```
 
-  ### Multiple input's with invalid messages
+  ### Multiple inputs with invalid messages
   ```jsx
   <ZrInput
     label="Email"
@@ -192,7 +197,7 @@
   <ZrInput
     label="Full Name"
     placeholder="Example: John S. Smith"
-    id="full-name"
+    id="full-name-4"
     :valid="true"
   >
   </ZrInput>
@@ -203,18 +208,19 @@
   <ZrInput
     label="Enter a Number"
     type="number"
-    id="full-name"
+    id="input-number"
   >
   </ZrInput>
   ```
 
-  ### full width Input without a label
+
+  ### Full width input with a hidden label
   ```jsx
   <ZrInput
+    label="First Name"
+    :labelHidden="true"
     placeholder="First Name"
-    id="first-name"
-    label="No Label"
-    :label-hidden="true"
+    id="input-hidden-label"
     full
   >
   </ZrInput>
@@ -225,12 +231,12 @@
   <form>
     <ZrInput
       label="First Name"
-      id="first-name"
+      id="input-stacked-1"
     >
     </ZrInput>
     <ZrInput
       label="Last Name"
-      id="first-name"
+      id="input-stacked-2"
     >
     </ZrInput>
   </form>
