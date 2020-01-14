@@ -1,6 +1,6 @@
 <template>
   <base-input-wrapper v-bind="$props">
-    <label v-if="label"  :for="id">{{label}}</label>
+    <label :class="{'visually-hidden': labelHidden}" :for="id">{{label}}</label>
     <div class="select-wrapper">
       <select :id="id"
               :name="name ? name : id"
@@ -61,6 +61,10 @@
       placeholder: {
         type: String,
         default: ''
+      },
+      labelHidden: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -132,6 +136,16 @@
 
     @include font-label();
     line-height: 1em;
+
+    &.visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+    }
   }
 </style>
 

@@ -40,7 +40,6 @@
     },
     methods: {
       radioChanged(event) {
-        console.log(event);
         this.$emit('change', event);
       }
     }

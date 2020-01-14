@@ -301,30 +301,30 @@
 
     #### Button Themes
     ```jsx
-    <ZrButton :label="'Default'" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Action'" theme="action" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Info'" theme="info" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Transparent'" theme="transparent" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton :label="'Negative'" theme="negative" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton style="margin-bottom: 10px">Default</ZrButton>
+    <ZrButton theme="action" style="margin-bottom: 10px">Action</ZrButton>
+    <ZrButton theme="info" style="margin-bottom: 10px">Info</ZrButton>
+    <ZrButton theme="transparent" style="margin-bottom: 10px">Transparent</ZrButton>
+    <ZrButton theme="negative" style="margin-bottom: 10px">Negative</ZrButton>
     ```
 
     #### Button Sizes
     ```jsx
-    <ZrButton label="Small" size="sm" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Default" style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Large" size="lg" style="margin-bottom: 10px"></ZrButton>
+    <ZrButton size="sm" style="margin-bottom: 10px">Small</ZrButton>
+    <ZrButton style="margin-bottom: 10px">Default</ZrButton>
+    <ZrButton size="lg" style="margin-bottom: 10px">Large</ZrButton>
     ```
 
     #### Button States
     ```jsx
-    <ZrButton label="Disabled" disabled style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Loading" loading style="margin-bottom: 10px"></ZrButton>
+    <ZrButton disabled style="margin-bottom: 10px">Disabled</ZrButton>
+    <ZrButton loading style="margin-bottom: 10px">Loading</ZrButton>
     ```
     #### Button Display Options
     ```jsx
-    <ZrButton label="Full Width" full style="margin-bottom: 10px"></ZrButton>
-    <ZrButton label="Button Inline 1" inline></ZrButton>
-    <ZrButton label="Button Inline 2" inline></ZrButton>
+    <ZrButton full style="margin-bottom: 10px">Full Width</ZrButton>
+    <ZrButton inline>Button Inline 1</ZrButton>
+    <ZrButton inline>Button Inline 2</ZrButton>
     ```
 
     #### Button Link Types
