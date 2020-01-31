@@ -141,10 +141,11 @@
              :alt-text="images.banner_image.alt"/>
   ```
 
-  #### Basic Picture with lazy loading, mobile image only
+  #### Basic Picture with lazy loading, mobile image and tablet
   ```jsx
   <ZrPicture :lazy="true"
              :mobile-img="images.banner_image.mobile.url"
+             :tablet-img="images.banner_image.half.url"
              :alt-text="images.banner_image.alt"/>
   ```
 
