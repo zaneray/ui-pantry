@@ -1,16 +1,19 @@
 <template>
   <div>
     <picture v-if="lazy" v-lazy>
-      <source :data-src="desktopImg" :media="breakpointQuery" :srcset="defaultImage">
+      <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="defaultImage">
+      <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="defaultImage">
       <img :data-src="mobileImg" :alt="altText" :src="defaultImage" :class="{'fade-image': fade}" />
     </picture>
     <picture v-else>
-      <source :srcset="desktopImg" :media="breakpointQuery"/>
+      <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop"/>
+      <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
       <img :src="mobileImg" :alt="altText"/>
     </picture>
     <noscript inline-template>
       <picture>
-        <source :srcset="desktopImg" :media="breakpointQuery"/>
+        <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop"/>
+        <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
         <img :src="mobileImg" :alt="altText"/>
       </picture>
     </noscript>
@@ -32,7 +35,16 @@
        */
       mobileImg: {
         type: String,
-        required: true
+        required: false,
+        default: null
+      },
+      /**
+       * Tablet image url to render
+       */
+      tabletImg: {
+        type: String,
+        required: false,
+        default: null
       },
       /**
        * Desktop image url to render
@@ -42,11 +54,15 @@
         required: true
       },
       /**
-       * Breakpoint (pixels) at which to switch between mobile and desktop image
+       * Breakpoints (pixels) at which to switch between mobile, tablet and desktop image
        */
-      breakpoint: {
+      breakpointTablet: {
         type: Number,
         default: 768
+      },
+      breakpointDesktop: {
+        type: Number,
+        default: 1024
       },
       /**
        * Alternative text to display for the image
@@ -78,8 +94,11 @@
       }
     },
     computed: {
-      breakpointQuery() {
-        return `(min-width: ${this.breakpoint}px)`;
+      breakpointQueryDesktop() {
+        return `(min-width: ${this.breakpointDesktop}px)`;
+      },
+      breakpointQueryTablet() {
+        return `(min-width: ${this.breakpointTablet}px)`;
       }
     }
   }
@@ -108,6 +127,7 @@
   ```jsx
   <ZrPicture :lazy="false"
              :mobile-img="images.banner_image.mobile.url"
+             :tablet-img="images.banner_image.half.url"
              :desktop-img="images.banner_image.url"
              :alt-text="images.banner_image.alt"/>
   ```
@@ -116,7 +136,15 @@
   ```jsx
   <ZrPicture :lazy="true"
              :mobile-img="images.banner_image.mobile.url"
+             :tablet-img="images.banner_image.half.url"
              :desktop-img="images.banner_image.url"
+             :alt-text="images.banner_image.alt"/>
+  ```
+
+  #### Basic Picture with lazy loading, mobile image only
+  ```jsx
+  <ZrPicture :lazy="true"
+             :mobile-img="images.banner_image.mobile.url"
              :alt-text="images.banner_image.alt"/>
   ```
 
