@@ -35,8 +35,7 @@
        */
       mobileImg: {
         type: String,
-        required: false,
-        default: null
+        required: true
       },
       /**
        * Tablet image url to render
@@ -51,7 +50,8 @@
        */
       desktopImg: {
         type: String,
-        required: true
+        required: false,
+        default: null
       },
       /**
        * Breakpoints (pixels) at which to switch between mobile, tablet and desktop image
