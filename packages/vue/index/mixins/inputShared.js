@@ -69,7 +69,15 @@ export const inputShared = {
      */
     invalid: {
       type: Boolean
+    },
+    /**
+     * Input disabled or not
+     */
+    disabled: {
+      type: Boolean,
+      default: false
     }
+
   },
   mounted() {
     if (this.validationMessage) {

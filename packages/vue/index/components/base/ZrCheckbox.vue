@@ -7,6 +7,7 @@
                :checked="selected"
                @change="inputChanged"
                v-bind="$attrs"
+               :disabled="disabled"
         />
         <label :for="id">{{label}}</label>
     </div>
@@ -115,6 +116,11 @@
     #### Default Checkbox
     ```jsx
     <ZrCheckbox label="Checkbox Label" value="1" id="check1"></ZrCheckbox>
+    ```
+
+    #### Default Checkbox Disabled
+    ```jsx
+    <ZrCheckbox label="Checkbox Label" value="1" id="check1-disabled" :disabled="true"></ZrCheckbox>
     ```
 
     #### Selected Checkbox

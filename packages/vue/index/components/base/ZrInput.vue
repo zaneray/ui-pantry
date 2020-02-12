@@ -10,6 +10,7 @@
            :title="title"
            :required="required"
            :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
+           :disabled="disabled"
            @input="updateValue"/>
   </base-input-wrapper>
 </template>
@@ -204,6 +205,17 @@
     label="Enter a Number"
     type="number"
     id="full-name"
+  >
+  </ZrInput>
+  ```
+
+  ### Default input Number Disabled
+  ```jsx
+  <ZrInput
+    label="Enter a Number"
+    type="number"
+    id="full-name"
+    :disabled="true"
   >
   </ZrInput>
   ```
