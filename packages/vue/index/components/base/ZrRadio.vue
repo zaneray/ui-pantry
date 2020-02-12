@@ -7,6 +7,7 @@
                :checked="selected"
                @change="inputChanged"
                v-bind="$attrs"
+               :disabled="disabled"
         />
         <label :for="id">{{label}}</label>
     </div>
@@ -114,6 +115,11 @@
     #### Default Radio
     ```jsx
     <ZrRadio label="Radio Label" value="1" id="radio1"></ZrRadio>
+    ```
+
+    #### Default Radio Disabled
+    ```jsx
+    <ZrRadio label="Radio Label" value="1" id="radio1-disabled" :disabled="true"></ZrRadio>
     ```
 
     #### Selected Radio
