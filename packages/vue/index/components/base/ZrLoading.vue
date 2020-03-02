@@ -41,7 +41,7 @@
        */
       duration: {
         type: Number,
-        default: 25000
+        default: 400
       },
       /**
        * Easing value of fade-in/fade-out
