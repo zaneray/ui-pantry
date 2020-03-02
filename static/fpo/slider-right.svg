@@ -1,0 +1,11 @@
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g id="Style-Guide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-Elements" transform="translate(-677.000000, -2156.000000)" fill="#FFFFFF" stroke="#0071BA" stroke-width="2">
+            <g id="Group-3" transform="translate(598.000000, 2156.000000)">
+                <g id="Group-2">
+                    <path d="M80,1 L80,19 L89,19 C93.9705627,19 98,14.9705627 98,10 C98,5.02943725 93.9705627,1 89,1 L80,1 Z" id="slider-right"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

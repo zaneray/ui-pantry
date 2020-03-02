@@ -75,6 +75,13 @@ export const inputShared = {
      */
     ariaInvalid: {
       type: Boolean
+    },
+    /**
+     * Input disabled or not
+     */
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {

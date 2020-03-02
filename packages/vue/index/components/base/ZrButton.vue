@@ -1,6 +1,9 @@
 <template>
-    <button :class="btnClass"
+    <component
+            :is="componentType"
+            :class="btnClass"
             :type="type"
+            v-bind="btnLinkProps"
             :title="title"
             :disabled="disabled">
         <span class="label">
@@ -9,7 +12,7 @@
         <span class="loading-container">
             <span class="loading-indicator"></span>
         </span>
-    </button>
+    </component>
 </template>
 
 <script>
@@ -39,7 +42,7 @@
        */
       type: {
         type: String,
-        default: 'button',
+        default: null,
         validator: function (value) {
           return ['button', 'reset', 'submit'].indexOf(value) !== -1
         }
@@ -56,7 +59,7 @@
        */
       title: {
         type: String,
-        default: ''
+        default: null
       },
       /**
        * Gives button a width of 100% of its parent container
@@ -78,6 +81,37 @@
       loading: {
         type: Boolean,
         default: false
+      },
+      /**
+       * Path to follow on click.  Renders a link element instead of button
+       */
+      linkPath: {
+        type: String,
+        default: null
+      },
+      /**
+       * Defines whether this is an external link.  If true, renders an 'a' tag.  If false, renders router-link or nuxt-link (if supporting "to" prop exists)
+       */
+      externalLink: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Whether to render <nuxt-link> instead of <router-link> when using the 'to' prop
+       */
+      nuxt: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Target for traditional link
+       */
+      target: {
+        type: String,
+        default: '_self',
+        validator: function (value) {
+          return ['_self', '_blank', '_parent', '_top'].includes(value)
+        }
       }
     },
     computed: {
@@ -92,7 +126,31 @@
             'loading': this.loading
           }
         ];
-      }
+      },
+      componentType() {
+        if (this.linkPath) {
+          if (this.externalLink) {
+            return 'a'
+          }
+          return this.nuxt ? 'nuxt-link' : 'router-link'
+        } else {
+          return 'button'
+        }
+      },
+      btnLinkProps() {
+        const linkProps = {};
+
+        if (this.linkPath) {
+          if (this.externalLink) {
+            linkProps.href = this.linkPath;
+            linkProps.target = this.target
+          } else {
+            linkProps.to = this.linkPath;
+          }
+        }
+
+        return linkProps
+      },
     },
   }
 </script>
@@ -101,11 +159,15 @@
     @import '../../styles/imports';
 
     .btn {
+        appearance: none;
+        -webkit-appearance: none;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: fit-content;
         text-align: center;
+        text-decoration: none;
         padding: $button-padding;
         font-size: 1rem;
         color: $color-lightest;
@@ -265,4 +327,11 @@
     <ZrButton inline>Inline 2</ZrButton>
     ```
 
+    #### Button Link Types
+    ```jsx
+    <ZrButton style="margin-bottom: 10px">Button</ZrButton>
+    <ZrButton link-path="www.google.com" external-link style="margin-bottom: 10px">Standard Link</ZrButton>
+    <ZrButton link-path="/product/path" style="margin-bottom: 10px">Router Link</ZrButton>
+    <ZrButton link-path="/product/path" nuxt>Nuxt Link</ZrButton>
+    ```
 </docs>

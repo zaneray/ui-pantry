@@ -1,30 +1,31 @@
 <template>
-    <base-input-wrapper v-bind="$props">
-        <label v-if="label" :for="id">{{label}}</label>
-        <div class="select-wrapper">
-            <select :id="id"
-                    :name="name ? name : id"
-                    :value="value"
-                    :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
-                    :aria-invalid="ariaInvalid"
-                    :required="required"
-                    @change="updateValue">
-                <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
-                <option v-for="option of options"
-                        :value="option.value"
-                        :key="option.value">
-                    {{option.label}}
-                </option>
-            </select>
-        </div>
-    </base-input-wrapper>
+  <base-input-wrapper v-bind="$props">
+    <label v-if="label" :for="id">{{label}}</label>
+    <div class="select-wrapper">
+      <select :id="id"
+              :name="name ? name : id"
+              :value="value"
+              :aria-invalid="ariaInvalid"
+              :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
+              :required="required"
+              @change="updateValue"
+              :disabled="disabled">
+        <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
+        <option v-for="option of options"
+                :value="option.value"
+                :key="option.value">
+          {{option.label}}
+        </option>
+      </select>
+    </div>
+  </base-input-wrapper>
 </template>
 
 <script>
-  import BaseInputWrapper from "./ZrInputWrapper.vue";
-  import { inputShared } from "../../mixins/inputShared";
+    import BaseInputWrapper from "./ZrInputWrapper.vue";
+    import {inputShared} from "../../mixins/inputShared";
 
-  export default {
+    export default {
     name: "ZrSelect",
     components: {BaseInputWrapper},
     mixins: [
@@ -74,6 +75,7 @@
 
 <style scoped lang="scss">
   @import '../../styles/imports';
+
   $select-icon-width: 2.5em;
 
   .select-wrapper {
@@ -165,5 +167,10 @@
     ### Select `aria-invalid`
     ```jsx
     <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :aria-invalid="true" :invalid="true"></ZrSelect>
+    ```
+
+    ### Basic Select Disabled
+    ```jsx
+    <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select" :disabled="true"></ZrSelect>
     ```
 </docs>
