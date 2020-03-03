@@ -44,8 +44,8 @@
       :style="{ left: dualRangeLeft, width: dualRangeWidth }">
     </div>
 
-    <div class="label-min">{{labelMin}}{{range1Model}}</div>
-    <div class="label-max" v-if="isDualSlider">{{labelMax}}{{range2Model}}</div>
+    <div class="label-min">{{labelMin}}{{range1Display}}{{labelMinAfter}}</div>
+    <div class="label-max" v-if="isDualSlider">{{labelMax}}{{range2Display}}{{labelMaxAfter}}</div>
 
   </div>
 
@@ -59,6 +59,8 @@
       return {
         range1Model: 0,
         range2Model: 0,
+        range1Display: 0,
+        range2Display: 0,
         rangePercentageRatio: 1
       }
     },
@@ -80,8 +82,20 @@
         required: false,
         default: ''
       },
+      /** Min Label After */
+      labelMinAfter: {
+        type: String,
+        required: false,
+        default: ''
+      },
       /** Max Label */
       labelMax: {
+        type: String,
+        required: false,
+        default: ''
+      },
+      /** Max Label After */
+      labelMaxAfter: {
         type: String,
         required: false,
         default: ''
@@ -103,11 +117,25 @@
         type: Number,
         required: false,
         default: 1
+      },
+      /** Step Size */
+      unitType: {
+        type: String,
+        required: false,
+        default: ''
+      }
+    },
+    watch: {
+      range1Model(val) {
+        this.formatRangeValues(this.range1Model, this.range2Model)
+      },
+      range2Model(val) {
+        this.formatRangeValues(this.range1Model, this.range2Model)
       }
     },
     computed: {
       singleRangeWidth: function () {
-        return `${this.range1Model * this.rangePercentageRatio}%`
+        return `${(this.range1Model - this.rangeSlideMin) * this.rangePercentageRatio}%`
       },
       dualRangeLeft: function () {
         return `${(this.range1Model - this.rangeSlideMin) * this.rangePercentageRatio}%`
@@ -124,9 +152,51 @@
     beforeMount() {
       this.range1Model = this.minValue;
       this.range2Model = this.maxValue;
+      this.formatRangeValues()
       this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
     },
     methods: {
+      formatRangeValues(minValue, maxValue) {
+
+        let minValueDisplay = '';
+        let maxValueDisplay = '';
+
+        // format range values depending on unit type
+        switch (this.unitType) {
+
+          case '$':
+            // format range labels as $ currency
+            minValue || minValue === 0 ? minValueDisplay = '$' + minValue.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : ''
+            maxValue ? maxValueDisplay = '$' + maxValue.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : ''
+            break
+          case 'foot-inch-short':
+            // format range labels as length in ' and "
+            const footMin = Math.floor(minValue / 12)
+            const inchesMin = minValue % 12
+            const footMax = Math.floor(maxValue / 12)
+            const inchesMax = maxValue % 12
+            minValue || minValue === 0 ? minValueDisplay = `${footMin}' ${inchesMin}"` : ''
+            maxValue ? maxValueDisplay = `${footMax}' ${inchesMax}"` : ''
+            break
+          case 'foot-inch-long':
+            // format range labels as length in ft and in
+            const footMinLong = Math.floor(minValue / 12)
+            const inchesMinLong = minValue % 12
+            const footMaxLong = Math.floor(maxValue / 12)
+            const inchesMaxLong = maxValue % 12
+            minValue || minValue === 0 ? minValueDisplay = `${footMinLong}ft ${inchesMinLong}in` : ''
+            maxValue ? maxValueDisplay = `${footMaxLong}ft ${inchesMaxLong}in` : ''
+            break
+          default:
+            // no formatting needed
+            minValueDisplay = minValue
+            maxValueDisplay = maxValue
+        }
+
+        this.range1Display = minValueDisplay;
+        this.range2Display = maxValueDisplay;
+
+      },
       rangeChanged() {
         // if dual slides also set value now for 2nd input range
         if (this.isDualSlider) {
@@ -307,14 +377,32 @@
   <ZrRangeSlider :min-value="10" :max-value="70"/>
   ```
 
-  #### Slider Dual preset values
+  #### Label before and after
   ```jsx
-  <ZrRangeSlider :min-value="600" :max-value="12000" :range-slide-min="500" :range-slide-max="18000"/>
+  <ZrRangeSlider :min-value="0" :range-slide-min="0" :range-slide-max="18000" :label-min="'Up to '"
+                 :label-min-after="' lbs'"/>
   ```
 
-  #### Slider preset values
+  #### Label before
   ```jsx
-  <ZrRangeSlider :min-value="60" :max-value="300" :range-slide-min="0" :range-slide-max="350"/>
+  <ZrRangeSlider :min-value="60" :range-slide-min="60" :range-slide-max="120" :step-size="20" :label-min="'Gallons '"/>
+  ```
+
+  #### Slider Dual preset values with currency formatting
+  ```jsx
+  <ZrRangeSlider :min-value="0" :max-value="7000" :range-slide-min="0" :range-slide-max="18000" :unit-type="'$'"/>
+  ```
+
+  #### Slider Dual preset values with ' " formatting
+  ```jsx
+  <ZrRangeSlider :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
+                 :unit-type="'foot-inch-short'"/>
+  ```
+
+  #### Slider Dual preset values with ft in formatting
+  ```jsx
+  <ZrRangeSlider :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
+                 :unit-type="'foot-inch-long'"/>
   ```
 
 </docs>
