@@ -118,7 +118,13 @@
         required: false,
         default: 1
       },
-      /** Step Size */
+      /** Step Size
+       *
+       * Set to & to format range labels as $ currency
+       * Set to 'foot-inch-short' to format to 1' 2"
+       * Set to 'foot-inch-long' to format to 1ft 2in"
+       *
+       * */
       unitType: {
         type: String,
         required: false,
@@ -156,6 +162,9 @@
       this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
     },
     methods: {
+      calcualteFtInches(inches, unitLabels){
+        return `${Math.floor(inches / 12)}${unitLabels.foot} ${inches % 12}${unitLabels.inches}`
+      },
       formatRangeValues(minValue, maxValue) {
 
         let minValueDisplay = '';
@@ -171,21 +180,13 @@
             break
           case 'foot-inch-short':
             // format range labels as length in ' and "
-            const footMin = Math.floor(minValue / 12)
-            const inchesMin = minValue % 12
-            const footMax = Math.floor(maxValue / 12)
-            const inchesMax = maxValue % 12
-            minValue || minValue === 0 ? minValueDisplay = `${footMin}' ${inchesMin}"` : ''
-            maxValue ? maxValueDisplay = `${footMax}' ${inchesMax}"` : ''
+            minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {foot: '\'', inches: '\"'}) : ''
+            maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {foot: '\'', inches: '\"'}) : ''
             break
           case 'foot-inch-long':
             // format range labels as length in ft and in
-            const footMinLong = Math.floor(minValue / 12)
-            const inchesMinLong = minValue % 12
-            const footMaxLong = Math.floor(maxValue / 12)
-            const inchesMaxLong = maxValue % 12
-            minValue || minValue === 0 ? minValueDisplay = `${footMinLong}ft ${inchesMinLong}in` : ''
-            maxValue ? maxValueDisplay = `${footMaxLong}ft ${inchesMaxLong}in` : ''
+            minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {foot: 'ft', inches: 'in'}) : ''
+            maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {foot: 'ft', inches: 'in'}) : ''
             break
           default:
             // no formatting needed
