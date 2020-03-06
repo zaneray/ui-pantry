@@ -29,7 +29,7 @@ Vue.directive('lazy', function (el, binding, vnode) {
     const observerOptions = {
       disableFade: directiveProperties.disableFade ? directiveProperties.disableFade : false,
       root: directiveProperties.root ? directiveProperties.root : null,
-      rootMargin: directiveProperties.rootMargin ? directiveProperties.rootMargin : '500px',
+      rootMargin: directiveProperties.rootMargin ? directiveProperties.rootMargin : '200px',
       threshold: directiveProperties.threshold ? directiveProperties.threshold : 0
     };
 
@@ -75,7 +75,9 @@ Vue.directive('lazy', function (el, binding, vnode) {
         element.classList.remove('img-loading');
 
         // add 'loaded' class to <img>
-        element.classList.add('img-loaded');
+        setTimeout(() => {
+          element.classList.add('img-loaded');
+        }, 50);
 
       }, false);
 
