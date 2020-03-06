@@ -46,7 +46,6 @@
 
     &.lazy-image.fade-image {
       opacity: 0;
-      transition: opacity 0.25s ease-out;
 
       &.img-loaded {
         opacity: 1;
