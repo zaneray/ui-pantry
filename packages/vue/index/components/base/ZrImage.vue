@@ -1,7 +1,7 @@
 <template>
   <div>
     <img v-if="lazy" v-lazy :data-src="imageSrc"
-         :src="defaultImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" />
+         :src="defaultImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" :style="fadeStyle" />
     <img v-else :src="imageSrc" :alt="altText" :class="imageClass"/>
     <noscript inline-template>
       <img :src="imageSrc" :alt="altText" :class="imageClass"/>
@@ -12,6 +12,7 @@
 <script>
 
   import '../../directives/lazyLoad'
+  import {imageShared} from '../../mixins/imageShared'
 
   /**
    * BaseImage is a rock solid image component that requires alt text, and handles lazy loading by default.
@@ -19,6 +20,7 @@
 
   export default {
     name: "ZrImage",
+    mixins: [imageShared],
     props: {
       /**
        * Path of image to display
@@ -33,36 +35,8 @@
       imageClass: {
         type: String,
         required: false
-      },
-      /**
-       * A string describing what is in the image.
-       */
-      altText: {
-        type: String,
-        required: true
-      },
-      /**
-       * Whether or not the image should lazy load
-       */
-      lazy: {
-        type: Boolean,
-        default: true
-      },
-      /**
-       * If lazy loading, whether or not to fade the image in on load
-       */
-      fade: {
-        type: Boolean,
-        default: true
-      },
-      /**
-       * Default image to show
-       */
-      defaultImage: {
-        type: String,
-        default: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
       }
-    },
+    }
   }
 </script>
 
@@ -72,7 +46,6 @@
 
     &.lazy-image.fade-image {
       opacity: 0;
-      transition: opacity 0.25s ease-out;
 
       &.img-loaded {
         opacity: 1;
@@ -84,15 +57,24 @@
 <docs>
   ### Examples
 
-  #### Simple image with default props
+  #### Default image with lazy loading
   ```jsx
-  <ZrImage :lazy="false" :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  <ZrImage :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
   ```
 
-  #### Simple image with lazy loading
+  #### Image with no lazy loading
   ```jsx
-  <ZrImage :lazy="true" :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  <ZrImage :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
   ```
 
+  #### Image with custom lazy load fade duration and easing
+  ```jsx
+  <ZrImage
+    :image-src="images.thumbnail.url"
+    :alt-text="text.sentence"
+    fade-duration="0.8"
+    fade-easing="linear"
+  />
+  ```
 
 </docs>
