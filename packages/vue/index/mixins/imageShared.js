@@ -46,6 +46,13 @@ export const imageShared = {
     fadeDuration: {
       type: String,
       default: '0.4'
+    },
+    /**
+     * Root Margin value to use for the intersection observer that handles lazy loading
+     */
+    rootMargin: {
+      type: String,
+      default: '400px'
     }
   },
   computed: {

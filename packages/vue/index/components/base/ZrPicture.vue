@@ -1,6 +1,6 @@
 <template>
   <div>
-    <picture v-if="lazy" v-lazy>
+    <picture v-if="lazy" v-lazy="{rootMargin: rootMargin}">
       <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="defaultImage">
       <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="defaultImage">
       <img :data-src="mobileImg" :alt="altText" :src="defaultImage" :class="{'fade-image': fade}" :style="fadeStyle" />
@@ -123,13 +123,14 @@
   />
   ```
 
-  #### Picture with default fade easing and duration
+  #### Picture with custom fade easing and duration, and custom rootMargin
   ```jsx
   <ZrPicture :mobile-img="images.banner_image.mobile.url"
              :tablet-img="images.banner_image.half.url"
              :alt-text="images.banner_image.alt"
              fade-duration="0.8"
              fade-easing="linear"
+             root-margin="-400px"
   />
   ```
 

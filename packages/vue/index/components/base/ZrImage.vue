@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img v-if="lazy" v-lazy :data-src="imageSrc"
+    <img v-if="lazy" v-lazy="{rootMargin: rootMargin}" :data-src="imageSrc"
          :src="defaultImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" :style="fadeStyle" />
     <img v-else :src="imageSrc" :alt="altText" :class="imageClass"/>
     <noscript inline-template>
