@@ -48,7 +48,7 @@
     mounted() {
       const intersectionOptions = {
         rootMargin: this.rootMargin,
-        threshold: this.threshold
+        threshold: Number(this.threshold)
       };
 
       this.observer = new IntersectionObserver(entries => {

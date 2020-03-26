@@ -1,22 +1,24 @@
 <template>
   <div>
-    <picture v-if="lazy" v-lazy="{rootMargin: rootMargin}">
-      <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="defaultImage">
-      <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="defaultImage">
-      <img :data-src="mobileImg" :alt="altText" :src="defaultImage" :class="{'fade-image': fade}" :style="fadeStyle" />
-    </picture>
+    <template v-if="lazy">
+      <picture v-lazy="{rootMargin: rootMargin}">
+        <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="defaultImage">
+        <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="defaultImage">
+        <img :data-src="mobileImg" :alt="altText" :src="defaultImage" :class="{'fade-image': fade}" :style="fadeStyle" />
+      </picture>
+      <noscript inline-template>
+        <picture>
+          <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop"/>
+          <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
+          <img :src="mobileImg" :alt="altText" />
+        </picture>
+      </noscript>
+    </template>
     <picture v-else>
-      <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop"/>
-      <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
+      <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop" />
+      <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet" />
       <img :src="mobileImg" :alt="altText" />
     </picture>
-    <noscript inline-template>
-      <picture>
-        <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop"/>
-        <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
-        <img :src="mobileImg" :alt="altText" />
-      </picture>
-    </noscript>
   </div>
 </template>
 
