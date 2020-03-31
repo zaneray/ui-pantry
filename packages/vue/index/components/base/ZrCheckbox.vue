@@ -5,7 +5,7 @@
                :id="id"
                :value="value"
                :checked="selected"
-               @change="inputChanged"
+               @change="inputChanged($event)"
                v-bind="$attrs"
                :disabled="disabled"
         />
@@ -42,8 +42,9 @@
       }
     },
     methods: {
-      inputChanged() {
+      inputChanged($event) {
         this.$emit('change', this.value);
+        this.$emit('changeEvent', $event);
       }
     }
   }
