@@ -47,6 +47,10 @@ Vue.directive('lazy', function (el, binding, vnode) {
       el.children.item(el.children.length - 1).classList.add('lazy-image');
     }
 
+    if (el.tagName === 'VIDEO') {
+      el.classList.add('lazy-video');
+    }
+
     // do we support intersection observer?
     if ("IntersectionObserver" in window) {
       // supported
@@ -56,40 +60,59 @@ Vue.directive('lazy', function (el, binding, vnode) {
       loadElement(el);
     }
 
-    function loadImage(element, observerOptions) {
+    function loadSrc(element, observerOptions) {
+
+      const videoTag = element.tagName === 'VIDEO';
+      const loadingClass = videoTag ? 'video-loading' : 'img-loading';
+      const loadedClass = videoTag  ? 'video-loaded' : 'img-loaded';
 
       if (observerOptions.disableFade) {
         element.classList.add('no-fade');
       }
 
       // add 'loading' class to <img>
-      element.classList.add('img-loading');
+      element.classList.add(loadingClass);
 
-      // retrieve data-src and apply value to element src (loan / show image)
-      element.setAttribute('src', element.dataset.src);
+      // retrieve data-src and apply value to element src (loan / show src)
+      if (videoTag) {
+        for (let elementChild of element.children) {
+          if (elementChild.tagName === 'SOURCE') {
+            element.setAttribute('src', elementChild.dataset.src);
+            element.load();
+          }
+        }
+      } else {
+        element.setAttribute('src', element.dataset.src);
+      }
 
       // create image loaded event
       element.addEventListener('load', function () {
+        loadedState();
+      }, false);
 
+      // create video loaded event
+      element.addEventListener('loadeddata', function() {
+        loadedState();
+      }, false);
+
+      function loadedState() {
         // remove 'loading' class to <img>
-        element.classList.remove('img-loading');
+        element.classList.remove(loadingClass);
 
         // add 'loaded' class to <img>
         setTimeout(() => {
-          element.classList.add('img-loaded');
+          element.classList.add(loadedClass);
         }, 50);
-
-      }, false);
-
+      }
     }
 
     function loadElement(element, observerOptions) {
 
       // -----------------------------------------------------------
-      // case IMAGE tag
+      // case IMAGE || VIDEO tag
       // -----------------------------------------------------------
-      if (element.tagName === 'IMG') {
-        loadImage(element, observerOptions);
+      if (element.tagName === 'IMG' || element.tagName === 'VIDEO') {
+        loadSrc(element, observerOptions);
       }
 
       // -----------------------------------------------------------
@@ -108,7 +131,7 @@ Vue.directive('lazy', function (el, binding, vnode) {
 
           // case IMG
           if (elementChild.tagName === 'IMG') {
-            loadImage(elementChild, observerOptions);
+            loadSrc(elementChild, observerOptions);
           }
 
         }
