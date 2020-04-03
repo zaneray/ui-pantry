@@ -25,6 +25,7 @@
 <script>
   import '../../directives/lazyLoad'
   import {imageShared} from '../../mixins/imageShared'
+  import {lazyLoadShared} from '../../mixins/lazyLoadShared';
 
   /**
    * Picture component for displaying multiple versions of an image responsively
@@ -32,7 +33,7 @@
 
   export default {
     name: "ZrPicture",
-    mixins: [imageShared],
+    mixins: [imageShared, lazyLoadShared],
     props: {
       /**
        * Mobile image url to render
