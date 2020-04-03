@@ -13,6 +13,7 @@
 
   import '../../directives/lazyLoad'
   import {imageShared} from '../../mixins/imageShared'
+  import {lazyLoadShared} from '../../mixins/lazyLoadShared';
 
   /**
    * BaseImage is a rock solid image component that requires alt text, and handles lazy loading by default.
@@ -20,7 +21,7 @@
 
   export default {
     name: "ZrImage",
-    mixins: [imageShared],
+    mixins: [imageShared, lazyLoadShared],
     props: {
       /**
        * Path of image to display

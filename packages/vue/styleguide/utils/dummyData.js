@@ -171,6 +171,9 @@ Vue.mixin({
             }
           }
         },
+        video: {
+          url: 'https://yeti-cycles-production.s3.amazonaws.com/wGH3miWgWeduxPqjQ4ML4Q8U?response-content-disposition=inline%3B%20filename%3D%22SB140_Clip_360_Alt.mp4%22%3B%20filename%2A%3DUTF-8%27%27SB140_Clip_360_Alt.mp4&response-content-type=video%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAISJSE6HOY3BOJSMQ%2F20200403%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200403T042307Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=85e5b0c5bf7d910a2f430ab99b918d760208b183008587d06580247d88e99c1d'
+        },
         selectOptions: [
           { label: 'Option 1', value: 1},
           { label: 'Option 2', value: 2},
