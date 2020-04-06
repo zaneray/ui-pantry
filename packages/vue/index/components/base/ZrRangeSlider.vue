@@ -132,6 +132,12 @@
       }
     },
     watch: {
+      minValue() {
+        this.range1Model = this.minValue
+      },
+      maxValue() {
+        this.range2Model = this.maxValue
+      },
       range1Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
       },
