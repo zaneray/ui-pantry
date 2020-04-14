@@ -17,6 +17,7 @@
 
   /**
    * BaseImage is a rock solid image component that requires alt text, and handles lazy loading by default.
+   * `loaded` event is emitted once image has lazy loaded
    */
 
   export default {

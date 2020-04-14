@@ -28,7 +28,8 @@
   import {lazyLoadShared} from '../../mixins/lazyLoadShared';
 
   /**
-   * Picture component for displaying multiple versions of an image responsively
+   * Picture component for displaying multiple versions of an image responsively.
+   * `loaded` event is emitted once picture has lazy loaded
    */
 
   export default {
