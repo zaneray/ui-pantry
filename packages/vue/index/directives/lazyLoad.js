@@ -60,6 +60,10 @@ Vue.directive('lazy', function (el, binding, vnode) {
       loadElement(el);
     }
 
+    function emitEvent(name) {
+      vnode.context.$emit(name);
+    }
+
     function loadSrc(element, observerOptions) {
 
       const videoTag = element.tagName === 'VIDEO';
@@ -77,7 +81,7 @@ Vue.directive('lazy', function (el, binding, vnode) {
       if (videoTag) {
         for (let elementChild of element.children) {
           if (elementChild.tagName === 'SOURCE') {
-            element.setAttribute('src', elementChild.dataset.src);
+            elementChild.setAttribute('src', elementChild.dataset.src);
             element.load();
           }
         }
@@ -102,6 +106,7 @@ Vue.directive('lazy', function (el, binding, vnode) {
         // add 'loaded' class to <img>
         setTimeout(() => {
           element.classList.add(loadedClass);
+          emitEvent('loaded');
         }, 50);
       }
     }
@@ -127,6 +132,7 @@ Vue.directive('lazy', function (el, binding, vnode) {
           if (elementChild.tagName === 'SOURCE') {
             // retrieve data-src and apply value to element srcset (loan / show image)
             elementChild.setAttribute('srcset', elementChild.dataset.src);
+            emitEvent('loaded');
           }
 
           // case IMG
