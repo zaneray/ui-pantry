@@ -31,11 +31,19 @@
       locale: {
         type: String,
         default: 'en'
+      },
+      /**
+       * Whether or not to display decimals at the end of the currency value
+       */
+      decimals: {
+        type: Boolean,
+        default: true
       }
     },
     computed: {
       formattedPrice() {
-        return new Intl.NumberFormat(this.locale, { style: 'currency', currency: this.currencyCode}).format(this.value)
+        const price = new Intl.NumberFormat(this.locale, { style: 'currency', currency: this.currencyCode }).format(this.value);
+        return this.decimals ? price : price.replace(/(\.[0-9]*?)[0-9]+/g, "");
       }
     }
   }
@@ -53,6 +61,11 @@
   <zr-currency :value="188"></zr-currency>
   ```
 
+  #### No decimals price display
+  ```jsx
+  <zr-currency :value="188.50" :decimals="false"></zr-currency>
+  ```
+
   #### Price with cents
   ```jsx
   <zr-currency :value="188.95"></zr-currency>
@@ -62,7 +75,7 @@
   ```jsx
   <zr-currency :value="1234567" currency-code="CAD" locale="ca-FR" :style="{display: 'block'}"></zr-currency>
   <zr-currency :value="1234567" currency-code="JPY" locale="ja-JP" :style="{display: 'block'}"></zr-currency>
-  <zr-currency :value="1234567" currency-code="EUR" :style="{display: 'block'}"></zr-currency>
+  <zr-currency :value="1234567.99" currency-code="EUR" :style="{display: 'block'}" :decimals="false"></zr-currency>
   ```
 </docs>
 
