@@ -43,7 +43,7 @@
     computed: {
       formattedPrice() {
         const price = new Intl.NumberFormat(this.locale, { style: 'currency', currency: this.currencyCode }).format(this.value);
-        return this.decimals ? price : price.replace(/(\.[0-9]*?)0+/g, "");
+        return this.decimals ? price : price.replace(/(\.[0-9]*?)[0-9]+/g, "");
       }
     }
   }
@@ -75,7 +75,7 @@
   ```jsx
   <zr-currency :value="1234567" currency-code="CAD" locale="ca-FR" :style="{display: 'block'}"></zr-currency>
   <zr-currency :value="1234567" currency-code="JPY" locale="ja-JP" :style="{display: 'block'}"></zr-currency>
-  <zr-currency :value="1234567.00" currency-code="EUR" :style="{display: 'block'}" :decimals="false"></zr-currency>
+  <zr-currency :value="1234567.99" currency-code="EUR" :style="{display: 'block'}" :decimals="false"></zr-currency>
   ```
 </docs>
 
