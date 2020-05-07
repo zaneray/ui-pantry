@@ -20,11 +20,13 @@
         default: '0px'
       },
       /**
-       * Option that defines the threshold of the component that needs to come into view before intersection event fires.  See MDN documentation (link above) for more details
+       * Option that defines the threshold of the component that needs to come into view before intersection event fires.
+       * Can be a single number between 0 and 1, or multiple numbers that are comma separated
+       * See MDN documentation (link above) for more details
        */
         threshold: {
         type: String,
-        default: '0'
+        default: '0, 1'
       },
       /**
        * Defines if the intersection event will only fire once
@@ -42,31 +44,66 @@
     data() {
       return {
         observer: null,
-        intersected: null
+        previousY: 0,
+        previousRatio: 0
+      }
+    },
+    computed: {
+      cleanThresholdValue() {
+        if (this.threshold.includes(',')) {
+          const thresholdValues = this.threshold.split(',');
+          return thresholdValues.map(item => item);
+        }
+        return this.threshold;
       }
     },
     mounted() {
       const intersectionOptions = {
         rootMargin: this.rootMargin,
-        threshold: Number(this.threshold)
+        threshold: this.cleanThresholdValue
       };
 
       this.observer = new IntersectionObserver(entries => {
-        const entry = entries[0];
-
-        if (entry.isIntersecting) {
-          this.intersected = true;
-          /**
-           * Event that fires when intersection occurs
-           *
-           * @type {intersectionObserver event}
-           */
-          this.$emit('intersected', entry);
-
-          if (this.once) {
-            this.observer.disconnect();
+       entries.forEach(entry => {
+          const currentY = entry.boundingClientRect.y;
+          const currentRatio = entry.intersectionRatio;
+          let intersectionObject = {
+            scrollDirection: null,
+            entering: currentRatio > this.previousRatio,
+            top: null
           }
-        }
+
+          if (currentY < this.previousY) {
+            intersectionObject.scrollDirection = 'down';
+            intersectionObject.top = intersectionObject.entering
+              ? currentRatio !== 1
+              : currentRatio !== 0
+          } else if (currentY > this.previousY) {
+            intersectionObject.scrollDirection = 'up';
+            intersectionObject.top = intersectionObject.entering
+              ? currentRatio === 1
+              : currentRatio === 0
+          }
+
+          if (entry.isIntersecting) {
+            //console.log(intersectionObject);
+            this.$emit('intersected', intersectionObject);
+            if (this.once) {
+              this.observer.disconnect();
+            }
+          }
+
+          const downBoundaryCase = intersectionObject.scrollDirection === 'down' && !intersectionObject.entering && !intersectionObject.top;
+          const upBoundaryCase = intersectionObject.scrollDirection === 'up' && !intersectionObject.entering && intersectionObject.top;
+
+          if (downBoundaryCase || upBoundaryCase) {
+            //console.log(intersectionObject);
+            this.$emit('intersected', intersectionObject);
+          }
+
+          this.previousY = currentY;
+          this.previousRatio = currentRatio;
+       });
       }, intersectionOptions);
 
       this.observer.observe(this.$el);
@@ -103,4 +140,16 @@
         <h2>Intersection: {{rootMarginLabel}}</h2>
     </ZrIntersection>
     ```
+
+  ### Intersection with rootMargin offset and once turned off
+  #### Scroll down to see Intersection with rootMargin offset
+  ```jsx
+  let rootMarginLabel = 'not yet';
+
+  <ZrIntersection style="margin-top: 200vh; margin-bottom: 100vh" @intersected="rootMarginLabel = 'true'" :once="false">
+    <div style="width: 100%; height: 500px; border: 1px solid #000000">
+      <h2>Intersection: {{rootMarginLabel}}</h2>
+    </div>
+  </ZrIntersection>
+  ```
 </docs>
