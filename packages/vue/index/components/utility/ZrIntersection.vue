@@ -45,16 +45,13 @@
       return {
         observer: null,
         previousY: 0,
-        previousRatio: 0
+        previousRatio: 0,
+        intersected: false
       }
     },
     computed: {
       cleanThresholdValue() {
-        if (this.threshold.includes(',')) {
-          const thresholdValues = this.threshold.split(',');
-          return thresholdValues.map(item => item);
-        }
-        return this.threshold;
+        return this.threshold.includes(',') ? this.threshold.split(',') : this.threshold;
       }
     },
     mounted() {
@@ -86,6 +83,7 @@
           }
 
           if (entry.isIntersecting) {
+            this.intersected = true;
             //console.log(intersectionObject);
             this.$emit('intersected', intersectionObject);
             if (this.once) {
@@ -96,9 +94,11 @@
           const downBoundaryCase = intersectionObject.scrollDirection === 'down' && !intersectionObject.entering && !intersectionObject.top;
           const upBoundaryCase = intersectionObject.scrollDirection === 'up' && !intersectionObject.entering && intersectionObject.top;
 
-          if (downBoundaryCase || upBoundaryCase) {
-            //console.log(intersectionObject);
-            this.$emit('intersected', intersectionObject);
+          if (this.intersected) {
+            if (downBoundaryCase || upBoundaryCase) {
+              //console.log(intersectionObject);
+              this.$emit('intersected', intersectionObject);
+            }
           }
 
           this.previousY = currentY;
