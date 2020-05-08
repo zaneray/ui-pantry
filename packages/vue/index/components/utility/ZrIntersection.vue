@@ -51,7 +51,8 @@
     },
     computed: {
       cleanThresholdValue() {
-        return this.threshold.includes(',') ? this.threshold.split(',') : this.threshold;
+        const thresholdArray = this.threshold.includes(',') && this.threshold.split(',').map(item => Number(item));
+        return thresholdArray || Number(this.threshold);
       }
     },
     mounted() {
@@ -136,7 +137,7 @@
     ```jsx
     let rootMarginLabel = 'not yet';
 
-    <ZrIntersection style="margin-top: 20vh" @intersected="rootMarginLabel = 'true'" rootMargin="-200px">
+    <ZrIntersection style="margin-top: 100vh" @intersected="rootMarginLabel = 'true'" rootMargin="0px 0px -200px 0px">
         <h2>Intersection: {{rootMarginLabel}}</h2>
     </ZrIntersection>
     ```
