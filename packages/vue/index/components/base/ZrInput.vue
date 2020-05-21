@@ -11,7 +11,10 @@
            :required="required"
            :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
            :disabled="disabled"
-           @input="updateValue"/>
+           @input="updateValue"
+           @blur="$emit('blur')"
+           @focus="$emit('focus')"
+    />
   </base-input-wrapper>
 </template>
 
