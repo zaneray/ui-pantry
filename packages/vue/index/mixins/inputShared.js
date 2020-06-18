@@ -79,17 +79,17 @@ export const inputShared = {
     }
 
   },
-  mounted() {
+  mounted: function() {
     if (this.validationMessage) {
-      const input = document.getElementById(this.id);
-      input.oninvalid = (e) => {
-        const el = e.target;
+      var input = document.getElementById(this.id);
+      input.oninvalid = function(e) {
+        var el = e.target;
         el.setCustomValidity('');
         if (!el.validity.valid) {
           el.setCustomValidity(this.validationMessage);
         }
       };
-      input.oninput = (e) => {
+      input.oninput = function(e) {
         e.target.setCustomValidity('');
       };
     }
