@@ -26,7 +26,7 @@ Vue.directive('lazy', function (el, binding, vnode) {
     let directiveProperties = binding.value ? binding.value : {};
 
     // set observer options from directive binding if available, otherwise set defaults
-    const observerOptions = {
+    var observerOptions = {
       disableFade: directiveProperties.disableFade ? directiveProperties.disableFade : false,
       root: directiveProperties.root ? directiveProperties.root : null,
       rootMargin: directiveProperties.rootMargin ? directiveProperties.rootMargin : '400px',
@@ -66,9 +66,9 @@ Vue.directive('lazy', function (el, binding, vnode) {
 
     function loadSrc(element, observerOptions) {
 
-      const videoTag = element.tagName === 'VIDEO';
-      const loadingClass = videoTag ? 'video-loading' : 'img-loading';
-      const loadedClass = videoTag  ? 'video-loaded' : 'img-loaded';
+      var videoTag = element.tagName === 'VIDEO';
+      var loadingClass = videoTag ? 'video-loading' : 'img-loading';
+      var loadedClass = videoTag  ? 'video-loaded' : 'img-loaded';
 
       if (observerOptions.disableFade) {
         element.classList.add('no-fade');
@@ -147,8 +147,8 @@ Vue.directive('lazy', function (el, binding, vnode) {
     function initObserver(observerOptions) {
 
       // create observer instance
-      const observer = new IntersectionObserver(((entries, observer) => {
-        entries.forEach((entry) => {
+      var observer = new IntersectionObserver((function(entries, observer) {
+        entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             const intersectingElement = entry.target;
             loadElement(intersectingElement, observerOptions);

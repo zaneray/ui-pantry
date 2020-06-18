@@ -42,7 +42,7 @@ export const lazyLoadShared = {
     }
   },
   computed: {
-    fadeStyle() {
+    fadeStyle: function() {
       return `transition: opacity ${this.fadeDuration}s ${this.fadeEasing}`
     }
   }
