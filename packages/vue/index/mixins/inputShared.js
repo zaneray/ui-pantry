@@ -79,7 +79,7 @@ export const inputShared = {
     }
 
   },
-  mounted() {
+  mounted: function() {
     if (this.validationMessage) {
       const input = document.getElementById(this.id);
       input.oninvalid = (e) => {
