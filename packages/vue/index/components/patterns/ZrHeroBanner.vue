@@ -64,13 +64,13 @@
   .hero-banner {
     position: relative;
     width: 100%;
-  }
 
-  /deep/ img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .hero-content-wrapper {

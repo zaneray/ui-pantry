@@ -1,21 +1,37 @@
-import VuePlugin from 'rollup-plugin-vue';
-import css from "rollup-plugin-css-only";
+import vue from 'rollup-plugin-vue'
 
-export default {
-  input: 'components/base/ZrAlert.vue',
-  output: {
-    format: 'esm',
-    file: 'dist/MyComponent.js'
+export default [
+  // ESM build to be used with webpack/rollup.
+  {
+    input: 'src/index.js',
+    output: {
+      format: 'esm',
+      file: 'dist/ZrComponents.esm.js'
+    },
+    plugins: [
+      vue()
+    ]
   },
-  plugins: [
-    VuePlugin({
-      customBlocks: [
-        '!docs', // exclude <docs>
-        '!*', // exclude everything else
-      ]
-    }),
-    css({
-      output: false
-    }),
-  ]
-}
+  // SSR build.
+  {
+    input: 'src/index.js',
+    output: {
+      format: 'cjs',
+      file: 'dist/ZrComponents.ssr.js'
+    },
+    plugins: [
+      vue({ template: { optimizeSSR: true } })
+    ]
+  },
+  // Browser build.
+  {
+    input: 'src/wrapper.js',
+    output: {
+      format: 'iife',
+      file: 'dist/ZrComponents.js'
+    },
+    plugins: [
+      vue()
+    ]
+  }
+]
