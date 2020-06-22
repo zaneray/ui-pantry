@@ -1,6 +1,17 @@
 import vue from 'rollup-plugin-vue'
 
 export default [
+  // Common JS Build.
+  {
+    input: 'src/index.js',
+    output: {
+      format: 'cjs',
+      file: 'dist/ZrComponents.js'
+    },
+    plugins: [
+      vue()
+    ]
+  },
   // ESM build to be used with webpack/rollup.
   {
     input: 'src/index.js',
@@ -23,12 +34,15 @@ export default [
       vue({ template: { optimizeSSR: true } })
     ]
   },
-  // Browser build.
+  // Plugin build.
   {
     input: 'src/wrapper.js',
     output: {
       format: 'iife',
-      file: 'dist/ZrComponents.js'
+      globals: {
+        'vue': 'Vue'
+      },
+      file: 'dist/ZrComponents.plugin.js'
     },
     plugins: [
       vue()
