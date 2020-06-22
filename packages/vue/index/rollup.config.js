@@ -1,15 +1,16 @@
 import commonjs from '@rollup/plugin-commonjs'; // Convert CommonJS modules to ES6
-import vue from 'rollup-plugin-vue'; // Handle .vue SFC files
-import babel from 'rollup-plugin-babel'; // Transpile/polyfill with reasonable browser support
+import VuePlugin from 'rollup-plugin-vue'; // Handle .vue SFC files
+import { getBabelOutputPlugin } from "@rollup/plugin-babel"; // Transpile/polyfill with reasonable browser support
 import resolve from 'rollup-plugin-node-resolve'; // Resolve dependencies
+import pkg from "./package.json";
 
 export default [
   // Common JS Build.
   {
     input: 'src/index.js',
     output: {
-      format: 'umd',
-      file: 'dist/ZrComponents.umd.js',
+      format: 'cjs',
+      file: pkg.main,
       name: 'common',
       globals: {
         'vue': 'Vue',
@@ -17,12 +18,12 @@ export default [
     },
     plugins: [
       commonjs(),
-      vue({
+      VuePlugin({
         css: true, // Dynamically inject css as a <style> tag
         compileTemplate: true, // Explicitly convert template to render function
       }),
-      babel({
-        exclude: 'node_modules/**' // only transpile our source code
+      getBabelOutputPlugin({
+        presets: ["@babel/preset-env"]
       }),
       resolve()
     ]
@@ -32,7 +33,7 @@ export default [
     input: 'src/index.js',
     output: {
       format: 'es',
-      file: 'dist/ZrComponents.esm.js',
+      file: pkg.module,
       name: 'module',
       globals: {
         'vue': 'Vue',
@@ -40,35 +41,12 @@ export default [
     },
     plugins: [
       commonjs(),
-      vue({
+      VuePlugin({
         css: true, // Dynamically inject css as a <style> tag
         compileTemplate: true, // Explicitly convert template to render function
       }),
-      babel({
-        exclude: 'node_modules/**' // only transpile our source code
-      }),
-      resolve()
-    ]
-  },
-  // Plugin build.
-  {
-    input: 'src/wrapper.js',
-    output: {
-      format: 'iife',
-      file: 'dist/ZrComponents.min.js',
-      name: 'plugin',
-      globals: {
-        'vue': 'Vue',
-      }
-    },
-    plugins: [
-      commonjs(),
-      vue({
-        css: true, // Dynamically inject css as a <style> tag
-        compileTemplate: true, // Explicitly convert template to render function
-      }),
-      babel({
-        exclude: 'node_modules/**' // only transpile our source code
+      getBabelOutputPlugin({
+        presets: ["@babel/preset-env"]
       }),
       resolve()
     ]

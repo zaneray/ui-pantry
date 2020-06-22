@@ -15,9 +15,8 @@
     "url": "https://github.com/zaneray/ui-pantry/issues"
   },
   "homepage": "https://github.com/zaneray/ui-pantry#readme",
-  "main": "dist/ZrComponents.umd.js",
+  "main": "./dist/ZrComponents.cjs.js",
   "module": "dist/ZrComponents.esm.js",
-  "unpkg": "dist/ZrComponents.min.js",
   "scripts": {
     "bundle": "rollup --config rollup.config.js"
   },

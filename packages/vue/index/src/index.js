@@ -22,21 +22,23 @@ import ZrHeroBanner from '../components/patterns/ZrHeroBanner.vue';
 // Utility
 import ZrIntersection from '../components/utility/ZrIntersection.vue';
 
-export const zrAlert = ZrAlert;
-export const zrButton = ZrButton;
-export const zrCheckbox = ZrCheckbox;
-export const zrCounter = ZrCounter;
-export const zrImage = ZrImage;
-export const zrInput  = ZrInput;
-export const zrInputWrapper = ZrInputWrapper;
-export const zrLoading = ZrLoading;
-export const zrPicture = ZrPicture;
-export const zrProgress = ZrProgress;
-export const zrRadio = ZrRadio;
-export const zrRangeSlider = ZrRangeSlider;
-export const zrSelect = ZrSelect;
-export const zrVideo = ZrVideo;
-export const zrAccordion = ZrAccordion;
-export const zrAccordionGroup = ZrAccordionGroup;
-export const zrHeroBanner = ZrHeroBanner;
-export const zrIntersection = ZrIntersection;
+export {
+  ZrAlert,
+  ZrButton,
+  ZrCheckbox,
+  ZrCounter,
+  ZrImage,
+  ZrInput,
+  ZrInputWrapper,
+  ZrLoading,
+  ZrPicture,
+  ZrProgress,
+  ZrRadio,
+  ZrRangeSlider,
+  ZrSelect,
+  ZrVideo,
+  ZrAccordion,
+  ZrAccordionGroup,
+  ZrHeroBanner,
+  ZrIntersection
+}
