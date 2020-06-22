@@ -11773,25 +11773,23 @@ __vue_render__$h._withStripped = true;
   );
 
 // Base components
-var index$1 = {
-  ZrAlert: __vue_component__,
-  ZrButton: __vue_component__$1,
-  ZrCheckbox: __vue_component__$2,
-  ZrCounter: __vue_component__$3,
-  ZrImage: __vue_component__$4,
-  ZrInput: __vue_component__$6,
-  ZrInputWrapper: __vue_component__$5,
-  ZrLoading: __vue_component__$7,
-  ZrPicture: __vue_component__$8,
-  ZrProgress: __vue_component__$9,
-  ZrRadio: __vue_component__$a,
-  ZrRangeSlider: __vue_component__$b,
-  ZrSelect: __vue_component__$c,
-  ZrVideo: __vue_component__$d,
-  ZrAccordion: __vue_component__$e,
-  ZrAccordionGroup: __vue_component__$f,
-  ZrHeroBanner: __vue_component__$g,
-  ZrIntersection: __vue_component__$h
-};
+var zrAlert = __vue_component__;
+var zrButton = __vue_component__$1;
+var zrCheckbox = __vue_component__$2;
+var zrCounter = __vue_component__$3;
+var zrImage = __vue_component__$4;
+var zrInput = __vue_component__$6;
+var zrInputWrapper = __vue_component__$5;
+var zrLoading = __vue_component__$7;
+var zrPicture = __vue_component__$8;
+var zrProgress = __vue_component__$9;
+var zrRadio = __vue_component__$a;
+var zrRangeSlider = __vue_component__$b;
+var zrSelect = __vue_component__$c;
+var zrVideo = __vue_component__$d;
+var zrAccordion = __vue_component__$e;
+var zrAccordionGroup = __vue_component__$f;
+var zrHeroBanner = __vue_component__$g;
+var zrIntersection = __vue_component__$h;
 
-export default index$1;
+export { zrAccordion, zrAccordionGroup, zrAlert, zrButton, zrCheckbox, zrCounter, zrHeroBanner, zrImage, zrInput, zrInputWrapper, zrIntersection, zrLoading, zrPicture, zrProgress, zrRadio, zrRangeSlider, zrSelect, zrVideo };
