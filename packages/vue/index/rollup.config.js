@@ -61,7 +61,6 @@ export default [
       vue({
         template: {
           isProduction: true,
-          optimizeSSR: true
         },
         style: {
           map: false
