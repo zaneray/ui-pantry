@@ -1,7 +1,7 @@
 <template>
   <video
     v-if="videoUrl && lazy"
-    v-lazy="{rootMargin: rootMargin}"
+    v-lazy-load="{rootMargin: rootMargin}"
     class="video"
     :class="{'fade-video': fade}"
     :autoplay="autoplay"
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import '../../directives/lazyLoad';
+  import lazyLoad from '../../directives/lazyLoad';
   import {lazyLoadShared} from '../../mixins/lazyLoadShared';
 
   /**
@@ -35,6 +35,9 @@
 
   export default {
     name: 'ZrVideo',
+    directives: {
+      lazyLoad
+    },
     mixins: [lazyLoadShared],
     props: {
       /**

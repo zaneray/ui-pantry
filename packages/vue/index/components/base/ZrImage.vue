@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img v-if="lazy" v-lazy="{rootMargin: rootMargin}" :data-src="imageSrc"
+    <img v-if="lazy" v-lazy-load="{rootMargin: rootMargin}" :data-src="imageSrc"
          :src="defaultImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" :style="fadeStyle" />
     <img v-else :src="imageSrc" :alt="altText" :class="imageClass"/>
     <noscript inline-template>
@@ -10,8 +10,7 @@
 </template>
 
 <script>
-
-  import '../../directives/lazyLoad'
+  import lazyLoad from '../../directives/lazyLoad';
   import {imageShared} from '../../mixins/imageShared'
   import {lazyLoadShared} from '../../mixins/lazyLoadShared';
 
@@ -22,6 +21,9 @@
 
   export default {
     name: "ZrImage",
+    directives: {
+      lazyLoad
+    },
     mixins: [imageShared, lazyLoadShared],
     props: {
       /**

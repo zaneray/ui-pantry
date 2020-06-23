@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="lazy">
-      <picture v-lazy="{rootMargin: rootMargin}">
+      <picture v-lazy-load="{rootMargin: rootMargin}">
         <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="defaultImage">
         <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="defaultImage">
         <img :data-src="mobileImg" :alt="altText" :src="defaultImage" :class="{'fade-image': fade}" :style="fadeStyle" />
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-  import '../../directives/lazyLoad'
-  import {imageShared} from '../../mixins/imageShared'
+  import lazyLoad from '../../directives/lazyLoad';
+  import {imageShared} from '../../mixins/imageShared';
   import {lazyLoadShared} from '../../mixins/lazyLoadShared';
 
   /**
@@ -34,6 +34,9 @@
 
   export default {
     name: "ZrPicture",
+    directives: {
+      lazyLoad
+    },
     mixins: [imageShared, lazyLoadShared],
     props: {
       /**
