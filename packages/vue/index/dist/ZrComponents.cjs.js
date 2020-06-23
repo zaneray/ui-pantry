@@ -2,10 +2,6 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var Vue = _interopDefault(require('vue'));
-
 //
 //
 //
@@ -942,6 +938,7 @@ var __vue_staticRenderFns__$4 = [];
   );
 
 // -----------------------------------------------------------
+// -----------------------------------------------------------
 //
 // Lazy Load Directive
 //
@@ -959,8 +956,121 @@ var __vue_staticRenderFns__$4 = [];
 // threshold = define the % of image / object that needs to be visible before a intersection is triggered
 //
 // -----------------------------------------------------------
+function emitEvent(vnode, name) {
+  vnode.context.$emit(name);
+}
 
-Vue.directive('lazy', function (el, binding, vnode) {
+function loadSrc(element, observerOptions, vnode) {
+  var videoTag = element.tagName === 'VIDEO';
+  var loadingClass = videoTag ? 'video-loading' : 'img-loading';
+  var loadedClass = videoTag ? 'video-loaded' : 'img-loaded';
+
+  if (observerOptions.disableFade) {
+    element.classList.add('no-fade');
+  } // add 'loading' class to <img>
+
+
+  element.classList.add(loadingClass); // retrieve data-src and apply value to element src (loan / show src)
+
+  if (videoTag) {
+    var _iterator = _createForOfIteratorHelper(element.children),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var elementChild = _step.value;
+
+        if (elementChild.tagName === 'SOURCE') {
+          elementChild.setAttribute('src', elementChild.dataset.src);
+          element.load();
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  } else {
+    element.setAttribute('src', element.dataset.src);
+  } // create image loaded event
+
+
+  element.addEventListener('load', function () {
+    loadedState();
+  }, false); // create video loaded event
+
+  element.addEventListener('loadeddata', function () {
+    loadedState();
+  }, false);
+
+  function loadedState() {
+    // remove 'loading' class to <img>
+    element.classList.remove(loadingClass); // add 'loaded' class to <img>
+
+    setTimeout(function () {
+      element.classList.add(loadedClass);
+      emitEvent(vnode, 'loaded');
+    }, 50);
+  }
+}
+
+function loadElement(element, observerOptions, vnode) {
+  // -----------------------------------------------------------
+  // case IMAGE || VIDEO tag
+  // -----------------------------------------------------------
+  if (element.tagName === 'IMG' || element.tagName === 'VIDEO') {
+    loadSrc(element, observerOptions, vnode);
+  } // -----------------------------------------------------------
+  // case PICTURE tag
+  // -----------------------------------------------------------
+
+
+  if (element.tagName === 'PICTURE') {
+    // loop on picture elements children
+    var _iterator2 = _createForOfIteratorHelper(element.children),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var elementChild = _step2.value;
+
+        // case SOURCE
+        if (elementChild.tagName === 'SOURCE') {
+          // retrieve data-src and apply value to element srcset (loan / show image)
+          elementChild.setAttribute('srcset', elementChild.dataset.src);
+          emitEvent(vnode, 'loaded');
+        } // case IMG
+
+
+        if (elementChild.tagName === 'IMG') {
+          loadSrc(elementChild, observerOptions, vnode);
+        }
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  }
+}
+
+function initObserver(el, observerOptions, vnode) {
+  // create observer instance
+  var observer = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var intersectingElement = entry.target;
+        loadElement(intersectingElement, observerOptions, vnode);
+        observer.unobserve(intersectingElement);
+        observer.disconnect();
+      }
+    });
+  }, observerOptions); // add element to intersection observer
+
+  observer.observe(el);
+}
+
+function bind(el, binding, vnode) {
   // store directive properties if available, otherwise create empty object
   var directiveProperties = binding.value ? binding.value : {}; // set observer options from directive binding if available, otherwise set defaults
 
@@ -990,126 +1100,16 @@ Vue.directive('lazy', function (el, binding, vnode) {
 
   if ("IntersectionObserver" in window) {
     // supported
-    initObserver(observerOptions);
+    initObserver(el, observerOptions, vnode);
   } else {
     // not supported (ie 11, etc.)
-    loadElement(el);
+    loadElement(el, vnode);
   }
+}
 
-  function emitEvent(name) {
-    vnode.context.$emit(name);
-  }
-
-  function loadSrc(element, observerOptions) {
-    var videoTag = element.tagName === 'VIDEO';
-    var loadingClass = videoTag ? 'video-loading' : 'img-loading';
-    var loadedClass = videoTag ? 'video-loaded' : 'img-loaded';
-
-    if (observerOptions.disableFade) {
-      element.classList.add('no-fade');
-    } // add 'loading' class to <img>
-
-
-    element.classList.add(loadingClass); // retrieve data-src and apply value to element src (loan / show src)
-
-    if (videoTag) {
-      var _iterator = _createForOfIteratorHelper(element.children),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var elementChild = _step.value;
-
-          if (elementChild.tagName === 'SOURCE') {
-            elementChild.setAttribute('src', elementChild.dataset.src);
-            element.load();
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    } else {
-      element.setAttribute('src', element.dataset.src);
-    } // create image loaded event
-
-
-    element.addEventListener('load', function () {
-      loadedState();
-    }, false); // create video loaded event
-
-    element.addEventListener('loadeddata', function () {
-      loadedState();
-    }, false);
-
-    function loadedState() {
-      // remove 'loading' class to <img>
-      element.classList.remove(loadingClass); // add 'loaded' class to <img>
-
-      setTimeout(function () {
-        element.classList.add(loadedClass);
-        emitEvent('loaded');
-      }, 50);
-    }
-  }
-
-  function loadElement(element, observerOptions) {
-    // -----------------------------------------------------------
-    // case IMAGE || VIDEO tag
-    // -----------------------------------------------------------
-    if (element.tagName === 'IMG' || element.tagName === 'VIDEO') {
-      loadSrc(element, observerOptions);
-    } // -----------------------------------------------------------
-    // case PICTURE tag
-    // -----------------------------------------------------------
-
-
-    if (element.tagName === 'PICTURE') {
-      // loop on picture elements children
-      var _iterator2 = _createForOfIteratorHelper(element.children),
-          _step2;
-
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var elementChild = _step2.value;
-
-          // case SOURCE
-          if (elementChild.tagName === 'SOURCE') {
-            // retrieve data-src and apply value to element srcset (loan / show image)
-            elementChild.setAttribute('srcset', elementChild.dataset.src);
-            emitEvent('loaded');
-          } // case IMG
-
-
-          if (elementChild.tagName === 'IMG') {
-            loadSrc(elementChild, observerOptions);
-          }
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-    }
-  }
-
-  function initObserver(observerOptions) {
-    // create observer instance
-    var observer = new IntersectionObserver(function (entries, observer) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var intersectingElement = entry.target;
-          loadElement(intersectingElement, observerOptions);
-          observer.unobserve(intersectingElement);
-          observer.disconnect();
-        }
-      });
-    }, observerOptions); // add element to intersection observer
-
-    observer.observe(el);
-  }
-});
+var directive = {
+  bind: bind
+};
 
 /**
  * @mixin
@@ -1196,6 +1196,9 @@ var lazyLoadShared = {
 
 var script$5 = {
   name: "ZrImage",
+  directives: {
+    lazyLoad: directive
+  },
   mixins: [imageShared, lazyLoadShared],
   props: {
     /**
@@ -1220,19 +1223,19 @@ var script$5 = {
 const __vue_script__$5 = script$5;
 
 /* template */
-var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?_c('img',{directives:[{name:"lazy",rawName:"v-lazy",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],class:[_vm.imageClass, {'fade-image': _vm.fade}],style:(_vm.fadeStyle),attrs:{"data-src":_vm.imageSrc,"src":_vm.defaultImage,"alt":_vm.altText}},[]):_vm._ssrNode(("<img"+(_vm._ssrAttr("src",_vm.imageSrc))+(_vm._ssrAttr("alt",_vm.altText))+(_vm._ssrClass(null,_vm.imageClass))+">")),_vm._ssrNode(" <noscript><img"+(_vm._ssrAttr("src",_vm.imageSrc))+(_vm._ssrAttr("alt",_vm.altText))+(_vm._ssrClass(null,_vm.imageClass))+"></noscript>")],2)};
+var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?_c('img',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],class:[_vm.imageClass, {'fade-image': _vm.fade}],style:(_vm.fadeStyle),attrs:{"data-src":_vm.imageSrc,"src":_vm.defaultImage,"alt":_vm.altText}},[]):_vm._ssrNode(("<img"+(_vm._ssrAttr("src",_vm.imageSrc))+(_vm._ssrAttr("alt",_vm.altText))+(_vm._ssrClass(null,_vm.imageClass))+">")),_vm._ssrNode(" <noscript><img"+(_vm._ssrAttr("src",_vm.imageSrc))+(_vm._ssrAttr("alt",_vm.altText))+(_vm._ssrClass(null,_vm.imageClass))+"></noscript>")],2)};
 var __vue_staticRenderFns__$5 = [];
 
   /* style */
   const __vue_inject_styles__$5 = function (inject) {
     if (!inject) return
-    inject("data-v-153ae6df_0", { source: "img[data-v-153ae6df]{width:100%}img.lazy-image.fade-image[data-v-153ae6df]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-153ae6df]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-63a3e872_0", { source: "img[data-v-63a3e872]{width:100%}img.lazy-image.fade-image[data-v-63a3e872]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-63a3e872]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$5 = "data-v-153ae6df";
+  const __vue_scope_id__$5 = "data-v-63a3e872";
   /* module identifier */
-  const __vue_module_identifier__$5 = "data-v-153ae6df";
+  const __vue_module_identifier__$5 = "data-v-63a3e872";
   /* functional template */
   const __vue_is_functional_template__$5 = false;
   /* style inject shadow dom */
@@ -1492,6 +1495,9 @@ var __vue_staticRenderFns__$8 = [];
 
 var script$9 = {
   name: "ZrPicture",
+  directives: {
+    lazyLoad: directive
+  },
   mixins: [imageShared, lazyLoadShared],
   props: {
     /**
@@ -1546,19 +1552,19 @@ var script$9 = {
 const __vue_script__$9 = script$9;
 
 /* template */
-var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?[_c('picture',{directives:[{name:"lazy",rawName:"v-lazy",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}]},[_vm._ssrNode(((_vm.desktopImg)?("<source"+(_vm._ssrAttr("data-src",_vm.desktopImg))+(_vm._ssrAttr("media",_vm.breakpointQueryDesktop))+(_vm._ssrAttr("srcset",_vm.defaultImage))+">"):"<!---->")+" "+((_vm.tabletImg)?("<source"+(_vm._ssrAttr("data-src",_vm.tabletImg))+(_vm._ssrAttr("media",_vm.breakpointQueryTablet))+(_vm._ssrAttr("srcset",_vm.defaultImage))+">"):"<!---->")+" <img"+(_vm._ssrAttr("data-src",_vm.mobileImg))+(_vm._ssrAttr("alt",_vm.altText))+(_vm._ssrAttr("src",_vm.defaultImage))+(_vm._ssrClass(null,{'fade-image': _vm.fade}))+(_vm._ssrStyle(null,_vm.fadeStyle, null))+">")]),_vm._ssrNode(" <noscript><picture>"+((_vm.desktopImg)?("<source"+(_vm._ssrAttr("srcset",_vm.desktopImg))+(_vm._ssrAttr("media",_vm.breakpointQueryDesktop))+">"):"<!---->")+" "+((_vm.tabletImg)?("<source"+(_vm._ssrAttr("srcset",_vm.tabletImg))+(_vm._ssrAttr("media",_vm.breakpointQueryTablet))+">"):"<!---->")+" <img"+(_vm._ssrAttr("src",_vm.mobileImg))+(_vm._ssrAttr("alt",_vm.altText))+"></picture></noscript>")]:_vm._ssrNode(("<picture>"+((_vm.desktopImg)?("<source"+(_vm._ssrAttr("srcset",_vm.desktopImg))+(_vm._ssrAttr("media",_vm.breakpointQueryDesktop))+">"):"<!---->")+" "+((_vm.tabletImg)?("<source"+(_vm._ssrAttr("srcset",_vm.tabletImg))+(_vm._ssrAttr("media",_vm.breakpointQueryTablet))+">"):"<!---->")+" <img"+(_vm._ssrAttr("src",_vm.mobileImg))+(_vm._ssrAttr("alt",_vm.altText))+"></picture>"))],2)};
+var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?[_c('picture',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}]},[_vm._ssrNode(((_vm.desktopImg)?("<source"+(_vm._ssrAttr("data-src",_vm.desktopImg))+(_vm._ssrAttr("media",_vm.breakpointQueryDesktop))+(_vm._ssrAttr("srcset",_vm.defaultImage))+">"):"<!---->")+" "+((_vm.tabletImg)?("<source"+(_vm._ssrAttr("data-src",_vm.tabletImg))+(_vm._ssrAttr("media",_vm.breakpointQueryTablet))+(_vm._ssrAttr("srcset",_vm.defaultImage))+">"):"<!---->")+" <img"+(_vm._ssrAttr("data-src",_vm.mobileImg))+(_vm._ssrAttr("alt",_vm.altText))+(_vm._ssrAttr("src",_vm.defaultImage))+(_vm._ssrClass(null,{'fade-image': _vm.fade}))+(_vm._ssrStyle(null,_vm.fadeStyle, null))+">")]),_vm._ssrNode(" <noscript><picture>"+((_vm.desktopImg)?("<source"+(_vm._ssrAttr("srcset",_vm.desktopImg))+(_vm._ssrAttr("media",_vm.breakpointQueryDesktop))+">"):"<!---->")+" "+((_vm.tabletImg)?("<source"+(_vm._ssrAttr("srcset",_vm.tabletImg))+(_vm._ssrAttr("media",_vm.breakpointQueryTablet))+">"):"<!---->")+" <img"+(_vm._ssrAttr("src",_vm.mobileImg))+(_vm._ssrAttr("alt",_vm.altText))+"></picture></noscript>")]:_vm._ssrNode(("<picture>"+((_vm.desktopImg)?("<source"+(_vm._ssrAttr("srcset",_vm.desktopImg))+(_vm._ssrAttr("media",_vm.breakpointQueryDesktop))+">"):"<!---->")+" "+((_vm.tabletImg)?("<source"+(_vm._ssrAttr("srcset",_vm.tabletImg))+(_vm._ssrAttr("media",_vm.breakpointQueryTablet))+">"):"<!---->")+" <img"+(_vm._ssrAttr("src",_vm.mobileImg))+(_vm._ssrAttr("alt",_vm.altText))+"></picture>"))],2)};
 var __vue_staticRenderFns__$9 = [];
 
   /* style */
   const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
-    inject("data-v-392b1412_0", { source: "img[data-v-392b1412]{display:block;width:100%}img.lazy-image.fade-image[data-v-392b1412]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-392b1412]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-4de67b07_0", { source: "img[data-v-4de67b07]{display:block;width:100%}img.lazy-image.fade-image[data-v-4de67b07]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-4de67b07]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = "data-v-392b1412";
+  const __vue_scope_id__$9 = "data-v-4de67b07";
   /* module identifier */
-  const __vue_module_identifier__$9 = "data-v-392b1412";
+  const __vue_module_identifier__$9 = "data-v-4de67b07";
   /* functional template */
   const __vue_is_functional_template__$9 = false;
   /* style inject shadow dom */
@@ -2087,6 +2093,9 @@ var __vue_staticRenderFns__$d = [];
 
 var script$e = {
   name: 'ZrVideo',
+  directives: {
+    lazyLoad: directive
+  },
   mixins: [lazyLoadShared],
   props: {
     /**
@@ -2143,19 +2152,19 @@ var script$e = {
 const __vue_script__$e = script$e;
 
 /* template */
-var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.videoUrl && _vm.lazy)?_c('video',{directives:[{name:"lazy",rawName:"v-lazy",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],staticClass:"video",class:{'fade-video': _vm.fade},style:(_vm.fadeStyle),attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline},domProps:{"muted":_vm.muted}},[_vm._ssrNode("<source"+(_vm._ssrAttr("data-src",_vm.videoUrl))+(_vm._ssrAttr("type",_vm.videoType))+">")],2):(_vm.videoUrl)?_c('video',{staticClass:"video",attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline},domProps:{"muted":_vm.muted}},[_vm._ssrNode("<source"+(_vm._ssrAttr("src",_vm.videoUrl))+(_vm._ssrAttr("type",_vm.videoType))+">")]):_vm._e()};
+var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.videoUrl && _vm.lazy)?_c('video',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],staticClass:"video",class:{'fade-video': _vm.fade},style:(_vm.fadeStyle),attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline},domProps:{"muted":_vm.muted}},[_vm._ssrNode("<source"+(_vm._ssrAttr("data-src",_vm.videoUrl))+(_vm._ssrAttr("type",_vm.videoType))+">")],2):(_vm.videoUrl)?_c('video',{staticClass:"video",attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline},domProps:{"muted":_vm.muted}},[_vm._ssrNode("<source"+(_vm._ssrAttr("src",_vm.videoUrl))+(_vm._ssrAttr("type",_vm.videoType))+">")]):_vm._e()};
 var __vue_staticRenderFns__$e = [];
 
   /* style */
   const __vue_inject_styles__$e = function (inject) {
     if (!inject) return
-    inject("data-v-7129f8d3_0", { source: ".video[data-v-7129f8d3]{width:100%;height:100%;object-fit:cover}.video.lazy-video.fade-video[data-v-7129f8d3]{opacity:0}.video.lazy-video.fade-video.video-loaded[data-v-7129f8d3]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-e53ed914_0", { source: ".video[data-v-e53ed914]{width:100%;height:100%;object-fit:cover}.video.lazy-video.fade-video[data-v-e53ed914]{opacity:0}.video.lazy-video.fade-video.video-loaded[data-v-e53ed914]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$e = "data-v-7129f8d3";
+  const __vue_scope_id__$e = "data-v-e53ed914";
   /* module identifier */
-  const __vue_module_identifier__$e = "data-v-7129f8d3";
+  const __vue_module_identifier__$e = "data-v-e53ed914";
   /* functional template */
   const __vue_is_functional_template__$e = false;
   /* style inject shadow dom */
