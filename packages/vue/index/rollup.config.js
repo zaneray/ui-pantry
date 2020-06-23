@@ -1,54 +1,74 @@
-import commonjs from '@rollup/plugin-commonjs'; // Convert CommonJS modules to ES6
-import VuePlugin from 'rollup-plugin-vue'; // Handle .vue SFC files
-import { getBabelOutputPlugin } from "@rollup/plugin-babel"; // Transpile/polyfill with reasonable browser support
-import resolve from 'rollup-plugin-node-resolve'; // Resolve dependencies
+import cjs from 'rollup-plugin-commonjs' // Convert CommonJS modules to ES6
+import vue from 'rollup-plugin-vue' // Handle .vue SFC files
+import babel from 'rollup-plugin-babel' // Transpile/polyfill with reasonable browser support
+import node from 'rollup-plugin-node-resolve'; // Resolve dependencies
 import pkg from "./package.json";
+
+const babelConfig = {
+  exclude: 'node_modules/**',
+  runtimeHelpers: true,
+  babelrc: false,
+  presets: [['@babel/preset-env', { modules: false }]]
+}
 
 export default [
   // Common JS Build.
   {
     input: 'src/index.js',
+    external: ['vue'],
     output: {
       format: 'cjs',
       file: pkg.main,
       name: 'common',
+      exports: 'named',
       globals: {
-        'vue': 'Vue',
+        vue: 'Vue'
       }
     },
     plugins: [
-      commonjs(),
-      VuePlugin({
-        css: true, // Dynamically inject css as a <style> tag
-        compileTemplate: true, // Explicitly convert template to render function
+      node({
+        extensions: ['.vue', '.js']
       }),
-      getBabelOutputPlugin({
-        presets: ["@babel/preset-env"]
+      vue({
+        template: {
+          isProduction: true,
+          optimizeSSR: true
+        },
+        style: {
+          map: false
+        }
       }),
-      resolve()
+      babel(babelConfig),
+      cjs()
     ]
   },
   // ESM build to be used with webpack/rollup.
   {
     input: 'src/index.js',
     output: {
-      format: 'es',
+      format: 'esm',
       file: pkg.module,
       name: 'module',
+      exports: 'named',
       globals: {
         'vue': 'Vue',
       }
     },
     plugins: [
-      commonjs(),
-      VuePlugin({
-        css: true, // Dynamically inject css as a <style> tag
-        compileTemplate: true, // Explicitly convert template to render function
+      node({
+        extensions: ['.vue', '.js']
       }),
-      getBabelOutputPlugin({
-        presets: ["@babel/preset-env"]
+      vue({
+        template: {
+          isProduction: true,
+          optimizeSSR: true
+        },
+        style: {
+          map: false
+        }
       }),
-      resolve()
+      babel(babelConfig),
+      cjs()
     ]
   }
 ]
