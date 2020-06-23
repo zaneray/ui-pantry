@@ -3,6 +3,7 @@ import ZrAlert from '../components/base/ZrAlert.vue';
 import ZrButton from '../components/base/ZrButton.vue';
 import ZrCheckbox from '../components/base/ZrCheckbox.vue';
 import ZrCounter from '../components/base/ZrCounter.vue';
+import ZrCurrency from '../components/base/ZrCurrency.vue';
 import ZrImage from '../components/base/ZrImage.vue';
 import ZrInput from '../components/base/ZrInput.vue';
 import ZrInputWrapper from '../components/base/ZrInputWrapper.vue';
@@ -27,6 +28,7 @@ export {
   ZrButton,
   ZrCheckbox,
   ZrCounter,
+  ZrCurrency,
   ZrImage,
   ZrInput,
   ZrInputWrapper,
