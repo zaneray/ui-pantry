@@ -3,13 +3,7 @@ import vue from 'rollup-plugin-vue' // Handle .vue SFC files
 import babel from 'rollup-plugin-babel' // Transpile/polyfill with reasonable browser support
 import node from 'rollup-plugin-node-resolve'; // Resolve dependencies
 import pkg from "./package.json";
-
-const babelConfig = {
-  exclude: 'node_modules/**',
-  runtimeHelpers: true,
-  babelrc: false,
-  presets: [['@babel/preset-env', { modules: false }]]
-}
+import babelConfig from '../../../babel.config';
 
 export default [
   // Common JS Build.
