@@ -1,7 +1,7 @@
 <template>
   <div>
     <img v-if="lazy" v-lazy-load="{rootMargin: rootMargin}" :data-src="imageSrc"
-         :src="defaultImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" :style="fadeStyle" />
+         :src="lazyImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" :style="fadeStyle" />
     <img v-else :src="imageSrc" :alt="altText" :class="imageClass"/>
     <noscript inline-template>
       <img :src="imageSrc" :alt="altText" :class="imageClass"/>
@@ -40,6 +40,11 @@
         type: String,
         required: false
       }
+    },
+    computed: {
+      lazyImage() {
+        return this.lazyLoaded ? this.imageSrc : this.defaultImage;
+      }
     }
   }
 </script>
@@ -69,6 +74,14 @@
   #### Image with no lazy loading
   ```jsx
   <ZrImage :image-src="images.thumbnail.url" :alt-text="text.sentence"/>
+  ```
+
+  #### Image with no dynamic source change
+  Click button to dynamically change the image src
+  ```jsx
+  let imageSrc = '/static/fpo/thumbnail.jpg'
+  <button @click="imageSrc = '/static/fpo/gallery-md.jpg'">Change Image Src</button>
+  <ZrImage :image-src="imageSrc" :alt-text="text.sentence"/>
   ```
 
   #### Image with custom lazy load fade duration and easing
