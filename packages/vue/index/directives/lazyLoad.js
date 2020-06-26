@@ -18,8 +18,9 @@
 //
 // -----------------------------------------------------------
 
-function emitEvent(vnode, name) {
-  vnode.context.$emit(name);
+function setLoadedOnComponent(vnode) {
+  vnode.context.$emit('loaded');
+  vnode.context.$data.lazyLoaded = true;
 }
 
 function loadSrc(element, observerOptions, vnode) {
@@ -64,7 +65,7 @@ function loadSrc(element, observerOptions, vnode) {
     // add 'loaded' class to <img>
     setTimeout(() => {
       element.classList.add(loadedClass);
-      emitEvent(vnode,'loaded');
+      setLoadedOnComponent(vnode);
     }, 50);
   }
 }
@@ -90,7 +91,7 @@ function loadElement(element, observerOptions, vnode) {
       if (elementChild.tagName === 'SOURCE') {
         // retrieve data-src and apply value to element srcset (loan / show image)
         elementChild.setAttribute('srcset', elementChild.dataset.src);
-        emitEvent(vnode,'loaded');
+        setLoadedOnComponent(vnode);
       }
 
       // case IMG

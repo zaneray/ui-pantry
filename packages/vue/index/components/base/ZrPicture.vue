@@ -2,9 +2,9 @@
   <div>
     <template v-if="lazy">
       <picture v-lazy-load="{rootMargin: rootMargin}">
-        <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="defaultImage">
-        <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="defaultImage">
-        <img :data-src="mobileImg" :alt="altText" :src="defaultImage" :class="{'fade-image': fade}" :style="fadeStyle" />
+        <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="lazyDesktopImg">
+        <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="lazyTabletImg">
+        <img :data-src="mobileImg" :alt="altText" :src="lazyMobileImg" :class="{'fade-image': fade}" :style="fadeStyle" />
       </picture>
       <noscript inline-template>
         <picture>
@@ -75,6 +75,15 @@
       }
     },
     computed: {
+      lazyDesktopImg() {
+        return this.lazyLoaded ? this.desktopImg : this.defaultImage;
+      },
+      lazyTabletImg() {
+        return this.lazyLoaded ? this.tabletImg : this.defaultImage;
+      },
+      lazyMobileImg() {
+        return this.lazyLoaded ? this.mobileImg : this.defaultImage;
+      },
       breakpointQueryDesktop() {
         return `(min-width: ${this.breakpointDesktop}px)`;
       },
@@ -122,6 +131,24 @@
   />
   ```
 
+  #### Picture with dynamic source change
+  Click the button to dynamically change the desktop image src
+  ```jsx
+  let desktopSrc = '/static/fpo/1920x960-light.jpg';
+  const changeSrc = () => {
+    console.log('change to: /static/fpo/1920x960-dark.jpg');
+    desktopSrc = '/static/fpo/1920x960-dark.jpg';
+  }
+
+  <button @click="desktopSrc = '/static/fpo/1920x960-dark.jpg'">Change Image Src</button>
+  <ZrPicture :lazy="false"
+             :mobile-img="images.banner_image.mobile.url"
+             :tablet-img="images.banner_image.half.url"
+             :desktop-img="desktopSrc"
+             :alt-text="images.banner_image.alt"
+  />
+  ```
+
   #### Basic Picture with lazy loading, mobile image and tablet
   ```jsx
   <ZrPicture :mobile-img="images.banner_image.mobile.url"
@@ -137,7 +164,7 @@
              :alt-text="images.banner_image.alt"
              fade-duration="0.8"
              fade-easing="linear"
-             root-margin="-400px"
+             root-margin="-500px"
   />
   ```
 

@@ -41,6 +41,11 @@ export const lazyLoadShared = {
       default: '400px'
     }
   },
+  data() {
+    return {
+      lazyLoaded: false
+    };
+  },
   computed: {
     fadeStyle: function() {
       return `transition: opacity ${this.fadeDuration}s ${this.fadeEasing}`
