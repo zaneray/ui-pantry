@@ -2575,8 +2575,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 // threshold = define the % of image / object that needs to be visible before a intersection is triggered
 //
 // -----------------------------------------------------------
-function emitEvent(vnode, name) {
-  vnode.context.$emit(name);
+function setLoadedOnComponent(vnode) {
+  vnode.context.$emit('loaded');
+  vnode.context.$data.lazyLoaded = true;
 }
 
 function loadSrc(element, observerOptions, vnode) {
@@ -2628,7 +2629,7 @@ function loadSrc(element, observerOptions, vnode) {
 
     setTimeout(function () {
       element.classList.add(loadedClass);
-      emitEvent(vnode, 'loaded');
+      setLoadedOnComponent(vnode);
     }, 50);
   }
 }
@@ -2657,7 +2658,7 @@ function loadElement(element, observerOptions, vnode) {
         if (elementChild.tagName === 'SOURCE') {
           // retrieve data-src and apply value to element srcset (loan / show image)
           elementChild.setAttribute('srcset', elementChild.dataset.src);
-          emitEvent(vnode, 'loaded');
+          setLoadedOnComponent(vnode);
         } // case IMG
 
 
@@ -2800,6 +2801,11 @@ var lazyLoadShared = {
       default: '400px'
     }
   },
+  data: function data() {
+    return {
+      lazyLoaded: false
+    };
+  },
   computed: {
     fadeStyle: function fadeStyle() {
       return "transition: opacity ".concat(this.fadeDuration, "s ").concat(this.fadeEasing);
@@ -2835,6 +2841,11 @@ var script$5 = {
       type: String,
       required: false
     }
+  },
+  computed: {
+    lazyImage: function lazyImage() {
+      return this.lazyLoaded ? this.imageSrc : this.defaultImage;
+    }
   }
 };
 
@@ -2842,17 +2853,17 @@ var script$5 = {
 const __vue_script__$5 = script$5;
 
 /* template */
-var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?_c('img',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],class:[_vm.imageClass, {'fade-image': _vm.fade}],style:(_vm.fadeStyle),attrs:{"data-src":_vm.imageSrc,"src":_vm.defaultImage,"alt":_vm.altText}}):_c('img',{class:_vm.imageClass,attrs:{"src":_vm.imageSrc,"alt":_vm.altText}}),_vm._v(" "),_c('noscript',{inlineTemplate:{render:function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('img',{class:_vm.imageClass,attrs:{"src":_vm.imageSrc,"alt":_vm.altText}})},staticRenderFns:[]}})])};
+var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?_c('img',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],class:[_vm.imageClass, {'fade-image': _vm.fade}],style:(_vm.fadeStyle),attrs:{"data-src":_vm.imageSrc,"src":_vm.lazyImage,"alt":_vm.altText}}):_c('img',{class:_vm.imageClass,attrs:{"src":_vm.imageSrc,"alt":_vm.altText}}),_vm._v(" "),_c('noscript',{inlineTemplate:{render:function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('img',{class:_vm.imageClass,attrs:{"src":_vm.imageSrc,"alt":_vm.altText}})},staticRenderFns:[]}})])};
 var __vue_staticRenderFns__$5 = [];
 
   /* style */
   const __vue_inject_styles__$5 = function (inject) {
     if (!inject) return
-    inject("data-v-63a3e872_0", { source: "img[data-v-63a3e872]{width:100%}img.lazy-image.fade-image[data-v-63a3e872]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-63a3e872]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-37e7a394_0", { source: "img[data-v-37e7a394]{width:100%}img.lazy-image.fade-image[data-v-37e7a394]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-37e7a394]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$5 = "data-v-63a3e872";
+  const __vue_scope_id__$5 = "data-v-37e7a394";
   /* module identifier */
   const __vue_module_identifier__$5 = undefined;
   /* functional template */
@@ -3168,6 +3179,15 @@ var script$9 = {
     }
   },
   computed: {
+    lazyDesktopImg: function lazyDesktopImg() {
+      return this.lazyLoaded ? this.desktopImg : this.defaultImage;
+    },
+    lazyTabletImg: function lazyTabletImg() {
+      return this.lazyLoaded ? this.tabletImg : this.defaultImage;
+    },
+    lazyMobileImg: function lazyMobileImg() {
+      return this.lazyLoaded ? this.mobileImg : this.defaultImage;
+    },
     breakpointQueryDesktop: function breakpointQueryDesktop() {
       return "(min-width: ".concat(this.breakpointDesktop, "px)");
     },
@@ -3181,17 +3201,17 @@ var script$9 = {
 const __vue_script__$9 = script$9;
 
 /* template */
-var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?[_c('picture',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}]},[(_vm.desktopImg)?_c('source',{attrs:{"data-src":_vm.desktopImg,"media":_vm.breakpointQueryDesktop,"srcset":_vm.defaultImage}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"data-src":_vm.tabletImg,"media":_vm.breakpointQueryTablet,"srcset":_vm.defaultImage}}):_vm._e(),_vm._v(" "),_c('img',{class:{'fade-image': _vm.fade},style:(_vm.fadeStyle),attrs:{"data-src":_vm.mobileImg,"alt":_vm.altText,"src":_vm.defaultImage}})]),_vm._v(" "),_c('noscript',{inlineTemplate:{render:function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])},staticRenderFns:[]}})]:_c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])],2)};
+var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?[_c('picture',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}]},[(_vm.desktopImg)?_c('source',{attrs:{"data-src":_vm.desktopImg,"media":_vm.breakpointQueryDesktop,"srcset":_vm.lazyDesktopImg}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"data-src":_vm.tabletImg,"media":_vm.breakpointQueryTablet,"srcset":_vm.lazyTabletImg}}):_vm._e(),_vm._v(" "),_c('img',{class:{'fade-image': _vm.fade},style:(_vm.fadeStyle),attrs:{"data-src":_vm.mobileImg,"alt":_vm.altText,"src":_vm.lazyMobileImg}})]),_vm._v(" "),_c('noscript',{inlineTemplate:{render:function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])},staticRenderFns:[]}})]:_c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])],2)};
 var __vue_staticRenderFns__$9 = [];
 
   /* style */
   const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
-    inject("data-v-4de67b07_0", { source: "img[data-v-4de67b07]{display:block;width:100%}img.lazy-image.fade-image[data-v-4de67b07]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-4de67b07]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-00eb0452_0", { source: "img[data-v-00eb0452]{display:block;width:100%}img.lazy-image.fade-image[data-v-00eb0452]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-00eb0452]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = "data-v-4de67b07";
+  const __vue_scope_id__$9 = "data-v-00eb0452";
   /* module identifier */
   const __vue_module_identifier__$9 = undefined;
   /* functional template */
