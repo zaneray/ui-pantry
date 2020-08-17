@@ -72,6 +72,8 @@ function loadSrc(element, observerOptions, vnode) {
 
 function loadElement(element, observerOptions, vnode) {
 
+  vnode.context.$emit('load');
+
   // -----------------------------------------------------------
   // case IMAGE || VIDEO tag
   // -----------------------------------------------------------
@@ -136,8 +138,6 @@ function bind(el, binding, vnode) {
 
   // set transparent image base 64 before image is loaded
   // el.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==');
-
-  vnode.context.$emit('load');
 
   // attach initial class to lazy loaded <img> tag
   if (el.tagName === 'IMG') {
