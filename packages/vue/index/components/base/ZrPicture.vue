@@ -168,4 +168,18 @@
   />
   ```
 
+  #### Basic Picture with lazy loading emitted event, mobile image and tablet
+  ```jsx
+
+  const loadPicture = () => console.log('load image');
+  const pictureLoaded = () => console.log('image loaded');
+
+  <ZrPicture :mobile-img="images.banner_image.mobile.url"
+             :tablet-img="images.banner_image.half.url"
+             :alt-text="images.banner_image.alt"
+             @load="loadPicture"
+             @loaded="pictureLoaded"
+  />
+  ```
+
 </docs>

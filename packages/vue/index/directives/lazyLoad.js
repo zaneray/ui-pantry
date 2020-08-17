@@ -72,6 +72,8 @@ function loadSrc(element, observerOptions, vnode) {
 
 function loadElement(element, observerOptions, vnode) {
 
+  vnode.context.$emit('load');
+
   // -----------------------------------------------------------
   // case IMAGE || VIDEO tag
   // -----------------------------------------------------------
