@@ -2635,9 +2635,10 @@ function loadSrc(element, observerOptions, vnode) {
 }
 
 function loadElement(element, observerOptions, vnode) {
-  // -----------------------------------------------------------
+  vnode.context.$emit('load'); // -----------------------------------------------------------
   // case IMAGE || VIDEO tag
   // -----------------------------------------------------------
+
   if (element.tagName === 'IMG' || element.tagName === 'VIDEO') {
     loadSrc(element, observerOptions, vnode);
   } // -----------------------------------------------------------
@@ -3207,11 +3208,11 @@ var __vue_staticRenderFns__$9 = [];
   /* style */
   const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
-    inject("data-v-00eb0452_0", { source: "img[data-v-00eb0452]{display:block;width:100%}img.lazy-image.fade-image[data-v-00eb0452]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-00eb0452]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-7f140c86_0", { source: "img[data-v-7f140c86]{display:block;width:100%}img.lazy-image.fade-image[data-v-7f140c86]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-7f140c86]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = "data-v-00eb0452";
+  const __vue_scope_id__$9 = "data-v-7f140c86";
   /* module identifier */
   const __vue_module_identifier__$9 = undefined;
   /* functional template */
