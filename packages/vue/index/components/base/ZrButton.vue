@@ -350,6 +350,6 @@
     <ZrButton link-path="www.google.com" external-link style="margin-bottom: 10px">Standard Link</ZrButton>
     <ZrButton link-path="/product/path" style="margin-bottom: 10px">Router Link</ZrButton>
     <ZrButton link-path="/product/path" nuxt style="margin-bottom: 10px">Nuxt Link</ZrButton>
-    <ZrButton render-div>Div</ZrButton>
+    <ZrButton render-div>Div Element</ZrButton>
     ```
 </docs>
