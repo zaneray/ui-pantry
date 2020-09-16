@@ -1,16 +1,16 @@
 <template>
-    <div class="radio">
-        <input type="radio"
-               :name="name"
-               :id="id"
-               :value="value"
-               :checked="selected"
-               @change="inputChanged"
-               v-bind="$attrs"
-               :disabled="disabled"
-        />
-        <label :for="id">{{label}}</label>
-    </div>
+<div class="zr-radio">
+    <input type="radio"
+           :name="name"
+           :id="id"
+           :value="value"
+           :checked="selected"
+           @change="inputChanged"
+           v-bind="$attrs"
+           :disabled="disabled"
+    />
+    <label :for="id">{{label}}</label>
+</div>
 </template>
 
 <script>
@@ -52,61 +52,62 @@
 
     $radio-outer-width: 1.5em;
     $radio-inner-width: 1em;
-
+  .zr-radio {
     input {
-        position: absolute;
-        width: 0;
-        height: 0;
-        opacity: 0;
-        margin: 0;
-        padding: 0;
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      margin: 0;
+      padding: 0;
 
-        &:checked + label {
-            &:after {
-                opacity: 1;
-                transform: scale(1);
-            }
+      &:checked + label {
+        &:after {
+          opacity: 1;
+          transform: scale(1);
         }
+      }
     }
 
     label {
-        position: relative;
+      position: relative;
+      display: block;
+      font-family: sans-serif;
+      font-size: 16px;
+      line-height: 1.5em;
+      padding-left: $radio-outer-width * 1.5;
+      vertical-align: middle;
+      cursor: pointer;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
         display: block;
-        font-family: sans-serif;
-        font-size: 16px;
-        line-height: 1.5em;
-        padding-left: $radio-outer-width * 1.5;
-        vertical-align: middle;
-        cursor: pointer;
+        border-radius: 50%;
+      }
 
-        &:before,
-        &:after {
-            content: '';
-            position: absolute;
-            display: block;
-            border-radius: 50%;
-        }
+      &:before {
+        top: 50%;
+        left: 0;
+        width: $radio-outer-width;
+        height: $radio-outer-width;
+        border: 1px solid $color-darker;
+        transform: translateY(-50%);
+      }
 
-        &:before {
-            top: 50%;
-            left: 0;
-            width: $radio-outer-width;
-            height: $radio-outer-width;
-            border: 1px solid $color-darker;
-            transform: translateY(-50%);
-        }
-
-        &:after {
-            opacity: 0;
-            left: calc((#{$radio-outer-width} - #{$radio-inner-width} + 2px) / 2);
-            top: calc((#{$radio-outer-width} - #{$radio-inner-width}) / 2);
-            width: $radio-inner-width;
-            height: $radio-inner-width;
-            background-color: $color-dark;
-            transform: scale(0);
-            transition: all 0.25s ease-out;
-        }
+      &:after {
+        opacity: 0;
+        left: calc((#{$radio-outer-width} - #{$radio-inner-width} + 2px) / 2);
+        top: calc((#{$radio-outer-width} - #{$radio-inner-width}) / 2);
+        width: $radio-inner-width;
+        height: $radio-inner-width;
+        background-color: $color-dark;
+        transform: scale(0);
+        transition: all 0.25s ease-out;
+      }
     }
+  }
 </style>
 
 <docs>

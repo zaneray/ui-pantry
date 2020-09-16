@@ -83,11 +83,22 @@
       },
       accordionTransition() {
         return `transition: height ${this.duration}ms ${this.easing}`;
+      },
+      contentEl() {
+        return this.$refs.content;
       }
     },
     watch: {
       expanded(newValue) {
         this.accordionExpanded = newValue;
+      },
+      contentEl: {
+        immediate: true,
+        handler: function(value) {
+          if (value && value.style) {
+            this.contentEl.style.height = this.contentEl.scrollHeight + 'px';
+          }
+        }
       }
     },
     methods: {
@@ -107,10 +118,6 @@
       leave: function(el) {
         el.style.height = '0';
       }
-    },
-    mounted() {
-      const contentEl = this.$refs.content;
-      contentEl.style.height = contentEl.scrollHeight + 'px';
     }
   }
 </script>

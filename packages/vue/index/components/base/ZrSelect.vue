@@ -1,5 +1,5 @@
 <template>
-  <base-input-wrapper v-bind="$props">
+  <base-input-wrapper v-bind="$props" class="zr-select">
     <label v-if="label" :for="id">{{label}}</label>
     <div class="select-wrapper">
       <select :id="id"
@@ -102,38 +102,40 @@
     }
   }
 
-  select {
-    display: block;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    font-size: $input-font-size;
-    padding: $input-padding;
-    padding-right: $select-icon-width + 1em;
-    border: 1px solid $input-border-color;
-    background-color: $color-white;
-    color: $color-darker;
-    border-radius: 0;
-    width: 100%;
-    cursor: pointer;
+  .zr-select {
+    select {
+      display: block;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      font-size: $input-font-size;
+      padding: $input-padding;
+      padding-right: $select-icon-width + 1em;
+      border: 1px solid $input-border-color;
+      background-color: $color-white;
+      color: $color-darker;
+      border-radius: 0;
+      width: 100%;
+      cursor: pointer;
 
-    &.input-sm {
-      padding: $input-padding-sm;
+      &.input-sm {
+        padding: $input-padding-sm;
+      }
+
+      &.input-lg {
+        padding: $input-padding-lg;
+      }
     }
 
-    &.input-lg {
-      padding: $input-padding-lg;
+    label {
+      display: inline-block;
+      padding-bottom: 0.25em;
+      cursor: pointer;
+      user-select: none;
+
+      @include font-label();
+      line-height: 1em;
     }
-  }
-
-  label {
-    display: inline-block;
-    padding-bottom: 0.25em;
-    cursor: pointer;
-    user-select: none;
-
-    @include font-label();
-    line-height: 1em;
   }
 </style>
 

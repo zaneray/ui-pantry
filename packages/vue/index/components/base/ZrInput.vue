@@ -1,5 +1,5 @@
 <template>
-  <base-input-wrapper v-bind="$props">
+  <base-input-wrapper v-bind="$props" class="zr-input">
     <label v-if="label" :class="{'visually-hidden': labelHidden}" :for="id">{{label}}</label>
     <input :type="type"
            :id="id"
@@ -83,52 +83,54 @@
 <style scoped lang="scss">
   @import '../../styles/imports';
 
-  input {
-    display: block;
-    font-size: $font-size-base;
-    padding: $input-padding;
-    border: 1px solid $input-border-color;
-    width: 100%;
-    color: $color-darkest;
-    font-family: sans-serif;
-    transition: $transition-base;
-    background-color: rgba($color-white, .36);
+  .zr-input {
+    input {
+      display: block;
+      font-size: $font-size-base;
+      padding: $input-padding;
+      border: 1px solid $input-border-color;
+      width: 100%;
+      color: $color-darkest;
+      font-family: sans-serif;
+      transition: $transition-base;
+      background-color: rgba($color-white, .36);
 
-    &::placeholder {
-      color: rgba($color-darkest, .5);
+      &::placeholder {
+        color: rgba($color-darkest, .5);
+      }
+
+      &:focus {
+        border-color: $input-border-color-focus;
+        outline: none;
+        background-color: rgba($color-white, .6);
+      }
+
+      &.input-sm {
+        padding: $input-padding-sm;
+      }
+
+      &.input-lg {
+        padding: $input-padding-lg;
+        font-size: $font-size-medium;
+      }
+
+      .invalid & {
+        border-color: $color-warning;
+      }
     }
 
-    &:focus {
-      border-color: $input-border-color-focus;
-      outline: none;
-      background-color: rgba($color-white, .6);
-    }
+    label {
+      display: inline-block;
+      padding-bottom: 0.25em;
+      cursor: pointer;
+      user-select: none;
 
-    &.input-sm {
-      padding: $input-padding-sm;
-    }
+      @include font-label();
+      line-height: 1rem;
 
-    &.input-lg {
-      padding: $input-padding-lg;
-      font-size: $font-size-medium;
-    }
-
-    .invalid & {
-      border-color: $color-warning;
-    }
-  }
-
-  label {
-    display: inline-block;
-    padding-bottom: 0.25em;
-    cursor: pointer;
-    user-select: none;
-
-    @include font-label();
-    line-height: 1rem;
-
-    &.visually-hidden {
-      display: none;
+      &.visually-hidden {
+        display: none;
+      }
     }
   }
 </style>
