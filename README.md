@@ -25,3 +25,16 @@ npm run react:styleguide
 ```
 
 This will run the React Styleguide against a local development server.
+
+### Bundling and Publishing
+All packages must be bundled before publsihing.  To do this, run
+
+```jsx harmony
+npm run bundle
+```
+
+and then:
+
+```jsx
+npm run publish
+```
