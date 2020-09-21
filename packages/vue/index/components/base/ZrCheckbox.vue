@@ -1,5 +1,5 @@
 <template>
-    <div class="checkbox">
+    <div class="checkbox" :class="{ readonly: readonly, checked: selected}">
         <input type="checkbox"
                :name="name"
                :id="id"
@@ -8,6 +8,7 @@
                @change="inputChanged($event)"
                v-bind="$attrs"
                :disabled="disabled"
+               :readonly="readonly"
         />
         <label :for="id">{{label}}</label>
     </div>
@@ -43,8 +44,10 @@
     },
     methods: {
       inputChanged($event) {
-        this.$emit('change', this.value);
-        this.$emit('changeEvent', $event);
+        if (!this.readonly) {
+          this.$emit('change', this.value);
+          this.$emit('changeEvent', $event);
+        }
       }
     }
   }
@@ -63,10 +66,24 @@
         margin: 0;
         padding: 0;
 
+        .readonly.checked & + label {
+            &:after {
+                opacity: 1;
+                transform: rotate(-50deg) scale(1);
+            }
+        }
+
         &:checked + label {
             &:after {
                 opacity: 1;
                 transform: rotate(-50deg) scale(1);
+            }
+
+            .readonly:not(.checked) & {
+                &:after {
+                    opacity: 0;
+                    transform: rotate(-30deg) scale(0);
+                }
             }
         }
     }
@@ -80,6 +97,10 @@
         padding-left: $checkbox-width * 1.5;
         vertical-align: middle;
         cursor: pointer;
+
+        .readonly & {
+          cursor: default;
+        }
 
         &:before,
         &:after {
@@ -127,6 +148,16 @@
     #### Selected Checkbox
     ```jsx
     <ZrCheckbox label="Label Here" value="2" id="check2" selected></ZrCheckbox>
+    ```
+
+    #### Readonly Selected Checkbox
+    ```jsx
+    <ZrCheckbox label="Readonly Selected" selected value="3" id="check3" readonly></ZrCheckbox>
+    ```
+
+    #### Readonly Unselected Checkbox
+    ```jsx
+    <ZrCheckbox label="Readonly Unselected" value="4" id="check4" readonly></ZrCheckbox>
     ```
 </docs>
 
