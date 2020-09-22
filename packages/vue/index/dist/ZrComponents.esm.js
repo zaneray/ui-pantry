@@ -1394,6 +1394,14 @@ var inputShared = {
     disabled: {
       type: Boolean,
       default: false
+    },
+
+    /**
+     * Whether the input is or not
+     */
+    readonly: {
+      type: Boolean,
+      default: false
     }
   },
   mounted: function mounted() {
@@ -1446,8 +1454,12 @@ var script$2 = {
   }),
   methods: {
     inputChanged: function inputChanged($event) {
-      this.$emit('change', this.value);
-      this.$emit('changeEvent', $event);
+      if (!this.readonly) {
+        this.$emit('change', this.value);
+        this.$emit('changeEvent', $event);
+      } else {
+        $event.preventDefault();
+      }
     }
   }
 };
@@ -1456,17 +1468,17 @@ var script$2 = {
 const __vue_script__$2 = script$2;
 
 /* template */
-var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"checkbox"},[_c('input',_vm._b({attrs:{"type":"checkbox","name":_vm.name,"id":_vm.id,"disabled":_vm.disabled},domProps:{"value":_vm.value,"checked":_vm.selected},on:{"change":function($event){_vm.inputChanged($event);}}},'input',_vm.$attrs,false)),_vm._v(" "),_c('label',{attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))])])};
+var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"checkbox",class:{ readonly: _vm.readonly, checked: _vm.selected}},[_c('input',_vm._b({attrs:{"type":"checkbox","name":_vm.name,"id":_vm.id,"disabled":_vm.disabled,"readonly":_vm.readonly},domProps:{"value":_vm.value,"checked":_vm.selected},on:{"click":function($event){_vm.inputChanged($event);}}},'input',_vm.$attrs,false)),_vm._v(" "),_c('label',{attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))])])};
 var __vue_staticRenderFns__$2 = [];
 
   /* style */
   const __vue_inject_styles__$2 = function (inject) {
     if (!inject) return
-    inject("data-v-08da9ee6_0", { source: "@keyframes SPIN-data-v-08da9ee6{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}input[data-v-08da9ee6]{position:absolute;width:0;height:0;opacity:0;margin:0;padding:0}input:checked+label[data-v-08da9ee6]:after{opacity:1;transform:rotate(-50deg) scale(1)}label[data-v-08da9ee6]{position:relative;display:block;font-family:sans-serif;font-size:16px;line-height:1.5em;padding-left:2.25em;vertical-align:middle;cursor:pointer}label[data-v-08da9ee6]:after,label[data-v-08da9ee6]:before{content:\"\";position:absolute;display:block}label[data-v-08da9ee6]:before{top:50%;left:0;width:1.5em;height:1.5em;border:1px solid #2a2928;transform:translateY(-50%)}label[data-v-08da9ee6]:after{opacity:0;left:.3em;top:25%;width:.9em;height:.45em;border-left:2px solid #595755;border-bottom:2px solid #595755;transform:rotate(-30deg) scale(0);transition:all .25s ease-out}", map: undefined, media: undefined });
+    inject("data-v-1e699793_0", { source: "@keyframes SPIN-data-v-1e699793{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}input[data-v-1e699793]{position:absolute;width:0;height:0;opacity:0;margin:0;padding:0}.readonly.checked input+label[data-v-1e699793]:after{opacity:1;transform:rotate(-50deg) scale(1)}input:checked+label[data-v-1e699793]:after{opacity:1;transform:rotate(-50deg) scale(1)}.readonly:not(.checked) input:checked+label[data-v-1e699793]:after{opacity:0;transform:rotate(-30deg) scale(0)}label[data-v-1e699793]{position:relative;display:block;font-family:sans-serif;font-size:16px;line-height:1.5em;padding-left:2.25em;vertical-align:middle;cursor:pointer}.readonly label[data-v-1e699793]{cursor:default}label[data-v-1e699793]:after,label[data-v-1e699793]:before{content:\"\";position:absolute;display:block}label[data-v-1e699793]:before{top:50%;left:0;width:1.5em;height:1.5em;border:1px solid #2a2928;transform:translateY(-50%)}label[data-v-1e699793]:after{opacity:0;left:.3em;top:25%;width:.9em;height:.45em;border-left:2px solid #595755;border-bottom:2px solid #595755;transform:rotate(-30deg) scale(0);transition:all .25s ease-out}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$2 = "data-v-08da9ee6";
+  const __vue_scope_id__$2 = "data-v-1e699793";
   /* module identifier */
   const __vue_module_identifier__$2 = undefined;
   /* functional template */
