@@ -76,8 +76,14 @@ export const inputShared = {
     disabled: {
       type: Boolean,
       default: false
+    },
+    /**
+     * Whether the input is or not
+     */
+    readonly: {
+      type: Boolean,
+      default: false
     }
-
   },
   mounted: function() {
     if (this.validationMessage) {
