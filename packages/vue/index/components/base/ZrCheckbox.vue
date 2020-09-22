@@ -5,7 +5,7 @@
                :id="id"
                :value="value"
                :checked="selected"
-               @change="inputChanged($event)"
+               @click="inputChanged($event)"
                v-bind="$attrs"
                :disabled="disabled"
                :readonly="readonly"
@@ -47,6 +47,8 @@
         if (!this.readonly) {
           this.$emit('change', this.value);
           this.$emit('changeEvent', $event);
+        } else {
+          $event.preventDefault();
         }
       }
     }
