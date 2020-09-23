@@ -71,6 +71,12 @@ export const inputShared = {
       type: Boolean
     },
     /**
+     * To indicate to the screen-reader whether the input is valid or invalid
+     */
+    ariaInvalid: {
+      type: Boolean
+    },
+    /**
      * Input disabled or not
      */
     disabled: {
@@ -100,4 +106,4 @@ export const inputShared = {
       };
     }
   }
-}
+};

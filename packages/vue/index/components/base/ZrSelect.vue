@@ -5,6 +5,7 @@
       <select :id="id"
               :name="name ? name : id"
               :value="value"
+              :aria-invalid="ariaInvalid"
               :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
               :required="required"
               @change="updateValue"
@@ -140,36 +141,38 @@
 </style>
 
 <docs>
-  ### Basic Select
-  ```jsx
-  <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select"></ZrSelect>
-  ```
+    ### Basic Select
+    ```jsx
+    <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select"></ZrSelect>
+    ```
 
-  ### Basic Select Disabled
-  ```jsx
-  <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select" :disabled="true"></ZrSelect>
-  ```
+    ### Select with placeholder
+    ```jsx
+    <ZrSelect label="Placeholder Select" :options="selectOptions" placeholder="Placeholder text" id="Placeholder-select"></ZrSelect>
+    ```
 
-  ### Select with placeholder
-  ```jsx
-  <ZrSelect label="Placeholder Select" :options="selectOptions" placeholder="Placeholder text"
-            id="Placeholder-select"></ZrSelect>
-  ```
+    ### Select with preselected value
+    ```jsx
+    <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
+    ```
 
-  ### Select with preselected value
-  ```jsx
-  <ZrSelect label="Preselected Select" :options="selectOptions" :value="3" id="Preselected-select"></ZrSelect>
-  ```
+    ### Select with required attribute
+    ```jsx
+    <ZrSelect label="Required Select" :options="selectOptions" :value="1" id="Preselected-select" :required="true"></ZrSelect>
+    ```
 
-  ### Select with required attribute
-  ```jsx
-  <ZrSelect label="Required Select" :options="selectOptions" :value="1" id="Preselected-select"
-            :required="true"></ZrSelect>
-  ```
+    ### Invalid Select
+    ```jsx
+    <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :required="true" :invalid="true"></ZrSelect>
+    ```
 
-  ### Invalid Select
-  ```jsx
-  <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select"
-            :required="true" :invalid="true"></ZrSelect>
-  ```
+    ### Select `aria-invalid`
+    ```jsx
+    <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select" :aria-invalid="true" :invalid="true"></ZrSelect>
+    ```
+
+    ### Basic Select Disabled
+    ```jsx
+    <ZrSelect label="Basic Select" :options="selectOptions" id="basic-select" :disabled="true"></ZrSelect>
+    ```
 </docs>

@@ -6,6 +6,7 @@
            :name="name ? name : id"
            :value="value"
            :aria-label="!label ? placeholder : !label"
+           :aria-invalid="ariaInvalid"
            :placeholder="placeholder"
            :title="title"
            :required="required"
@@ -233,6 +234,19 @@
     label="No Label"
     :label-hidden="true"
     full
+  >
+  </ZrInput>
+  ```
+
+  ### Input `aria-invalid`
+  ```jsx
+  <ZrInput
+    placeholder="First Name"
+    id="first-name"
+    label="No Label"
+    :label-hidden="true"
+    :aria-invalid="true"
+    :invalid="true"
   >
   </ZrInput>
   ```
