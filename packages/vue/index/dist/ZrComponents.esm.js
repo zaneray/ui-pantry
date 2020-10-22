@@ -3720,7 +3720,7 @@ var script$d = {
 
     /**
      * Array of options to display in the select.  Each option should be an object of this shape:
-     * { label: 'optionLabel', value: 'optionValue' }.
+     * { label: 'optionLabel', value: 'optionValue', disabled: true }.
      */
     options: {
       type: Array,
@@ -3746,17 +3746,17 @@ var script$d = {
 const __vue_script__$d = script$d;
 
 /* template */
-var __vue_render__$d = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('base-input-wrapper',_vm._b({staticClass:"zr-select"},'base-input-wrapper',_vm.$props,false),[(_vm.label)?_c('label',{attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"select-wrapper"},[_c('select',{class:{'input-sm': _vm.size === 'sm', 'input-lg': _vm.size === 'lg'},attrs:{"id":_vm.id,"name":_vm.name ? _vm.name : _vm.id,"required":_vm.required,"disabled":_vm.disabled},domProps:{"value":_vm.value},on:{"change":_vm.updateValue}},[(_vm.placeholder)?_c('option',{attrs:{"value":"","disabled":"","selected":""}},[_vm._v(_vm._s(_vm.placeholder))]):_vm._e(),_vm._v(" "),_vm._l((_vm.options),function(option){return _c('option',{key:option.value,domProps:{"value":option.value}},[_vm._v("\n          "+_vm._s(option.label)+"\n        ")])})],2)])])};
+var __vue_render__$d = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('base-input-wrapper',_vm._b({staticClass:"zr-select"},'base-input-wrapper',_vm.$props,false),[(_vm.label)?_c('label',{attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"select-wrapper"},[_c('select',{class:{'input-sm': _vm.size === 'sm', 'input-lg': _vm.size === 'lg'},attrs:{"id":_vm.id,"name":_vm.name ? _vm.name : _vm.id,"required":_vm.required,"disabled":_vm.disabled},domProps:{"value":_vm.value},on:{"change":_vm.updateValue}},[(_vm.placeholder)?_c('option',{attrs:{"value":"","disabled":"","selected":""}},[_vm._v(_vm._s(_vm.placeholder))]):_vm._e(),_vm._v(" "),_vm._l((_vm.options),function(option){return _c('option',{key:option.value,attrs:{"disabled":option.disabled},domProps:{"value":option.value}},[_vm._v("\n          "+_vm._s(option.label)+"\n        ")])})],2)])])};
 var __vue_staticRenderFns__$d = [];
 
   /* style */
   const __vue_inject_styles__$d = function (inject) {
     if (!inject) return
-    inject("data-v-0b598b44_0", { source: "@keyframes SPIN-data-v-0b598b44{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.select-wrapper[data-v-0b598b44]{display:block;position:relative;width:100%}.select-wrapper[data-v-0b598b44]:after{position:absolute;top:0;bottom:0;right:0;width:2.5em;display:block;content:\"\";background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGFBMVEUAAAAZJCYWISIYIyQYIiUWIiIYIyQYIiXh0rToAAAACHRSTlMA/hTRqiinvwFkb0sAAABCSURBVHjajchBDsAgDAPBOJDw/x+XVN0icQGfPGs3i+2GEqeiLCXWLENzvdzrDfP2ls/NjfKbgimYglfBq2Dm+LwHguMA235EdKYAAAAASUVORK5CYII=) center no-repeat;pointer-events:none}.invalid .select-wrapper select[data-v-0b598b44]{color:#d23838;border-color:#d23838}.zr-select select[data-v-0b598b44]{display:block;appearance:none;-webkit-appearance:none;-moz-appearance:none;font-size:.875rem;padding:.75em 1em;padding-right:3.5em;border:1px solid #8c8a7e;background-color:#fff;color:#2a2928;border-radius:0;width:100%;cursor:pointer}.zr-select select.input-sm[data-v-0b598b44]{padding:.5em .5em}.zr-select select.input-lg[data-v-0b598b44]{padding:1em 1.5em}.zr-select label[data-v-0b598b44]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
+    inject("data-v-c3d4078c_0", { source: "@keyframes SPIN-data-v-c3d4078c{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.select-wrapper[data-v-c3d4078c]{display:block;position:relative;width:100%}.select-wrapper[data-v-c3d4078c]:after{position:absolute;top:0;bottom:0;right:0;width:2.5em;display:block;content:\"\";background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGFBMVEUAAAAZJCYWISIYIyQYIiUWIiIYIyQYIiXh0rToAAAACHRSTlMA/hTRqiinvwFkb0sAAABCSURBVHjajchBDsAgDAPBOJDw/x+XVN0icQGfPGs3i+2GEqeiLCXWLENzvdzrDfP2ls/NjfKbgimYglfBq2Dm+LwHguMA235EdKYAAAAASUVORK5CYII=) center no-repeat;pointer-events:none}.invalid .select-wrapper select[data-v-c3d4078c]{color:#d23838;border-color:#d23838}.zr-select select[data-v-c3d4078c]{display:block;appearance:none;-webkit-appearance:none;-moz-appearance:none;font-size:.875rem;padding:.75em 1em;padding-right:3.5em;border:1px solid #8c8a7e;background-color:#fff;color:#2a2928;border-radius:0;width:100%;cursor:pointer}.zr-select select.input-sm[data-v-c3d4078c]{padding:.5em .5em}.zr-select select.input-lg[data-v-c3d4078c]{padding:1em 1.5em}.zr-select label[data-v-c3d4078c]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$d = "data-v-0b598b44";
+  const __vue_scope_id__$d = "data-v-c3d4078c";
   /* module identifier */
   const __vue_module_identifier__$d = undefined;
   /* functional template */
