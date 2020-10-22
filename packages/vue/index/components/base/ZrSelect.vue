@@ -12,6 +12,7 @@
         <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
         <option v-for="option of options"
                 :value="option.value"
+                :disabled="option.disabled"
                 :key="option.value">
           {{option.label}}
         </option>
@@ -50,7 +51,7 @@
       },
       /**
        * Array of options to display in the select.  Each option should be an object of this shape:
-       * { label: 'optionLabel', value: 'optionValue' }.
+       * { label: 'optionLabel', value: 'optionValue', disabled: true }.
        */
       options: {
         type: Array,
@@ -171,5 +172,11 @@
   ```jsx
   <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select"
             :required="true" :invalid="true"></ZrSelect>
+  ```
+
+  ### Disabled Select Options
+  ```jsx
+  <ZrSelect label="Select An Option" :options="disabledSelectOptions" placeholder="Placeholder text" id="Preselected-select"
+            :required="true"></ZrSelect>
   ```
 </docs>
