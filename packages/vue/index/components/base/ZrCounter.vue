@@ -87,8 +87,13 @@
         return newCount;
       }
     },
-    beforeMount() {
-      this.count = this.checkAgainstMaxAndMin(this.value, this.min, this.max);
+    watch: {
+      value: {
+        immediate: true,
+        handler: function() {
+          this.count = this.checkAgainstMaxAndMin(this.value, this.min, this.max);
+        }
+      }
     }
   }
 </script>
@@ -176,5 +181,12 @@
   ### Counter with min and max
   ```jsx
   <ZrCounter :min="4" :max="11"></ZrCounter>
+  ```
+
+  ### Dynamic Value
+  ```jsx
+  const value = 3;
+  <button @click="value++">Increment Value</button>
+  <ZrCounter :value="value"></ZrCounter>
   ```
 </docs>
