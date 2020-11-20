@@ -12,7 +12,7 @@
                     v-on:before-leave="beforeLeave" v-on:leave="leave">
             <div class="accordion-content"
                  v-show="accordionExpanded"
-                 ref="content"
+                 ref="accordionContent"
                  :aria-hidden="!accordionExpanded ? 'true' : 'false'"
                  :style="accordionTransition"
                  :id="contentId">
@@ -83,25 +83,17 @@
       },
       accordionTransition() {
         return `transition: height ${this.duration}ms ${this.easing}`;
-      },
-      contentEl() {
-        return this.$refs.content;
       }
     },
     watch: {
       expanded(newValue) {
         this.accordionExpanded = newValue;
-      },
-      contentEl: {
-        immediate: true,
-        handler: function(value) {
-          if (value && value.style) {
-            this.contentEl.style.height = this.contentEl.scrollHeight + 'px';
-          }
-        }
       }
     },
     methods: {
+      setContentHeight() {
+        this.$refs.accordionContent.style.height = this.$refs.accordionContent.scrollHeight + 'px';
+      },
       toggleAccordion() {
         this.accordionExpanded = !this.accordionExpanded;
         this.$emit('toggle', this.accordionExpanded);
@@ -117,6 +109,11 @@
       },
       leave: function(el) {
         el.style.height = '0';
+      }
+    },
+    updated() {
+      if (this.accordionExpanded) {
+        this.setContentHeight();
       }
     }
   }
@@ -208,6 +205,16 @@
     ```jsx
     <zr-accordion name="test3" header="Custom transition" :duration="500" easing="cubic-bezier(0.250, 0.250, 0.785, 0.325)">
         <div v-html="text.paragraphs"></div>
+    </zr-accordion>
+    ```
+
+    #### Height updated when dynamic content comes in
+    ```jsx
+    let dynamicContent = false;
+    <button @click="dynamicContent = !dynamicContent">Toggle Dynamic Content</button>
+    <zr-accordion name="test3" header="Custom transition">
+      <div v-html="text.paragraphs"></div>
+      <h4 v-if="dynamicContent">Some New Content</h4>
     </zr-accordion>
     ```
 </docs>
