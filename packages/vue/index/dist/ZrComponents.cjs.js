@@ -3962,25 +3962,17 @@ var script$f = {
     },
     accordionTransition: function accordionTransition() {
       return "transition: height ".concat(this.duration, "ms ").concat(this.easing);
-    },
-    contentEl: function contentEl() {
-      return this.$refs.content;
     }
   },
   watch: {
     expanded: function expanded(newValue) {
       this.accordionExpanded = newValue;
-    },
-    contentEl: {
-      immediate: true,
-      handler: function handler(value) {
-        if (value && value.style) {
-          this.contentEl.style.height = this.contentEl.scrollHeight + 'px';
-        }
-      }
     }
   },
   methods: {
+    setContentHeight: function setContentHeight() {
+      this.$refs.accordionContent.style.height = this.$refs.accordionContent.scrollHeight + 'px';
+    },
     toggleAccordion: function toggleAccordion() {
       this.accordionExpanded = !this.accordionExpanded;
       this.$emit('toggle', this.accordionExpanded);
@@ -3997,6 +3989,11 @@ var script$f = {
     leave: function leave(el) {
       el.style.height = '0';
     }
+  },
+  updated: function updated() {
+    if (this.accordionExpanded) {
+      this.setContentHeight();
+    }
   }
 };
 
@@ -4004,19 +4001,19 @@ var script$f = {
 const __vue_script__$f = script$f;
 
 /* template */
-var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"accordion-container"},[_vm._ssrNode("<button"+(_vm._ssrAttr("aria-controls",_vm.contentId))+(_vm._ssrAttr("aria-expanded",_vm.accordionExpanded  ? 'true' : 'false'))+(_vm._ssrClass(null,['accordion-header', {'expanded': _vm.accordionExpanded}]))+">"+_vm._ssrEscape("\n            "+_vm._s(_vm.header)+"\n            ")+"<span class=\"accordion-indicator\"></span></button> "),_c('transition',{attrs:{"name":"accordion"},on:{"before-enter":_vm.beforeEnter,"enter":_vm.enter,"before-leave":_vm.beforeLeave,"leave":_vm.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.accordionExpanded),expression:"accordionExpanded"}],ref:"content",staticClass:"accordion-content",style:(_vm.accordionTransition),attrs:{"aria-hidden":!_vm.accordionExpanded ? 'true' : 'false',"id":_vm.contentId}},[_c('div',{staticClass:"accordion-content-inner"},[_vm._t("default")],2)])])],2)};
+var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"accordion-container"},[_vm._ssrNode("<button"+(_vm._ssrAttr("aria-controls",_vm.contentId))+(_vm._ssrAttr("aria-expanded",_vm.accordionExpanded  ? 'true' : 'false'))+(_vm._ssrClass(null,['accordion-header', {'expanded': _vm.accordionExpanded}]))+">"+_vm._ssrEscape("\n            "+_vm._s(_vm.header)+"\n            ")+"<span class=\"accordion-indicator\"></span></button> "),_c('transition',{attrs:{"name":"accordion"},on:{"before-enter":_vm.beforeEnter,"enter":_vm.enter,"before-leave":_vm.beforeLeave,"leave":_vm.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.accordionExpanded),expression:"accordionExpanded"}],ref:"accordionContent",staticClass:"accordion-content",style:(_vm.accordionTransition),attrs:{"aria-hidden":!_vm.accordionExpanded ? 'true' : 'false',"id":_vm.contentId}},[_c('div',{staticClass:"accordion-content-inner"},[_vm._t("default")],2)])])],2)};
 var __vue_staticRenderFns__$f = [];
 
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-6b8a156e_0", { source: "@keyframes SPIN-data-v-6b8a156e{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.accordion-header[data-v-6b8a156e]{position:relative;appearance:none;-webkit-appearance:none;width:100%;margin:0;padding:1rem 1.5rem 1rem 0;line-height:1;text-align:left;border:none;border-top:1px solid #000;border-bottom:1px solid #000;cursor:pointer}.accordion-indicator[data-v-6b8a156e]:after,.accordion-indicator[data-v-6b8a156e]:before{content:\"\";position:absolute;right:0;top:calc(50% - 1px);display:block;width:1em;height:2px;background-color:#000;transition:all .25s ease-out}.accordion-indicator[data-v-6b8a156e]:after{transform:rotate(90deg)}[aria-expanded=true] .accordion-indicator[data-v-6b8a156e]:after,[aria-expanded=true] .accordion-indicator[data-v-6b8a156e]:before{transform:rotate(180deg)}.accordion-content[data-v-6b8a156e]{overflow:hidden;transition:all .25s ease-out}.accordion-content-inner[data-v-6b8a156e]{padding:1rem 0}", map: undefined, media: undefined });
+    inject("data-v-43452162_0", { source: "@keyframes SPIN-data-v-43452162{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.accordion-header[data-v-43452162]{position:relative;appearance:none;-webkit-appearance:none;width:100%;margin:0;padding:1rem 1.5rem 1rem 0;line-height:1;text-align:left;border:none;border-top:1px solid #000;border-bottom:1px solid #000;cursor:pointer}.accordion-indicator[data-v-43452162]:after,.accordion-indicator[data-v-43452162]:before{content:\"\";position:absolute;right:0;top:calc(50% - 1px);display:block;width:1em;height:2px;background-color:#000;transition:all .25s ease-out}.accordion-indicator[data-v-43452162]:after{transform:rotate(90deg)}[aria-expanded=true] .accordion-indicator[data-v-43452162]:after,[aria-expanded=true] .accordion-indicator[data-v-43452162]:before{transform:rotate(180deg)}.accordion-content[data-v-43452162]{overflow:hidden;transition:all .25s ease-out}.accordion-content-inner[data-v-43452162]{padding:1rem 0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$f = "data-v-6b8a156e";
+  const __vue_scope_id__$f = "data-v-43452162";
   /* module identifier */
-  const __vue_module_identifier__$f = "data-v-6b8a156e";
+  const __vue_module_identifier__$f = "data-v-43452162";
   /* functional template */
   const __vue_is_functional_template__$f = false;
   /* style inject shadow dom */
