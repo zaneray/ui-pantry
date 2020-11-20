@@ -92,7 +92,9 @@
     },
     methods: {
       setContentHeight() {
-        this.$refs.accordionContent.style.height = this.$refs.accordionContent.scrollHeight + 'px';
+        if (this.$refs.accordionContent) {
+          this.$refs.accordionContent.style.height = this.$refs.accordionContent.scrollHeight + 'px';
+        }
       },
       toggleAccordion() {
         this.accordionExpanded = !this.accordionExpanded;
