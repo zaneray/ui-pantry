@@ -1523,6 +1523,10 @@ var __vue_staticRenderFns__$2 = [];
 //
 //
 //
+//
+//
+//
+//
 
 /**
  * A custom counter component used to allow a user to increment a number
@@ -1560,6 +1564,14 @@ var script$3 = {
     },
 
     /**
+     * Whether counter buttons should be disabled when min or max condition is met
+     */
+    disableAtBoundaries: {
+      type: Boolean,
+      default: true
+    },
+
+    /**
      * Error message to display
      */
     errorMessage: {
@@ -1580,6 +1592,12 @@ var script$3 = {
       } else {
         return this.count === 1 ? " ".concat(this.countLabel) : " ".concat(this.countLabel, "s");
       }
+    },
+    minDisabled: function minDisabled() {
+      return this.stepperDisabled('min');
+    },
+    maxDisabled: function maxDisabled() {
+      return this.stepperDisabled('max');
     }
   },
   methods: {
@@ -1602,6 +1620,10 @@ var script$3 = {
       }
 
       return newCount;
+    },
+    stepperDisabled: function stepperDisabled(type) {
+      var countComparison = type === 'min' ? this.min : this.max;
+      return this.disableAtBoundaries && this.count === countComparison ? true : false;
     }
   },
   watch: {
@@ -1618,19 +1640,19 @@ var script$3 = {
 const __vue_script__$3 = script$3;
 
 /* template */
-var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"counter-wrapper-outer"},[_vm._ssrNode("<div class=\"counter-wrapper\"><button class=\"stepper stepper-negative\">-</button> <div class=\"total\">"+_vm._ssrEscape(_vm._s(_vm.count)+_vm._s(_vm.displayLabel))+"</div> <button class=\"stepper stepper-positive\">+</button></div> "+((_vm.showError)?("<div class=\"counter-error\">"+_vm._ssrEscape("\n      "+_vm._s(_vm.errorMessage)+"\n    ")+"</div>"):"<!---->"))])};
+var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"counter-wrapper-outer"},[_vm._ssrNode("<div class=\"counter-wrapper\">","</div>",[_vm._ssrNode("<button"+(_vm._ssrAttr("disabled",_vm.minDisabled))+" class=\"stepper stepper-negative\">","</button>",[_vm._t("decrementSymbol",[_vm._v("-")])],2),_vm._ssrNode(" <div class=\"total\">"+_vm._ssrEscape(_vm._s(_vm.count)+_vm._s(_vm.displayLabel))+"</div> "),_vm._ssrNode("<button"+(_vm._ssrAttr("disabled",_vm.maxDisabled))+" class=\"stepper stepper-positive\">","</button>",[_vm._t("incrementSymbol",[_vm._v("+")])],2)],2),_vm._ssrNode(" "+((_vm.showError)?("<div class=\"counter-error\">"+_vm._ssrEscape("\n      "+_vm._s(_vm.errorMessage)+"\n    ")+"</div>"):"<!---->"))],2)};
 var __vue_staticRenderFns__$3 = [];
 
   /* style */
   const __vue_inject_styles__$3 = function (inject) {
     if (!inject) return
-    inject("data-v-d03eea54_0", { source: "@keyframes SPIN-data-v-d03eea54{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.counter-wrapper-outer[data-v-d03eea54]{position:relative}.counter-wrapper[data-v-d03eea54]{display:flex;justify-content:center}.stepper[data-v-d03eea54]{display:flex;align-items:center;justify-content:center;width:3rem;background-color:#2a2928;color:#fff;font-weight:700;font-size:1.75rem;appearance:none}.total[data-v-d03eea54]{display:flex;align-items:center;justify-content:center;width:5rem;height:3rem;border-top:2px solid #2a2928;border-bottom:2px solid #2a2928;font-family:sans-serif;font-weight:700}.counter-error[data-v-d03eea54]{background:#d23838;color:#fff;display:inline-block;position:absolute;left:50%;transform:translateX(-50%);font-size:1.125rem;font-weight:700;padding:1rem;z-index:1000;top:calc(100% + 1.5rem);min-width:270px;max-width:380px}.counter-error[data-v-d03eea54]:after{content:\"\";position:absolute;left:50%;bottom:100%;transform:translateX(-4rem);border-bottom:1.5rem solid #d23838;border-right:1.5rem solid transparent}", map: undefined, media: undefined });
+    inject("data-v-72efac4d_0", { source: "@keyframes SPIN-data-v-72efac4d{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.counter-wrapper-outer[data-v-72efac4d]{position:relative}.counter-wrapper[data-v-72efac4d]{display:flex;justify-content:center}.stepper[data-v-72efac4d]{display:flex;align-items:center;justify-content:center;width:3rem;background-color:#2a2928;color:#fff;font-weight:700;font-size:1.75rem;appearance:none}.total[data-v-72efac4d]{display:flex;align-items:center;justify-content:center;width:5rem;height:3rem;border-top:2px solid #2a2928;border-bottom:2px solid #2a2928;font-family:sans-serif;font-weight:700}.counter-error[data-v-72efac4d]{background:#d23838;color:#fff;display:inline-block;position:absolute;left:50%;transform:translateX(-50%);font-size:1.125rem;font-weight:700;padding:1rem;z-index:1000;top:calc(100% + 1.5rem);min-width:270px;max-width:380px}.counter-error[data-v-72efac4d]:after{content:\"\";position:absolute;left:50%;bottom:100%;transform:translateX(-4rem);border-bottom:1.5rem solid #d23838;border-right:1.5rem solid transparent}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$3 = "data-v-d03eea54";
+  const __vue_scope_id__$3 = "data-v-72efac4d";
   /* module identifier */
-  const __vue_module_identifier__$3 = "data-v-d03eea54";
+  const __vue_module_identifier__$3 = "data-v-72efac4d";
   /* functional template */
   const __vue_is_functional_template__$3 = false;
   /* style inject shadow dom */
