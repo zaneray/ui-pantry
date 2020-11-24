@@ -1,9 +1,13 @@
 <template>
   <div class="counter-wrapper-outer">
     <div class="counter-wrapper">
-      <button class="stepper stepper-negative" @click="increment(-1)">-</button>
+      <button class="stepper stepper-negative" @click="increment(-1)" :disabled="minDisabled">
+        <slot name="decrementSymbol">-</slot>
+      </button>
       <div class="total">{{count}}{{displayLabel}}</div>
-      <button class="stepper stepper-positive" @click="increment(1)">+</button>
+      <button class="stepper stepper-positive" @click="increment(1)" :disabled="maxDisabled">
+        <slot name="incrementSymbol">+</slot>
+      </button>
     </div>
     <div v-if="showError" class="counter-error">
       {{errorMessage}}
@@ -45,6 +49,13 @@
         type: Number
       },
       /**
+       * Whether counter buttons should be disabled when min or max condition is met
+       */
+      disableAtBoundaries: {
+        type: Boolean,
+        default: true
+      },
+      /**
        * Error message to display
        */
       errorMessage: {
@@ -65,6 +76,12 @@
         } else {
           return this.count === 1 ? ` ${this.countLabel}` : ` ${this.countLabel}s`
         }
+      },
+      minDisabled() {
+        return this.stepperDisabled('min')
+      },
+      maxDisabled() {
+        return this.stepperDisabled('max')
       }
     },
     methods: {
@@ -85,6 +102,10 @@
           this.showError = false;
         }
         return newCount;
+      },
+      stepperDisabled(type) {
+        const countComparison = type === 'min' ? this.min : this.max
+        return this.disableAtBoundaries && this.count === countComparison ? true : false
       }
     },
     watch: {
@@ -183,10 +204,23 @@
   <ZrCounter :min="4" :max="11"></ZrCounter>
   ```
 
+  ### Counter with min and max, not disabled at boundaries
+  ```jsx
+  <ZrCounter :min="4" :max="11" :disable-at-boundaries="false"></ZrCounter>
+  ```
+
   ### Dynamic Value
   ```jsx
   const value = 3;
   <button @click="value++">Increment Value</button>
   <ZrCounter :value="value"></ZrCounter>
+  ```
+
+  ### Counter with custom button symbols
+  ```jsx
+  <ZrCounter>
+    <template v-slot:decrementSymbol><</template>
+    <template v-slot:incrementSymbol>></template>
+  </ZrCounter>
   ```
 </docs>
