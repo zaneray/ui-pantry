@@ -243,7 +243,7 @@
   <ZrInput
       placeholder="First Name"
       id="first-name"
-      label="No Label"
+      label="Read Only"
       readonly
       full
   >
