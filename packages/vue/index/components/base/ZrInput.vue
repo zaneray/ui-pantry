@@ -241,8 +241,8 @@
   ### readonly Input
   ```jsx
   <ZrInput
-      placeholder="First Name"
-      id="first-name"
+      placeholder="Readonly input"
+      id="read-only"
       label="Read Only"
       readonly
       full
