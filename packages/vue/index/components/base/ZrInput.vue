@@ -11,6 +11,7 @@
            :required="required"
            :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
            :disabled="disabled"
+           :readonly="readonly"
            @input="updateValue"
            @blur="$emit('blur')"
            @focus="$emit('focus')"
@@ -31,13 +32,13 @@
     props: {
       ...inputShared.props,
       /**
-       * input type options. `text` (default), `email`, `password`, `search`, `number`
+       * input type options. `text` (default), `email`, `password`, `search`, `number`, `tel`
        */
       type: {
         type: String,
         default: 'text',
         validator: function (value) {
-          return ['text', 'email', 'password', 'search', 'number'].indexOf(value) !== -1
+          return ['text', 'email', 'password', 'search', 'number', 'tel'].indexOf(value) !== -1
         }
       },
       /**
@@ -233,6 +234,18 @@
     label="No Label"
     :label-hidden="true"
     full
+  >
+  </ZrInput>
+  ```
+
+  ### readonly Input
+  ```jsx
+  <ZrInput
+      placeholder="First Name"
+      id="first-name"
+      label="No Label"
+      readonly
+      full
   >
   </ZrInput>
   ```
