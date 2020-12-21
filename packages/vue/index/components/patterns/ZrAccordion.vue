@@ -3,6 +3,7 @@
         <button :class="['accordion-header', {'expanded': accordionExpanded}]"
                 @click="toggleAccordion"
                 :aria-controls="contentId"
+                type="button"
                 :aria-expanded="accordionExpanded  ? 'true' : 'false'">
             {{header}}
             <span class="accordion-indicator"></span>
