@@ -3484,6 +3484,8 @@ var __vue_staticRenderFns__$b = [];
 //
 //
 //
+//
+//
 var script$c = {
   name: "ZrRangeSlider",
   data: function data() {
@@ -3502,8 +3504,20 @@ var script$c = {
       required: false
     },
 
+    /** Label to be displayed */
+    label2: {
+      type: String,
+      required: false
+    },
+
     /** Required to associate a label to the first range input */
     id: {
+      type: String,
+      required: false
+    },
+
+    /** Required to associate a label to the first range input */
+    id2: {
       type: String,
       required: false
     },
@@ -3513,6 +3527,15 @@ var script$c = {
      * This boolean turns it on an off visually.
      */
     hideLabel: {
+      type: Boolean,
+      required: false
+    },
+
+    /**
+     * In some cases it makes sense to not show a label. ADA still required it to be in the code.
+     * This boolean turns it on an off visually.
+     */
+    hideLabel2: {
       type: Boolean,
       required: false
     },
@@ -3705,17 +3728,17 @@ var script$c = {
 const __vue_script__$c = script$c;
 
 /* template */
-var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"range",class:{'dual-range': _vm.isDualSlider}},[(_vm.label)?_c('label',{class:{'visually-hidden': _vm.hideLabel},attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range1Model),expression:"range1Model",modifiers:{"number":true}}],attrs:{"id":_vm.id,"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range1Model},domProps:{"value":(_vm.range1Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.isDualSlider ? _vm.checkRangeValid('min') : '';},"__r":function($event){_vm.range1Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}),_vm._v(" "),(_vm.isDualSlider)?_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range2Model),expression:"range2Model",modifiers:{"number":true}}],staticClass:"dualInput",attrs:{"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range2Model},domProps:{"value":(_vm.range2Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.checkRangeValid('max');},"__r":function($event){_vm.range2Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"range-track"}),_vm._v(" "),(!_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: 0, width: _vm.singleRangeWidth })}):_vm._e(),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: _vm.dualRangeLeft, width: _vm.dualRangeWidth })}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"label-min"},[_vm._v(_vm._s(_vm.labelMin)+_vm._s(_vm.range1Display)+_vm._s(_vm.labelMinAfter))]),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"label-max"},[_vm._v(_vm._s(_vm.labelMax)+_vm._s(_vm.range2Display)+_vm._s(_vm.labelMaxAfter))]):_vm._e()])};
+var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"range",class:{'dual-range': _vm.isDualSlider}},[(_vm.label)?_c('label',{class:{'visually-hidden': _vm.hideLabel},attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),(_vm.label2)?_c('label',{class:{'visually-hidden': _vm.hideLabel2},attrs:{"for":_vm.id2}},[_vm._v(_vm._s(_vm.label2))]):_vm._e(),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range1Model),expression:"range1Model",modifiers:{"number":true}}],attrs:{"id":_vm.id,"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range1Model},domProps:{"value":(_vm.range1Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.isDualSlider ? _vm.checkRangeValid('min') : '';},"__r":function($event){_vm.range1Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}),_vm._v(" "),(_vm.isDualSlider)?_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range2Model),expression:"range2Model",modifiers:{"number":true}}],staticClass:"dualInput",attrs:{"id":_vm.id2,"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range2Model},domProps:{"value":(_vm.range2Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.checkRangeValid('max');},"__r":function($event){_vm.range2Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"range-track"}),_vm._v(" "),(!_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: 0, width: _vm.singleRangeWidth })}):_vm._e(),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: _vm.dualRangeLeft, width: _vm.dualRangeWidth })}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"label-min"},[_vm._v(_vm._s(_vm.labelMin)+_vm._s(_vm.range1Display)+_vm._s(_vm.labelMinAfter))]),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"label-max"},[_vm._v(_vm._s(_vm.labelMax)+_vm._s(_vm.range2Display)+_vm._s(_vm.labelMaxAfter))]):_vm._e()])};
 var __vue_staticRenderFns__$c = [];
 
   /* style */
   const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
-    inject("data-v-78b04ab2_0", { source: "@keyframes SPIN-data-v-78b04ab2{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.range[data-v-78b04ab2]{width:100%;height:34px;position:relative}.range .visually-hidden[data-v-78b04ab2]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.range input[type=range][data-v-78b04ab2]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-78b04ab2]:focus{outline:0}.range input[type=range][data-v-78b04ab2]::-moz-focus-outer{border:0}.range input[type=range][data-v-78b04ab2]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-78b04ab2]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-78b04ab2]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-78b04ab2]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-78b04ab2],.range .label-min[data-v-78b04ab2]{position:absolute;top:20px}.range .label-max[data-v-78b04ab2]{right:0}.range .range-display[data-v-78b04ab2],.range .range-track[data-v-78b04ab2]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-78b04ab2]{width:100%;background-color:#999;z-index:1}.range label[data-v-78b04ab2]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
+    inject("data-v-1b9b09ac_0", { source: "@keyframes SPIN-data-v-1b9b09ac{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.range[data-v-1b9b09ac]{width:100%;height:34px;position:relative}.range .visually-hidden[data-v-1b9b09ac]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.range input[type=range][data-v-1b9b09ac]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-1b9b09ac]:focus{outline:0}.range input[type=range][data-v-1b9b09ac]::-moz-focus-outer{border:0}.range input[type=range][data-v-1b9b09ac]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-1b9b09ac]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-1b9b09ac]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-1b9b09ac]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-1b9b09ac],.range .label-min[data-v-1b9b09ac]{position:absolute;top:20px}.range .label-max[data-v-1b9b09ac]{right:0}.range .range-display[data-v-1b9b09ac],.range .range-track[data-v-1b9b09ac]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-1b9b09ac]{width:100%;background-color:#999;z-index:1}.range label[data-v-1b9b09ac]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$c = "data-v-78b04ab2";
+  const __vue_scope_id__$c = "data-v-1b9b09ac";
   /* module identifier */
   const __vue_module_identifier__$c = undefined;
   /* functional template */
