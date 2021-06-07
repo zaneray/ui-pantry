@@ -451,6 +451,11 @@
                  :unit-type="'foot-inch-long'"/>
   ```
 
+  #### Default Range Slider with label
+  ```jsx
+  <ZrRangeSlider label="Rangeslider label" />
+  ```
+
   #### Slider Dual preset values with ft in formatting with visually hidden label
   ```jsx
   <ZrRangeSlider :label="'My Label'"  :id="'ranger-1'" :hide-label="true" :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
