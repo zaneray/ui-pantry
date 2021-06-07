@@ -1,8 +1,9 @@
 <template>
 
   <div class="range" :class="{'dual-range': isDualSlider}">
-
+    <label :class="{'visually-hidden': hideLabel}" v-if="label" :for="id">{{label}}</label>
     <input
+      :id="id"
       type="range"
       :min="rangeSlideMin"
       :max="rangeSlideMax"
@@ -65,6 +66,24 @@
       }
     },
     props: {
+      /** Label to be displayed */
+      label: {
+        type: String,
+        required: false
+      },
+      /** Required to associate a label to the first range input */
+      id: {
+        type: String,
+        required: false
+      },
+      /**
+       * In some cases it makes sense to not show a label. ADA still required it to be in the code.
+       * This boolean turns it on an off visually.
+       */
+      hideLabel: {
+        type: Boolean,
+        required: false
+      },
       /** Value for Range 1 */
       minValue: {
         type: Number,
@@ -233,7 +252,7 @@
 </script>
 
 <style scoped lang="scss">
-
+  @import '../../styles/imports';
   $trackBackGround: rgb(153, 153, 153);
   $trackColor: rgb(0, 113, 186);
   $trackHeight: 4px;
@@ -245,6 +264,16 @@
     width: 100%;
     height: 34px; /* thumb height + label font size */
     position: relative;
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+    }
 
     /* track styling */
     input[type="range"] {
@@ -366,6 +395,16 @@
       z-index: 1;
     }
 
+    label {
+      display: inline-block;
+      padding-bottom: 0.25em;
+      cursor: pointer;
+      user-select: none;
+
+      @include font-label();
+      line-height: 1em;
+    }
+
   }
 
 
@@ -409,6 +448,12 @@
   #### Slider Dual preset values with ft in formatting
   ```jsx
   <ZrRangeSlider :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
+                 :unit-type="'foot-inch-long'"/>
+  ```
+
+  #### Slider Dual preset values with ft in formatting with visually hidden label
+  ```jsx
+  <ZrRangeSlider :label="'My Label'"  :id="'ranger-1'" :hide-label="true" :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
                  :unit-type="'foot-inch-long'"/>
   ```
 
