@@ -3477,6 +3477,7 @@ var __vue_staticRenderFns__$b = [];
 //
 //
 //
+//
 var script$c = {
   name: "ZrRangeSlider",
   data: function data() {
@@ -3489,6 +3490,27 @@ var script$c = {
     };
   },
   props: {
+    /** Label to be displayed */
+    label: {
+      type: String,
+      required: false
+    },
+
+    /** Required to associate a label to the first range input */
+    id: {
+      type: String,
+      required: false
+    },
+
+    /**
+     * In some cases it makes sense to not show a label. ADA still required it to be in the code.
+     * This boolean turns it on an off visually.
+     */
+    hideLabel: {
+      type: Boolean,
+      required: false
+    },
+
     /** Value for Range 1 */
     minValue: {
       type: Number,
@@ -3677,19 +3699,19 @@ var script$c = {
 const __vue_script__$c = script$c;
 
 /* template */
-var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"range",class:{'dual-range': _vm.isDualSlider}},[_vm._ssrNode("<input type=\"range\""+(_vm._ssrAttr("min",_vm.rangeSlideMin))+(_vm._ssrAttr("max",_vm.rangeSlideMax))+(_vm._ssrAttr("step",_vm.stepSize))+(_vm._ssrAttr("aria-valuemin",_vm.rangeSlideMin))+(_vm._ssrAttr("aria-valuemax",_vm.rangeSlideMax))+(_vm._ssrAttr("aria-valuenow",_vm.range1Model))+(_vm._ssrAttr("value",(_vm.range1Model)))+"> "+((_vm.isDualSlider)?("<input type=\"range\""+(_vm._ssrAttr("min",_vm.rangeSlideMin))+(_vm._ssrAttr("max",_vm.rangeSlideMax))+(_vm._ssrAttr("step",_vm.stepSize))+(_vm._ssrAttr("aria-valuemin",_vm.rangeSlideMin))+(_vm._ssrAttr("aria-valuemax",_vm.rangeSlideMax))+(_vm._ssrAttr("aria-valuenow",_vm.range2Model))+(_vm._ssrAttr("value",(_vm.range2Model)))+" class=\"dualInput\">"):"<!---->")+" <div class=\"range-track\"></div> "+((!_vm.isDualSlider)?("<div class=\"range-display\""+(_vm._ssrStyle(null,{ left: 0, width: _vm.singleRangeWidth }, null))+"></div>"):"<!---->")+" "+((_vm.isDualSlider)?("<div class=\"range-display\""+(_vm._ssrStyle(null,{ left: _vm.dualRangeLeft, width: _vm.dualRangeWidth }, null))+"></div>"):"<!---->")+" <div class=\"label-min\">"+_vm._ssrEscape(_vm._s(_vm.labelMin)+_vm._s(_vm.range1Display)+_vm._s(_vm.labelMinAfter))+"</div> "+((_vm.isDualSlider)?("<div class=\"label-max\">"+_vm._ssrEscape(_vm._s(_vm.labelMax)+_vm._s(_vm.range2Display)+_vm._s(_vm.labelMaxAfter))+"</div>"):"<!---->"))])};
+var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"range",class:{'dual-range': _vm.isDualSlider}},[_vm._ssrNode(((_vm.label)?("<label"+(_vm._ssrAttr("for",_vm.id))+(_vm._ssrClass(null,{'visually-hidden': _vm.hideLabel}))+">"+_vm._ssrEscape(_vm._s(_vm.label))+"</label>"):"<!---->")+" <input"+(_vm._ssrAttr("id",_vm.id))+" type=\"range\""+(_vm._ssrAttr("min",_vm.rangeSlideMin))+(_vm._ssrAttr("max",_vm.rangeSlideMax))+(_vm._ssrAttr("step",_vm.stepSize))+(_vm._ssrAttr("aria-valuemin",_vm.rangeSlideMin))+(_vm._ssrAttr("aria-valuemax",_vm.rangeSlideMax))+(_vm._ssrAttr("aria-valuenow",_vm.range1Model))+(_vm._ssrAttr("value",(_vm.range1Model)))+"> "+((_vm.isDualSlider)?("<input type=\"range\""+(_vm._ssrAttr("min",_vm.rangeSlideMin))+(_vm._ssrAttr("max",_vm.rangeSlideMax))+(_vm._ssrAttr("step",_vm.stepSize))+(_vm._ssrAttr("aria-valuemin",_vm.rangeSlideMin))+(_vm._ssrAttr("aria-valuemax",_vm.rangeSlideMax))+(_vm._ssrAttr("aria-valuenow",_vm.range2Model))+(_vm._ssrAttr("value",(_vm.range2Model)))+" class=\"dualInput\">"):"<!---->")+" <div class=\"range-track\"></div> "+((!_vm.isDualSlider)?("<div class=\"range-display\""+(_vm._ssrStyle(null,{ left: 0, width: _vm.singleRangeWidth }, null))+"></div>"):"<!---->")+" "+((_vm.isDualSlider)?("<div class=\"range-display\""+(_vm._ssrStyle(null,{ left: _vm.dualRangeLeft, width: _vm.dualRangeWidth }, null))+"></div>"):"<!---->")+" <div class=\"label-min\">"+_vm._ssrEscape(_vm._s(_vm.labelMin)+_vm._s(_vm.range1Display)+_vm._s(_vm.labelMinAfter))+"</div> "+((_vm.isDualSlider)?("<div class=\"label-max\">"+_vm._ssrEscape(_vm._s(_vm.labelMax)+_vm._s(_vm.range2Display)+_vm._s(_vm.labelMaxAfter))+"</div>"):"<!---->"))])};
 var __vue_staticRenderFns__$c = [];
 
   /* style */
   const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
-    inject("data-v-5a99b879_0", { source: ".range[data-v-5a99b879]{width:100%;height:34px;position:relative}.range input[type=range][data-v-5a99b879]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-5a99b879]:focus{outline:0}.range input[type=range][data-v-5a99b879]::-moz-focus-outer{border:0}.range input[type=range][data-v-5a99b879]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-5a99b879]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-5a99b879]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-5a99b879]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-5a99b879],.range .label-min[data-v-5a99b879]{position:absolute;top:20px}.range .label-max[data-v-5a99b879]{right:0}.range .range-display[data-v-5a99b879],.range .range-track[data-v-5a99b879]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-5a99b879]{width:100%;background-color:#999;z-index:1}", map: undefined, media: undefined });
+    inject("data-v-10f0078c_0", { source: "@keyframes SPIN-data-v-10f0078c{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.range[data-v-10f0078c]{width:100%;height:34px;position:relative}.range .visually-hidden[data-v-10f0078c]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.range input[type=range][data-v-10f0078c]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-10f0078c]:focus{outline:0}.range input[type=range][data-v-10f0078c]::-moz-focus-outer{border:0}.range input[type=range][data-v-10f0078c]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-10f0078c]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-10f0078c]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-10f0078c]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-10f0078c],.range .label-min[data-v-10f0078c]{position:absolute;top:20px}.range .label-max[data-v-10f0078c]{right:0}.range .range-display[data-v-10f0078c],.range .range-track[data-v-10f0078c]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-10f0078c]{width:100%;background-color:#999;z-index:1}.range label[data-v-10f0078c]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$c = "data-v-5a99b879";
+  const __vue_scope_id__$c = "data-v-10f0078c";
   /* module identifier */
-  const __vue_module_identifier__$c = "data-v-5a99b879";
+  const __vue_module_identifier__$c = "data-v-10f0078c";
   /* functional template */
   const __vue_is_functional_template__$c = false;
   /* style inject shadow dom */
@@ -3752,6 +3774,15 @@ var script$d = {
     placeholder: {
       type: String,
       default: ''
+    },
+
+    /**
+     * In some cases it makes sense to not show a label. ADA still requires it to be in the code.
+     * This boolean turns it on an off visually.
+     */
+    hideLabel: {
+      type: Boolean,
+      required: false
     }
   }),
   methods: {
@@ -3765,19 +3796,19 @@ var script$d = {
 const __vue_script__$d = script$d;
 
 /* template */
-var __vue_render__$d = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('base-input-wrapper',_vm._b({staticClass:"zr-select"},'base-input-wrapper',_vm.$props,false),[(_vm.label)?_c('label',{attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"select-wrapper"},[_c('select',{class:{'input-sm': _vm.size === 'sm', 'input-lg': _vm.size === 'lg'},attrs:{"id":_vm.id,"name":_vm.name ? _vm.name : _vm.id,"required":_vm.required,"disabled":_vm.disabled},domProps:{"value":_vm.value},on:{"change":_vm.updateValue}},[(_vm.placeholder)?_c('option',{attrs:{"value":"","disabled":"","selected":""}},[_vm._v(_vm._s(_vm.placeholder))]):_vm._e(),_vm._v(" "),_vm._l((_vm.options),function(option){return _c('option',{key:option.value,attrs:{"disabled":option.disabled},domProps:{"value":option.value}},[_vm._v("\n          "+_vm._s(option.label)+"\n        ")])})],2)])])};
+var __vue_render__$d = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('base-input-wrapper',_vm._b({staticClass:"zr-select"},'base-input-wrapper',_vm.$props,false),[(_vm.label)?_c('label',{class:{'visually-hidden': _vm.hideLabel},attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"select-wrapper"},[_c('select',{class:{'input-sm': _vm.size === 'sm', 'input-lg': _vm.size === 'lg'},attrs:{"id":_vm.id,"name":_vm.name ? _vm.name : _vm.id,"required":_vm.required,"disabled":_vm.disabled},domProps:{"value":_vm.value},on:{"change":_vm.updateValue}},[(_vm.placeholder)?_c('option',{attrs:{"value":"","disabled":"","selected":""}},[_vm._v(_vm._s(_vm.placeholder))]):_vm._e(),_vm._v(" "),_vm._l((_vm.options),function(option){return _c('option',{key:option.value,attrs:{"disabled":option.disabled},domProps:{"value":option.value}},[_vm._v("\n          "+_vm._s(option.label)+"\n        ")])})],2)])])};
 var __vue_staticRenderFns__$d = [];
 
   /* style */
   const __vue_inject_styles__$d = function (inject) {
     if (!inject) return
-    inject("data-v-c3d4078c_0", { source: "@keyframes SPIN-data-v-c3d4078c{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.select-wrapper[data-v-c3d4078c]{display:block;position:relative;width:100%}.select-wrapper[data-v-c3d4078c]:after{position:absolute;top:0;bottom:0;right:0;width:2.5em;display:block;content:\"\";background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGFBMVEUAAAAZJCYWISIYIyQYIiUWIiIYIyQYIiXh0rToAAAACHRSTlMA/hTRqiinvwFkb0sAAABCSURBVHjajchBDsAgDAPBOJDw/x+XVN0icQGfPGs3i+2GEqeiLCXWLENzvdzrDfP2ls/NjfKbgimYglfBq2Dm+LwHguMA235EdKYAAAAASUVORK5CYII=) center no-repeat;pointer-events:none}.invalid .select-wrapper select[data-v-c3d4078c]{color:#d23838;border-color:#d23838}.zr-select select[data-v-c3d4078c]{display:block;appearance:none;-webkit-appearance:none;-moz-appearance:none;font-size:.875rem;padding:.75em 1em;padding-right:3.5em;border:1px solid #8c8a7e;background-color:#fff;color:#2a2928;border-radius:0;width:100%;cursor:pointer}.zr-select select.input-sm[data-v-c3d4078c]{padding:.5em .5em}.zr-select select.input-lg[data-v-c3d4078c]{padding:1em 1.5em}.zr-select label[data-v-c3d4078c]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
+    inject("data-v-c2c10054_0", { source: "@keyframes SPIN-data-v-c2c10054{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.select-wrapper[data-v-c2c10054]{display:block;position:relative;width:100%}.select-wrapper[data-v-c2c10054]:after{position:absolute;top:0;bottom:0;right:0;width:2.5em;display:block;content:\"\";background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGFBMVEUAAAAZJCYWISIYIyQYIiUWIiIYIyQYIiXh0rToAAAACHRSTlMA/hTRqiinvwFkb0sAAABCSURBVHjajchBDsAgDAPBOJDw/x+XVN0icQGfPGs3i+2GEqeiLCXWLENzvdzrDfP2ls/NjfKbgimYglfBq2Dm+LwHguMA235EdKYAAAAASUVORK5CYII=) center no-repeat;pointer-events:none}.invalid .select-wrapper select[data-v-c2c10054]{color:#d23838;border-color:#d23838}.zr-select .visually-hidden[data-v-c2c10054]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.zr-select select[data-v-c2c10054]{display:block;appearance:none;-webkit-appearance:none;-moz-appearance:none;font-size:.875rem;padding:.75em 1em;padding-right:3.5em;border:1px solid #8c8a7e;background-color:#fff;color:#2a2928;border-radius:0;width:100%;cursor:pointer}.zr-select select.input-sm[data-v-c2c10054]{padding:.5em .5em}.zr-select select.input-lg[data-v-c2c10054]{padding:1em 1.5em}.zr-select label[data-v-c2c10054]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$d = "data-v-c3d4078c";
+  const __vue_scope_id__$d = "data-v-c2c10054";
   /* module identifier */
-  const __vue_module_identifier__$d = "data-v-c3d4078c";
+  const __vue_module_identifier__$d = "data-v-c2c10054";
   /* functional template */
   const __vue_is_functional_template__$d = false;
   /* style inject shadow dom */
@@ -3922,6 +3953,7 @@ var __vue_staticRenderFns__$e = [];
 //
 //
 //
+//
 
 /**
  * A simple accordion component to display a header and content that is hidden by default,
@@ -4025,19 +4057,19 @@ var script$f = {
 const __vue_script__$f = script$f;
 
 /* template */
-var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"accordion-container"},[_vm._ssrNode("<button"+(_vm._ssrAttr("aria-controls",_vm.contentId))+(_vm._ssrAttr("aria-expanded",_vm.accordionExpanded  ? 'true' : 'false'))+(_vm._ssrClass(null,['accordion-header', {'expanded': _vm.accordionExpanded}]))+">"+_vm._ssrEscape("\n            "+_vm._s(_vm.header)+"\n            ")+"<span class=\"accordion-indicator\"></span></button> "),_c('transition',{attrs:{"name":"accordion"},on:{"before-enter":_vm.beforeEnter,"enter":_vm.enter,"before-leave":_vm.beforeLeave,"leave":_vm.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.accordionExpanded),expression:"accordionExpanded"}],ref:"accordionContent",staticClass:"accordion-content",style:(_vm.accordionTransition),attrs:{"aria-hidden":!_vm.accordionExpanded ? 'true' : 'false',"id":_vm.contentId}},[_c('div',{staticClass:"accordion-content-inner"},[_vm._t("default")],2)])])],2)};
+var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"accordion-container"},[_vm._ssrNode("<button"+(_vm._ssrAttr("aria-controls",_vm.contentId))+" type=\"button\""+(_vm._ssrAttr("aria-expanded",_vm.accordionExpanded  ? 'true' : 'false'))+(_vm._ssrClass(null,['accordion-header', {'expanded': _vm.accordionExpanded}]))+">"+_vm._ssrEscape("\n            "+_vm._s(_vm.header)+"\n            ")+"<span class=\"accordion-indicator\"></span></button> "),_c('transition',{attrs:{"name":"accordion"},on:{"before-enter":_vm.beforeEnter,"enter":_vm.enter,"before-leave":_vm.beforeLeave,"leave":_vm.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.accordionExpanded),expression:"accordionExpanded"}],ref:"accordionContent",staticClass:"accordion-content",style:(_vm.accordionTransition),attrs:{"aria-hidden":!_vm.accordionExpanded ? 'true' : 'false',"id":_vm.contentId}},[_c('div',{staticClass:"accordion-content-inner"},[_vm._t("default")],2)])])],2)};
 var __vue_staticRenderFns__$f = [];
 
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-54fbcd2a_0", { source: "@keyframes SPIN-data-v-54fbcd2a{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.accordion-header[data-v-54fbcd2a]{position:relative;appearance:none;-webkit-appearance:none;width:100%;margin:0;padding:1rem 1.5rem 1rem 0;line-height:1;text-align:left;border:none;border-top:1px solid #000;border-bottom:1px solid #000;cursor:pointer}.accordion-indicator[data-v-54fbcd2a]:after,.accordion-indicator[data-v-54fbcd2a]:before{content:\"\";position:absolute;right:0;top:calc(50% - 1px);display:block;width:1em;height:2px;background-color:#000;transition:all .25s ease-out}.accordion-indicator[data-v-54fbcd2a]:after{transform:rotate(90deg)}[aria-expanded=true] .accordion-indicator[data-v-54fbcd2a]:after,[aria-expanded=true] .accordion-indicator[data-v-54fbcd2a]:before{transform:rotate(180deg)}.accordion-content[data-v-54fbcd2a]{overflow:hidden;transition:all .25s ease-out}.accordion-content-inner[data-v-54fbcd2a]{padding:1rem 0}", map: undefined, media: undefined });
+    inject("data-v-ba3bcd7a_0", { source: "@keyframes SPIN-data-v-ba3bcd7a{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.accordion-header[data-v-ba3bcd7a]{position:relative;appearance:none;-webkit-appearance:none;width:100%;margin:0;padding:1rem 1.5rem 1rem 0;line-height:1;text-align:left;border:none;border-top:1px solid #000;border-bottom:1px solid #000;cursor:pointer}.accordion-indicator[data-v-ba3bcd7a]:after,.accordion-indicator[data-v-ba3bcd7a]:before{content:\"\";position:absolute;right:0;top:calc(50% - 1px);display:block;width:1em;height:2px;background-color:#000;transition:all .25s ease-out}.accordion-indicator[data-v-ba3bcd7a]:after{transform:rotate(90deg)}[aria-expanded=true] .accordion-indicator[data-v-ba3bcd7a]:after,[aria-expanded=true] .accordion-indicator[data-v-ba3bcd7a]:before{transform:rotate(180deg)}.accordion-content[data-v-ba3bcd7a]{overflow:hidden;transition:all .25s ease-out}.accordion-content-inner[data-v-ba3bcd7a]{padding:1rem 0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$f = "data-v-54fbcd2a";
+  const __vue_scope_id__$f = "data-v-ba3bcd7a";
   /* module identifier */
-  const __vue_module_identifier__$f = "data-v-54fbcd2a";
+  const __vue_module_identifier__$f = "data-v-ba3bcd7a";
   /* functional template */
   const __vue_is_functional_template__$f = false;
   /* style inject shadow dom */
