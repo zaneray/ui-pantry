@@ -1,6 +1,6 @@
 <template>
   <base-input-wrapper v-bind="$props" class="zr-select">
-    <label v-if="label" :for="id">{{label}}</label>
+    <label :class="{'visually-hidden': hideLabel}" v-if="label" :for="id">{{label}}</label>
     <div class="select-wrapper">
       <select :id="id"
               :name="name ? name : id"
@@ -63,6 +63,14 @@
       placeholder: {
         type: String,
         default: ''
+      },
+      /**
+       * In some cases it makes sense to not show a label. ADA still requires it to be in the code.
+       * This boolean turns it on an off visually.
+       */
+      hideLabel: {
+        type: Boolean,
+        required: false
       }
     },
     methods: {
@@ -104,6 +112,9 @@
   }
 
   .zr-select {
+    .visually-hidden {
+      display: none;
+    }
     select {
       display: block;
       appearance: none;
@@ -177,6 +188,12 @@
   ### Disabled Select Options
   ```jsx
   <ZrSelect label="Select An Option" :options="disabledSelectOptions" placeholder="Placeholder text" id="Preselected-select"
+            :required="true"></ZrSelect>
+  ```
+
+  ### Disabled Select Options and hidden Label
+  ```jsx
+  <ZrSelect :hide-label="true" label="Select An Option" :options="disabledSelectOptions" placeholder="Placeholder text" id="Preselected-select"
             :required="true"></ZrSelect>
   ```
 </docs>
