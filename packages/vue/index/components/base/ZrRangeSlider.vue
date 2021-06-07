@@ -266,7 +266,13 @@
     position: relative;
 
     .visually-hidden {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
     }
 
     /* track styling */
