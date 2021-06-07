@@ -2,6 +2,7 @@
 
   <div class="range" :class="{'dual-range': isDualSlider}">
     <label :class="{'visually-hidden': hideLabel}" v-if="label" :for="id">{{label}}</label>
+    <label :class="{'visually-hidden': hideLabel2}" v-if="label2" :for="id2">{{label2}}</label>
     <input
       :id="id"
       type="range"
@@ -17,6 +18,7 @@
     >
 
     <input
+      :id="id2"
       v-if="isDualSlider"
       type="range"
       :min="rangeSlideMin"
@@ -71,8 +73,17 @@
         type: String,
         required: false
       },
+      /** Label to be displayed */
+      label2: {
+        type: String,
+        required: false
+      },
       /** Required to associate a label to the first range input */
       id: {
+        type: String,
+        required: false
+      }, /** Required to associate a label to the first range input */
+      id2: {
         type: String,
         required: false
       },
@@ -81,6 +92,14 @@
        * This boolean turns it on an off visually.
        */
       hideLabel: {
+        type: Boolean,
+        required: false
+      },
+      /**
+       * In some cases it makes sense to not show a label. ADA still required it to be in the code.
+       * This boolean turns it on an off visually.
+       */
+      hideLabel2: {
         type: Boolean,
         required: false
       },
@@ -458,7 +477,7 @@
 
   #### Slider Dual preset values with ft in formatting with visually hidden label
   ```jsx
-  <ZrRangeSlider :label="'My Label'"  :id="'ranger-1'" :hide-label="true" :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
+  <ZrRangeSlider :label="'My Label'" :id="'ranger-1'" :hide-label="true" :label2="'My Label2'" :id2="'ranger-2'" :hide-label2="true" :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
                  :unit-type="'foot-inch-long'"/>
   ```
 
