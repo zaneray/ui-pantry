@@ -238,13 +238,13 @@
             break
           case 'foot-inch-short':
             // format range labels as length in ' and "
-            minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {foot: '\'', inches: '\"'}) : ''
-            maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {foot: '\'', inches: '\"'}) : ''
+            minValue || minValue === 0 ? minValueDisplay = this.calculateFtInches(minValue, {foot: '\'', inches: '\"'}) : ''
+            maxValue ? maxValueDisplay = this.calculateFtInches(maxValue, {foot: '\'', inches: '\"'}) : ''
             break
           case 'foot-inch-long':
             // format range labels as length in ft and in
-            minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {foot: 'ft', inches: 'in'}) : ''
-            maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {foot: 'ft', inches: 'in'}) : ''
+            minValue || minValue === 0 ? minValueDisplay = this.calculateFtInches(minValue, {foot: 'ft', inches: 'in'}) : ''
+            maxValue ? maxValueDisplay = this.calculateFtInches(maxValue, {foot: 'ft', inches: 'in'}) : ''
             break
           default:
             // no formatting needed
