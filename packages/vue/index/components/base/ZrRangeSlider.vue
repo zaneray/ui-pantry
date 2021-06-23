@@ -12,6 +12,7 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range1Model"
+      :aria-valuetext="range1ModelText"
       v-model.number="range1Model"
       @change="rangeChanged"
       @input="isDualSlider ? checkRangeValid('min') : ''"
@@ -27,6 +28,7 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range2Model"
+      :aria-valuetext="range2ModelText"
       v-model.number="range2Model"
       @change="rangeChanged"
       @input="checkRangeValid('max')"
@@ -64,7 +66,9 @@
         range2Model: 0,
         range1Display: 0,
         range2Display: 0,
-        rangePercentageRatio: 1
+        rangePercentageRatio: 1,
+        range1ModelText: null,
+        range2ModelText: null,
       }
     },
     props: {
@@ -167,20 +171,28 @@
         type: String,
         required: false,
         default: ''
+      },
+      ariaValueText: {
+        type: Array,
+        required: false
       }
     },
     watch: {
       minValue() {
         this.range1Model = this.minValue
+        this.range1ModelText = this.ariaValueText && this.ariaValueText[this.minValue - 1] ? this.ariaValueText[this.minValue -1] : null
       },
       maxValue() {
         this.range2Model = this.maxValue
+        this.range2ModelText = this.ariaValueText && this.ariaValueText[this.maxValue - 1] ? this.ariaValueText[this.maxValue - 1] : null
       },
       range1Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
+        this.range1ModelText = this.ariaValueText && this.ariaValueText[this.range1Model - 1] ? this.ariaValueText[this.range1Model - 1] : null
       },
       range2Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
+        this.range2ModelText = this.ariaValueText && this.ariaValueText[this.range2Model - 1] ? this.ariaValueText[this.range2Model - 1] : null
       }
     },
     computed: {
@@ -201,7 +213,9 @@
     },
     beforeMount() {
       this.range1Model = this.minValue;
+      this.range1ModelText = this.ariaValueText && this.ariaValueText[this.minValue - 1] ? this.ariaValueText[this.minValue - 1] : null
       this.range2Model = this.maxValue;
+      this.range2ModelText = this.ariaValueText && this.ariaValueText[this.maxValue - 1] ? this.ariaValueText[this.maxValue - 1] : null
       this.formatRangeValues()
       this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
     },
@@ -238,8 +252,8 @@
             maxValueDisplay = maxValue
         }
 
-        this.range1Display = minValueDisplay;
-        this.range2Display = maxValueDisplay;
+        this.range1Display = this.ariaValueText && this.ariaValueText[minValueDisplay - 1] ? this.ariaValueText[minValueDisplay - 1] : minValueDisplay;
+        this.range2Display = this.ariaValueText && this.ariaValueText[maxValueDisplay - 1] ? this.ariaValueText[maxValueDisplay - 1] : maxValueDisplay;
 
       },
       rangeChanged() {
@@ -258,11 +272,13 @@
         // case min range active
         if (activeRangeSlider === 'min' && minValueCurrent >= maxValueCurrent) {
           this.range1Model = maxValueCurrent - this.stepSize
+          this.range1ModelText = this.ariaValueText && this.ariaValueText[this.range1Model] ? this.ariaValueText[this.range1Model] : null
         }
 
         // case max range active
         if (activeRangeSlider === 'max' && maxValueCurrent <= minValueCurrent) {
           this.range2Model = minValueCurrent + this.stepSize;
+          this.range2ModelText = this.ariaValueText && this.ariaValueText[this.range2Model] ? this.ariaValueText[this.range2Model] : null
         }
 
       }
@@ -435,6 +451,16 @@
   #### Default Range Slider
   ```jsx
   <ZrRangeSlider/>
+  ```
+
+  #### Default Range Slider with Aria value text object
+  ```jsx
+  <ZrRangeSlider :range-slide-min="1" :range-slide-max="7" :min-value="2" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
+  ```
+
+  #### Default Range Slider with Aria value text object dual
+  ```jsx
+  <ZrRangeSlider :range-slide-min="1" :range-slide-max="7" :min-value="2" :max-value="5" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
   ```
 
   #### Slider Dual preset values
