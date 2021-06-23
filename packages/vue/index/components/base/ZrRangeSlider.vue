@@ -180,19 +180,19 @@
     watch: {
       minValue() {
         this.range1Model = this.minValue
-        this.range1ModelText = this.ariaValueText && this.ariaValueText[this.minValue - 1] ? this.ariaValueText[this.minValue -1] : null
+        this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1)
       },
       maxValue() {
         this.range2Model = this.maxValue
-        this.range2ModelText = this.ariaValueText && this.ariaValueText[this.maxValue - 1] ? this.ariaValueText[this.maxValue - 1] : null
+        this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1)
       },
       range1Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
-        this.range1ModelText = this.ariaValueText && this.ariaValueText[this.range1Model - 1] ? this.ariaValueText[this.range1Model - 1] : null
+        this.range1ModelText = this.getFinalAriaValueText(this.range1Model - 1)
       },
       range2Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
-        this.range2ModelText = this.ariaValueText && this.ariaValueText[this.range2Model - 1] ? this.ariaValueText[this.range2Model - 1] : null
+        this.range2ModelText = this.getFinalAriaValueText(this.range2Model - 1)
       }
     },
     computed: {
@@ -213,14 +213,17 @@
     },
     beforeMount() {
       this.range1Model = this.minValue;
-      this.range1ModelText = this.ariaValueText && this.ariaValueText[this.minValue - 1] ? this.ariaValueText[this.minValue - 1] : null
+      this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1)
       this.range2Model = this.maxValue;
-      this.range2ModelText = this.ariaValueText && this.ariaValueText[this.maxValue - 1] ? this.ariaValueText[this.maxValue - 1] : null
+      this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1)
       this.formatRangeValues()
       this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
     },
     methods: {
-      calcualteFtInches(inches, unitLabels){
+      getFinalAriaValueText(index, elseReturn = null) {
+        return this.ariaValueText && this.ariaValueText[index] ? this.ariaValueText[index] : elseReturn
+      },
+      calculateFtInches(inches, unitLabels){
         return `${Math.floor(inches / 12)}${unitLabels.foot} ${inches % 12}${unitLabels.inches}`
       },
       formatRangeValues(minValue, maxValue) {
@@ -252,8 +255,8 @@
             maxValueDisplay = maxValue
         }
 
-        this.range1Display = this.ariaValueText && this.ariaValueText[minValueDisplay - 1] ? this.ariaValueText[minValueDisplay - 1] : minValueDisplay;
-        this.range2Display = this.ariaValueText && this.ariaValueText[maxValueDisplay - 1] ? this.ariaValueText[maxValueDisplay - 1] : maxValueDisplay;
+        this.range1Display = this.getFinalAriaValueText(minValueDisplay - 1, minValueDisplay)
+        this.range2Display = this.getFinalAriaValueText(maxValueDisplay - 1, maxValueDisplay)
 
       },
       rangeChanged() {
@@ -272,13 +275,13 @@
         // case min range active
         if (activeRangeSlider === 'min' && minValueCurrent >= maxValueCurrent) {
           this.range1Model = maxValueCurrent - this.stepSize
-          this.range1ModelText = this.ariaValueText && this.ariaValueText[this.range1Model] ? this.ariaValueText[this.range1Model] : null
+          this.range1ModelText = this.getFinalAriaValueText(this.range1Model) //this.ariaValueText && this.ariaValueText[this.range1Model] ? this.ariaValueText[this.range1Model] : null
         }
 
         // case max range active
         if (activeRangeSlider === 'max' && maxValueCurrent <= minValueCurrent) {
           this.range2Model = minValueCurrent + this.stepSize;
-          this.range2ModelText = this.ariaValueText && this.ariaValueText[this.range2Model] ? this.ariaValueText[this.range2Model] : null
+          this.range2ModelText = this.getFinalAriaValueText(this.range2Model) //this.ariaValueText && this.ariaValueText[this.range2Model] ? this.ariaValueText[this.range2Model] : null
         }
 
       }
