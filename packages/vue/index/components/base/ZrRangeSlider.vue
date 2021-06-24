@@ -180,19 +180,19 @@
     watch: {
       minValue() {
         this.range1Model = this.minValue
-        this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1)
+        this.range1ModelText = this.getFinalAriaValueText(this.minValue)
       },
       maxValue() {
         this.range2Model = this.maxValue
-        this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1)
+        this.range2ModelText = this.getFinalAriaValueText(this.maxValue)
       },
       range1Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
-        this.range1ModelText = this.getFinalAriaValueText(this.range1Model - 1)
+        this.range1ModelText = this.getFinalAriaValueText(this.range1Model)
       },
       range2Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
-        this.range2ModelText = this.getFinalAriaValueText(this.range2Model - 1)
+        this.range2ModelText = this.getFinalAriaValueText(this.range2Model)
       }
     },
     computed: {
@@ -213,9 +213,9 @@
     },
     beforeMount() {
       this.range1Model = this.minValue;
-      this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1)
+      this.range1ModelText = this.getFinalAriaValueText(this.minValue)
       this.range2Model = this.maxValue;
-      this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1)
+      this.range2ModelText = this.getFinalAriaValueText(this.maxValue)
       this.formatRangeValues()
       this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
     },
@@ -255,8 +255,8 @@
             maxValueDisplay = maxValue
         }
 
-        this.range1Display = this.getFinalAriaValueText(minValueDisplay - 1, minValueDisplay)
-        this.range2Display = this.getFinalAriaValueText(maxValueDisplay - 1, maxValueDisplay)
+        this.range1Display = this.getFinalAriaValueText(minValueDisplay, minValueDisplay)
+        this.range2Display = this.getFinalAriaValueText(maxValueDisplay, maxValueDisplay)
 
       },
       rangeChanged() {
@@ -458,12 +458,12 @@
 
   #### Default Range Slider with Aria value text object
   ```jsx
-  <ZrRangeSlider :range-slide-min="1" :range-slide-max="7" :min-value="2" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
+  <ZrRangeSlider :range-slide-min="0" :range-slide-max="6" :min-value="2" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
   ```
 
   #### Default Range Slider with Aria value text object dual
   ```jsx
-  <ZrRangeSlider :range-slide-min="1" :range-slide-max="7" :min-value="2" :max-value="5" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
+  <ZrRangeSlider :range-slide-min="0" :range-slide-max="6" :min-value="2" :max-value="5" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
   ```
 
   #### Slider Dual preset values
