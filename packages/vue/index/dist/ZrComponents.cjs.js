@@ -3620,19 +3620,19 @@ var script$c = {
   watch: {
     minValue: function minValue() {
       this.range1Model = this.minValue;
-      this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1);
+      this.range1ModelText = this.getFinalAriaValueText(this.minValue);
     },
     maxValue: function maxValue() {
       this.range2Model = this.maxValue;
-      this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1);
+      this.range2ModelText = this.getFinalAriaValueText(this.maxValue);
     },
     range1Model: function range1Model(val) {
       this.formatRangeValues(this.range1Model, this.range2Model);
-      this.range1ModelText = this.getFinalAriaValueText(this.range1Model - 1);
+      this.range1ModelText = this.getFinalAriaValueText(this.range1Model);
     },
     range2Model: function range2Model(val) {
       this.formatRangeValues(this.range1Model, this.range2Model);
-      this.range2ModelText = this.getFinalAriaValueText(this.range2Model - 1);
+      this.range2ModelText = this.getFinalAriaValueText(this.range2Model);
     }
   },
   computed: {
@@ -3653,9 +3653,9 @@ var script$c = {
   },
   beforeMount: function beforeMount() {
     this.range1Model = this.minValue;
-    this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1);
+    this.range1ModelText = this.getFinalAriaValueText(this.minValue);
     this.range2Model = this.maxValue;
-    this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1);
+    this.range2ModelText = this.getFinalAriaValueText(this.maxValue);
     this.formatRangeValues();
     this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
   },
@@ -3708,8 +3708,8 @@ var script$c = {
           maxValueDisplay = maxValue;
       }
 
-      this.range1Display = this.getFinalAriaValueText(minValueDisplay - 1, minValueDisplay);
-      this.range2Display = this.getFinalAriaValueText(maxValueDisplay - 1, maxValueDisplay);
+      this.range1Display = this.getFinalAriaValueText(minValueDisplay, minValueDisplay);
+      this.range2Display = this.getFinalAriaValueText(maxValueDisplay, maxValueDisplay);
     },
     rangeChanged: function rangeChanged() {
       // if dual slides also set value now for 2nd input range
@@ -3748,13 +3748,13 @@ var __vue_staticRenderFns__$c = [];
   /* style */
   const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
-    inject("data-v-4af7b1e4_0", { source: "@keyframes SPIN-data-v-4af7b1e4{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.range[data-v-4af7b1e4]{width:100%;height:34px;position:relative}.range .visually-hidden[data-v-4af7b1e4]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.range input[type=range][data-v-4af7b1e4]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-4af7b1e4]:focus{outline:0}.range input[type=range][data-v-4af7b1e4]::-moz-focus-outer{border:0}.range input[type=range][data-v-4af7b1e4]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-4af7b1e4]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-4af7b1e4]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-4af7b1e4]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-4af7b1e4],.range .label-min[data-v-4af7b1e4]{position:absolute;top:20px}.range .label-max[data-v-4af7b1e4]{right:0}.range .range-display[data-v-4af7b1e4],.range .range-track[data-v-4af7b1e4]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-4af7b1e4]{width:100%;background-color:#999;z-index:1}.range label[data-v-4af7b1e4]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
+    inject("data-v-634affe4_0", { source: "@keyframes SPIN-data-v-634affe4{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.range[data-v-634affe4]{width:100%;height:34px;position:relative}.range .visually-hidden[data-v-634affe4]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.range input[type=range][data-v-634affe4]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-634affe4]:focus{outline:0}.range input[type=range][data-v-634affe4]::-moz-focus-outer{border:0}.range input[type=range][data-v-634affe4]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-634affe4]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-634affe4]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-634affe4]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-634affe4],.range .label-min[data-v-634affe4]{position:absolute;top:20px}.range .label-max[data-v-634affe4]{right:0}.range .range-display[data-v-634affe4],.range .range-track[data-v-634affe4]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-634affe4]{width:100%;background-color:#999;z-index:1}.range label[data-v-634affe4]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$c = "data-v-4af7b1e4";
+  const __vue_scope_id__$c = "data-v-634affe4";
   /* module identifier */
-  const __vue_module_identifier__$c = "data-v-4af7b1e4";
+  const __vue_module_identifier__$c = "data-v-634affe4";
   /* functional template */
   const __vue_is_functional_template__$c = false;
   /* style inject shadow dom */
