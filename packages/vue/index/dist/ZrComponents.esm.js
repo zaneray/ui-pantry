@@ -3486,6 +3486,8 @@ var __vue_staticRenderFns__$b = [];
 //
 //
 //
+//
+//
 var script$c = {
   name: "ZrRangeSlider",
   data: function data() {
@@ -3494,7 +3496,9 @@ var script$c = {
       range2Model: 0,
       range1Display: 0,
       range2Display: 0,
-      rangePercentageRatio: 1
+      rangePercentageRatio: 1,
+      range1ModelText: null,
+      range2ModelText: null
     };
   },
   props: {
@@ -3613,20 +3617,28 @@ var script$c = {
       type: String,
       required: false,
       default: ''
+    },
+    ariaValueText: {
+      type: Array,
+      required: false
     }
   },
   watch: {
     minValue: function minValue() {
       this.range1Model = this.minValue;
+      this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1);
     },
     maxValue: function maxValue() {
       this.range2Model = this.maxValue;
+      this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1);
     },
     range1Model: function range1Model(val) {
       this.formatRangeValues(this.range1Model, this.range2Model);
+      this.range1ModelText = this.getFinalAriaValueText(this.range1Model - 1);
     },
     range2Model: function range2Model(val) {
       this.formatRangeValues(this.range1Model, this.range2Model);
+      this.range2ModelText = this.getFinalAriaValueText(this.range2Model - 1);
     }
   },
   computed: {
@@ -3647,12 +3659,18 @@ var script$c = {
   },
   beforeMount: function beforeMount() {
     this.range1Model = this.minValue;
+    this.range1ModelText = this.getFinalAriaValueText(this.minValue - 1);
     this.range2Model = this.maxValue;
+    this.range2ModelText = this.getFinalAriaValueText(this.maxValue - 1);
     this.formatRangeValues();
     this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
   },
   methods: {
-    calcualteFtInches: function calcualteFtInches(inches, unitLabels) {
+    getFinalAriaValueText: function getFinalAriaValueText(index) {
+      var elseReturn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      return this.ariaValueText && this.ariaValueText[index] ? this.ariaValueText[index] : elseReturn;
+    },
+    calculateFtInches: function calculateFtInches(inches, unitLabels) {
       return "".concat(Math.floor(inches / 12)).concat(unitLabels.foot, " ").concat(inches % 12).concat(unitLabels.inches);
     },
     formatRangeValues: function formatRangeValues(minValue, maxValue) {
@@ -3668,11 +3686,11 @@ var script$c = {
 
         case 'foot-inch-short':
           // format range labels as length in ' and "
-          minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {
+          minValue || minValue === 0 ? minValueDisplay = this.calculateFtInches(minValue, {
             foot: '\'',
             inches: '\"'
           }) : '';
-          maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {
+          maxValue ? maxValueDisplay = this.calculateFtInches(maxValue, {
             foot: '\'',
             inches: '\"'
           }) : '';
@@ -3680,11 +3698,11 @@ var script$c = {
 
         case 'foot-inch-long':
           // format range labels as length in ft and in
-          minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {
+          minValue || minValue === 0 ? minValueDisplay = this.calculateFtInches(minValue, {
             foot: 'ft',
             inches: 'in'
           }) : '';
-          maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {
+          maxValue ? maxValueDisplay = this.calculateFtInches(maxValue, {
             foot: 'ft',
             inches: 'in'
           }) : '';
@@ -3696,8 +3714,8 @@ var script$c = {
           maxValueDisplay = maxValue;
       }
 
-      this.range1Display = minValueDisplay;
-      this.range2Display = maxValueDisplay;
+      this.range1Display = this.getFinalAriaValueText(minValueDisplay - 1, minValueDisplay);
+      this.range2Display = this.getFinalAriaValueText(maxValueDisplay - 1, maxValueDisplay);
     },
     rangeChanged: function rangeChanged() {
       // if dual slides also set value now for 2nd input range
@@ -3714,11 +3732,13 @@ var script$c = {
 
       if (activeRangeSlider === 'min' && minValueCurrent >= maxValueCurrent) {
         this.range1Model = maxValueCurrent - this.stepSize;
+        this.range1ModelText = this.getFinalAriaValueText(this.range1Model); //this.ariaValueText && this.ariaValueText[this.range1Model] ? this.ariaValueText[this.range1Model] : null
       } // case max range active
 
 
       if (activeRangeSlider === 'max' && maxValueCurrent <= minValueCurrent) {
         this.range2Model = minValueCurrent + this.stepSize;
+        this.range2ModelText = this.getFinalAriaValueText(this.range2Model); //this.ariaValueText && this.ariaValueText[this.range2Model] ? this.ariaValueText[this.range2Model] : null
       }
     }
   }
@@ -3728,17 +3748,17 @@ var script$c = {
 const __vue_script__$c = script$c;
 
 /* template */
-var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"range",class:{'dual-range': _vm.isDualSlider}},[(_vm.label)?_c('label',{class:{'visually-hidden': _vm.hideLabel},attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),(_vm.label2)?_c('label',{class:{'visually-hidden': _vm.hideLabel2},attrs:{"for":_vm.id2}},[_vm._v(_vm._s(_vm.label2))]):_vm._e(),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range1Model),expression:"range1Model",modifiers:{"number":true}}],attrs:{"id":_vm.id,"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range1Model},domProps:{"value":(_vm.range1Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.isDualSlider ? _vm.checkRangeValid('min') : '';},"__r":function($event){_vm.range1Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}),_vm._v(" "),(_vm.isDualSlider)?_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range2Model),expression:"range2Model",modifiers:{"number":true}}],staticClass:"dualInput",attrs:{"id":_vm.id2,"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range2Model},domProps:{"value":(_vm.range2Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.checkRangeValid('max');},"__r":function($event){_vm.range2Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"range-track"}),_vm._v(" "),(!_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: 0, width: _vm.singleRangeWidth })}):_vm._e(),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: _vm.dualRangeLeft, width: _vm.dualRangeWidth })}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"label-min"},[_vm._v(_vm._s(_vm.labelMin)+_vm._s(_vm.range1Display)+_vm._s(_vm.labelMinAfter))]),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"label-max"},[_vm._v(_vm._s(_vm.labelMax)+_vm._s(_vm.range2Display)+_vm._s(_vm.labelMaxAfter))]):_vm._e()])};
+var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"range",class:{'dual-range': _vm.isDualSlider}},[(_vm.label)?_c('label',{class:{'visually-hidden': _vm.hideLabel},attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),(_vm.label2)?_c('label',{class:{'visually-hidden': _vm.hideLabel2},attrs:{"for":_vm.id2}},[_vm._v(_vm._s(_vm.label2))]):_vm._e(),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range1Model),expression:"range1Model",modifiers:{"number":true}}],attrs:{"id":_vm.id,"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range1Model,"aria-valuetext":_vm.range1ModelText},domProps:{"value":(_vm.range1Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.isDualSlider ? _vm.checkRangeValid('min') : '';},"__r":function($event){_vm.range1Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}),_vm._v(" "),(_vm.isDualSlider)?_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.range2Model),expression:"range2Model",modifiers:{"number":true}}],staticClass:"dualInput",attrs:{"id":_vm.id2,"type":"range","min":_vm.rangeSlideMin,"max":_vm.rangeSlideMax,"step":_vm.stepSize,"aria-valuemin":_vm.rangeSlideMin,"aria-valuemax":_vm.rangeSlideMax,"aria-valuenow":_vm.range2Model,"aria-valuetext":_vm.range2ModelText},domProps:{"value":(_vm.range2Model)},on:{"change":_vm.rangeChanged,"input":function($event){_vm.checkRangeValid('max');},"__r":function($event){_vm.range2Model=_vm._n($event.target.value);},"blur":function($event){_vm.$forceUpdate();}}}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"range-track"}),_vm._v(" "),(!_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: 0, width: _vm.singleRangeWidth })}):_vm._e(),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"range-display",style:({ left: _vm.dualRangeLeft, width: _vm.dualRangeWidth })}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"label-min"},[_vm._v(_vm._s(_vm.labelMin)+_vm._s(_vm.range1Display)+_vm._s(_vm.labelMinAfter))]),_vm._v(" "),(_vm.isDualSlider)?_c('div',{staticClass:"label-max"},[_vm._v(_vm._s(_vm.labelMax)+_vm._s(_vm.range2Display)+_vm._s(_vm.labelMaxAfter))]):_vm._e()])};
 var __vue_staticRenderFns__$c = [];
 
   /* style */
   const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
-    inject("data-v-1b9b09ac_0", { source: "@keyframes SPIN-data-v-1b9b09ac{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.range[data-v-1b9b09ac]{width:100%;height:34px;position:relative}.range .visually-hidden[data-v-1b9b09ac]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.range input[type=range][data-v-1b9b09ac]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-1b9b09ac]:focus{outline:0}.range input[type=range][data-v-1b9b09ac]::-moz-focus-outer{border:0}.range input[type=range][data-v-1b9b09ac]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-1b9b09ac]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-1b9b09ac]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-1b9b09ac]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-1b9b09ac],.range .label-min[data-v-1b9b09ac]{position:absolute;top:20px}.range .label-max[data-v-1b9b09ac]{right:0}.range .range-display[data-v-1b9b09ac],.range .range-track[data-v-1b9b09ac]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-1b9b09ac]{width:100%;background-color:#999;z-index:1}.range label[data-v-1b9b09ac]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
+    inject("data-v-4af7b1e4_0", { source: "@keyframes SPIN-data-v-4af7b1e4{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.range[data-v-4af7b1e4]{width:100%;height:34px;position:relative}.range .visually-hidden[data-v-4af7b1e4]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;border:0}.range input[type=range][data-v-4af7b1e4]{width:100%;pointer-events:none;position:absolute;-webkit-appearance:none;border:none;background:0 0;height:4px;outline:0;z-index:10;padding:0;margin:0}.range input[type=range][data-v-4af7b1e4]:focus{outline:0}.range input[type=range][data-v-4af7b1e4]::-moz-focus-outer{border:0}.range input[type=range][data-v-4af7b1e4]::-ms-track{width:100%;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.range input[type=range][data-v-4af7b1e4]::-webkit-slider-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-4af7b1e4]::-moz-range-thumb{pointer-events:all;position:absolute;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:1px solid transparent;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range input[type=range][data-v-4af7b1e4]::-ms-thumb{pointer-events:all;position:relative;z-index:2;outline:0;-webkit-appearance:none;width:20px;height:20px;border:none;appearance:none;cursor:pointer;background-color:#0071ba;border-radius:50%}.range .label-max[data-v-4af7b1e4],.range .label-min[data-v-4af7b1e4]{position:absolute;top:20px}.range .label-max[data-v-4af7b1e4]{right:0}.range .range-display[data-v-4af7b1e4],.range .range-track[data-v-4af7b1e4]{position:absolute;height:4px;background:#0071ba;top:0;z-index:2}.range .range-track[data-v-4af7b1e4]{width:100%;background-color:#999;z-index:1}.range label[data-v-4af7b1e4]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1em}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$c = "data-v-1b9b09ac";
+  const __vue_scope_id__$c = "data-v-4af7b1e4";
   /* module identifier */
   const __vue_module_identifier__$c = undefined;
   /* functional template */
