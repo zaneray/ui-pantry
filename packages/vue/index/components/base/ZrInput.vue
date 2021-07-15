@@ -94,7 +94,6 @@
       color: $color-darkest;
       font-family: sans-serif;
       transition: $transition-base;
-      background-color: rgba($color-white, .36);
 
       &::placeholder {
         color: rgba($color-darkest, .5);
@@ -103,7 +102,6 @@
       &:focus {
         border-color: $input-border-color-focus;
         outline: none;
-        background-color: rgba($color-white, .6);
       }
 
       &.input-sm {
