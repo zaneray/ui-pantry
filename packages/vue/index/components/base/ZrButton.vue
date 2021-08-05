@@ -129,7 +129,7 @@
         default: false
       },
       /**
-       * Whether the input should be autofocused
+       * Whether the button should be autofocused
        */
       autofocus: {
         type: Boolean,
