@@ -83,6 +83,13 @@ export const inputShared = {
     readonly: {
       type: Boolean,
       default: false
+    },
+    /**
+     * Whether the input should be autofocused
+     */
+    autofocus: {
+      type: Boolean,
+      default: false
     }
   },
   mounted: function() {

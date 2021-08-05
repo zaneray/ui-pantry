@@ -5,7 +5,8 @@
             :type="type"
             v-bind="btnLinkProps"
             :title="title"
-            :disabled="disabled">
+            :disabled="disabled"
+            :autofocus="autofocus">
         <span class="label">
             <slot></slot>
         </span>
@@ -124,6 +125,13 @@
        * Whether to render a div element or not
        */
       renderDiv: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Whether the input should be autofocused
+       */
+      autofocus: {
         type: Boolean,
         default: false
       }

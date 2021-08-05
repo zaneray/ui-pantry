@@ -9,6 +9,7 @@
                v-bind="$attrs"
                :disabled="disabled"
                :readonly="readonly"
+               :autofocus="autofocus"
         />
         <label :for="id">{{label}}</label>
     </div>
