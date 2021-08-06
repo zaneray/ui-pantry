@@ -15,6 +15,7 @@
            @input="updateValue"
            @blur="$emit('blur')"
            @focus="$emit('focus')"
+           :autofocus="autofocus"
     />
   </base-input-wrapper>
 </template>

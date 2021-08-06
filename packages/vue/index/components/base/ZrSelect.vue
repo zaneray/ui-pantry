@@ -8,7 +8,8 @@
               :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
               :required="required"
               @change="updateValue"
-              :disabled="disabled">
+              :disabled="disabled"
+              :autofocus="autofocus">
         <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
         <option v-for="option of options"
                 :value="option.value"

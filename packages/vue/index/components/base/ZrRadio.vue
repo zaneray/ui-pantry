@@ -8,6 +8,7 @@
            @change="inputChanged"
            v-bind="$attrs"
            :disabled="disabled"
+           :autofocus="autofocus"
     />
     <label :for="id">{{label}}</label>
 </div>
@@ -126,6 +127,11 @@
     #### Selected Radio
     ```jsx
     <ZrRadio label="Label Here" value="2" id="radio2" selected></ZrRadio>
+    ```
+
+    #### AutoFocus Radio
+    ```jsx
+    <ZrRadio label="Label Here" value="2" id="radio3" :autofocus="true"></ZrRadio>
     ```
 </docs>
 
