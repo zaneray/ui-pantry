@@ -3944,6 +3944,13 @@ var script$e = {
     },
 
     /**
+     * An image to display while the video loads
+     */
+    poster: {
+      type: String
+    },
+
+    /**
      * Whether or not the video should play inline (must be true to autoplay at mobile)
      */
     playsinline: {
@@ -3965,17 +3972,17 @@ var script$e = {
 const __vue_script__$e = script$e;
 
 /* template */
-var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.videoUrl && _vm.lazy)?_c('video',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],staticClass:"video",class:{'fade-video': _vm.fade},style:(_vm.fadeStyle),attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"data-src":_vm.videoUrl,"type":_vm.videoType}})]):(_vm.videoUrl)?_c('video',{staticClass:"video",attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"src":_vm.videoUrl,"type":_vm.videoType}})]):_vm._e()};
+var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.videoUrl && _vm.lazy)?_c('video',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],staticClass:"video",class:{'fade-video': _vm.fade},style:(_vm.fadeStyle),attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline,"poster":_vm.poster},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"data-src":_vm.videoUrl,"type":_vm.videoType}})]):(_vm.videoUrl)?_c('video',{staticClass:"video",attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline,"poster":_vm.poster},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"src":_vm.videoUrl,"type":_vm.videoType}})]):_vm._e()};
 var __vue_staticRenderFns__$e = [];
 
   /* style */
   const __vue_inject_styles__$e = function (inject) {
     if (!inject) return
-    inject("data-v-e53ed914_0", { source: ".video[data-v-e53ed914]{width:100%;height:100%;object-fit:cover}.video.lazy-video.fade-video[data-v-e53ed914]{opacity:0}.video.lazy-video.fade-video.video-loaded[data-v-e53ed914]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-6f06533d_0", { source: ".video[data-v-6f06533d]{width:100%;height:100%;object-fit:cover}.video.lazy-video.fade-video[data-v-6f06533d]{opacity:0}.video.lazy-video.fade-video.video-loaded[data-v-6f06533d]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$e = "data-v-e53ed914";
+  const __vue_scope_id__$e = "data-v-6f06533d";
   /* module identifier */
   const __vue_module_identifier__$e = undefined;
   /* functional template */
@@ -4098,7 +4105,7 @@ var script$f = {
   methods: {
     setContentHeight: function setContentHeight() {
       if (this.$refs.accordionContent) {
-        this.$refs.accordionContent.style.height = this.$refs.accordionContent.scrollHeight + 'px';
+        this.$refs.accordionContent.style.height = this.$refs.accordionContentInner.scrollHeight + 'px';
       }
     },
     toggleAccordion: function toggleAccordion() {
@@ -4129,17 +4136,17 @@ var script$f = {
 const __vue_script__$f = script$f;
 
 /* template */
-var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"accordion-container"},[_c('button',{class:['accordion-header', {'expanded': _vm.accordionExpanded}],attrs:{"aria-controls":_vm.contentId,"type":"button","aria-expanded":_vm.accordionExpanded  ? 'true' : 'false'},on:{"click":_vm.toggleAccordion}},[_vm._v("\n            "+_vm._s(_vm.header)+"\n            "),_c('span',{staticClass:"accordion-indicator"})]),_vm._v(" "),_c('transition',{attrs:{"name":"accordion"},on:{"before-enter":_vm.beforeEnter,"enter":_vm.enter,"before-leave":_vm.beforeLeave,"leave":_vm.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.accordionExpanded),expression:"accordionExpanded"}],ref:"accordionContent",staticClass:"accordion-content",style:(_vm.accordionTransition),attrs:{"aria-hidden":!_vm.accordionExpanded ? 'true' : 'false',"id":_vm.contentId}},[_c('div',{staticClass:"accordion-content-inner"},[_vm._t("default")],2)])])],1)};
+var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"accordion-container"},[_c('button',{class:['accordion-header', {'expanded': _vm.accordionExpanded}],attrs:{"aria-controls":_vm.contentId,"type":"button","aria-expanded":_vm.accordionExpanded  ? 'true' : 'false'},on:{"click":_vm.toggleAccordion}},[_vm._v("\n            "+_vm._s(_vm.header)+"\n            "),_c('span',{staticClass:"accordion-indicator"})]),_vm._v(" "),_c('transition',{attrs:{"name":"accordion"},on:{"before-enter":_vm.beforeEnter,"enter":_vm.enter,"before-leave":_vm.beforeLeave,"leave":_vm.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.accordionExpanded),expression:"accordionExpanded"}],ref:"accordionContent",staticClass:"accordion-content",style:(_vm.accordionTransition),attrs:{"aria-hidden":!_vm.accordionExpanded ? 'true' : 'false',"id":_vm.contentId}},[_c('div',{ref:"accordionContentInner",staticClass:"accordion-content-inner"},[_vm._t("default")],2)])])],1)};
 var __vue_staticRenderFns__$f = [];
 
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-ba3bcd7a_0", { source: "@keyframes SPIN-data-v-ba3bcd7a{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.accordion-header[data-v-ba3bcd7a]{position:relative;appearance:none;-webkit-appearance:none;width:100%;margin:0;padding:1rem 1.5rem 1rem 0;line-height:1;text-align:left;border:none;border-top:1px solid #000;border-bottom:1px solid #000;cursor:pointer}.accordion-indicator[data-v-ba3bcd7a]:after,.accordion-indicator[data-v-ba3bcd7a]:before{content:\"\";position:absolute;right:0;top:calc(50% - 1px);display:block;width:1em;height:2px;background-color:#000;transition:all .25s ease-out}.accordion-indicator[data-v-ba3bcd7a]:after{transform:rotate(90deg)}[aria-expanded=true] .accordion-indicator[data-v-ba3bcd7a]:after,[aria-expanded=true] .accordion-indicator[data-v-ba3bcd7a]:before{transform:rotate(180deg)}.accordion-content[data-v-ba3bcd7a]{overflow:hidden;transition:all .25s ease-out}.accordion-content-inner[data-v-ba3bcd7a]{padding:1rem 0}", map: undefined, media: undefined });
+    inject("data-v-455d527a_0", { source: "@keyframes SPIN-data-v-455d527a{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.accordion-header[data-v-455d527a]{position:relative;appearance:none;-webkit-appearance:none;width:100%;margin:0;padding:1rem 1.5rem 1rem 0;line-height:1;text-align:left;border:none;border-top:1px solid #000;border-bottom:1px solid #000;cursor:pointer}.accordion-indicator[data-v-455d527a]:after,.accordion-indicator[data-v-455d527a]:before{content:\"\";position:absolute;right:0;top:calc(50% - 1px);display:block;width:1em;height:2px;background-color:#000;transition:all .25s ease-out}.accordion-indicator[data-v-455d527a]:after{transform:rotate(90deg)}[aria-expanded=true] .accordion-indicator[data-v-455d527a]:after,[aria-expanded=true] .accordion-indicator[data-v-455d527a]:before{transform:rotate(180deg)}.accordion-content[data-v-455d527a]{overflow:hidden;transition:all .25s ease-out}.accordion-content-inner[data-v-455d527a]{padding:1rem 0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$f = "data-v-ba3bcd7a";
+  const __vue_scope_id__$f = "data-v-455d527a";
   /* module identifier */
   const __vue_module_identifier__$f = undefined;
   /* functional template */
