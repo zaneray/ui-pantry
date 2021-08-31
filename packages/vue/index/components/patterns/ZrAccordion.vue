@@ -17,7 +17,7 @@
                  :aria-hidden="!accordionExpanded ? 'true' : 'false'"
                  :style="accordionTransition"
                  :id="contentId">
-                <div class="accordion-content-inner">
+                <div class="accordion-content-inner" ref="accordionContentInner">
                     <slot></slot>
                 </div>
             </div>
@@ -94,7 +94,7 @@
     methods: {
       setContentHeight() {
         if (this.$refs.accordionContent) {
-          this.$refs.accordionContent.style.height = this.$refs.accordionContent.scrollHeight + 'px';
+          this.$refs.accordionContent.style.height = this.$refs.accordionContentInner.scrollHeight + 'px';
         }
       },
       toggleAccordion() {
