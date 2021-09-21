@@ -4,6 +4,8 @@
 
 Each component has been built in a simple yet thorough manner from a functionality standpoint, while intentionally being styled very minimally.  Each component is meant to be styled to its environment wherever it may be imported some day.
 
+For examples and documentation, please visit the [Live Styleguide](https://zr-vue.netlify.app/)
+
 ---
 
 ## Running the Styleguide
