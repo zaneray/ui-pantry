@@ -12,6 +12,8 @@
            :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
            :disabled="disabled"
            :readonly="readonly"
+           :min="min"
+           :max="max"
            @input="updateValue"
            @blur="$emit('blur')"
            @focus="$emit('focus')"
@@ -33,20 +35,20 @@
     props: {
       ...inputShared.props,
       /**
-       * input type options. `text` (default), `email`, `password`, `search`, `number`, `tel`
+       * input type options. `text` (default), `email`, `password`, `search`, `number`, `tel`, `date`
        */
       type: {
         type: String,
         default: 'text',
         validator: function (value) {
-          return ['text', 'email', 'password', 'search', 'number', 'tel'].indexOf(value) !== -1
+          return ['text', 'email', 'password', 'search', 'number', 'tel', 'date'].indexOf(value) !== -1
         }
       },
       /**
        * predefined value of the input
        */
       value: {
-        type: [String, Number],
+        type: [String, Number, Date],
         default: ''
       },
       /**
@@ -72,7 +74,21 @@
       placeholder: {
         type: String,
         default: ''
-      }
+      },
+      /**
+       * Minimum allowed value for date inputs
+       */
+      min: {
+        type: [Date, String],
+        default: ''
+      },
+      /**
+       * Maximum allowed value for date inputs
+       */
+      max: {
+        type: [Date, String],
+        default: ''
+      },
     },
     methods: {
       updateValue(event) {
@@ -265,4 +281,15 @@
   </form>
   ```
 
+  ### Date Input
+  ```jsx
+  <ZrInput
+      type="date"
+      id="date-picker"
+      label="Pick a Date"
+      min="2021-11-22"
+      max="2022-12-01"
+  >
+  </ZrInput>
+  ```
 </docs>
