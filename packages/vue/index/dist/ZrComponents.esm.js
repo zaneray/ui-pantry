@@ -3018,13 +3018,13 @@ var script$7 = {
   mixins: [inputShared],
   props: _objectSpread$1(_objectSpread$1({}, inputShared.props), {}, {
     /**
-     * input type options. `text` (default), `email`, `password`, `search`, `number`, `tel`
+     * input type options. `text` (default), `email`, `password`, `search`, `number`, `tel`, `date`
      */
     type: {
       type: String,
       default: 'text',
       validator: function validator(value) {
-        return ['text', 'email', 'password', 'search', 'number', 'tel'].indexOf(value) !== -1;
+        return ['text', 'email', 'password', 'search', 'number', 'tel', 'date'].indexOf(value) !== -1;
       }
     },
 
@@ -3032,7 +3032,7 @@ var script$7 = {
      * predefined value of the input
      */
     value: {
-      type: [String, Number],
+      type: [String, Number, Date],
       default: ''
     },
 
@@ -3061,6 +3061,22 @@ var script$7 = {
     placeholder: {
       type: String,
       default: ''
+    },
+
+    /**
+     * Minimum allowed value for date inputs
+     */
+    min: {
+      type: [Date, String],
+      default: ''
+    },
+
+    /**
+     * Maximum allowed value for date inputs
+     */
+    max: {
+      type: [Date, String],
+      default: ''
     }
   }),
   methods: {
@@ -3074,17 +3090,17 @@ var script$7 = {
 const __vue_script__$7 = script$7;
 
 /* template */
-var __vue_render__$7 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('base-input-wrapper',_vm._b({staticClass:"zr-input"},'base-input-wrapper',_vm.$props,false),[(_vm.label)?_c('label',{class:{'visually-hidden': _vm.labelHidden},attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),_c('input',{class:{'input-sm': _vm.size === 'sm', 'input-lg': _vm.size === 'lg'},attrs:{"type":_vm.type,"id":_vm.id,"name":_vm.name ? _vm.name : _vm.id,"aria-label":!_vm.label ? _vm.placeholder : !_vm.label,"placeholder":_vm.placeholder,"title":_vm.title,"required":_vm.required,"disabled":_vm.disabled,"readonly":_vm.readonly,"autofocus":_vm.autofocus},domProps:{"value":_vm.value},on:{"input":_vm.updateValue,"blur":function($event){_vm.$emit('blur');},"focus":function($event){_vm.$emit('focus');}}})])};
+var __vue_render__$7 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('base-input-wrapper',_vm._b({staticClass:"zr-input"},'base-input-wrapper',_vm.$props,false),[(_vm.label)?_c('label',{class:{'visually-hidden': _vm.labelHidden},attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]):_vm._e(),_vm._v(" "),_c('input',{class:{'input-sm': _vm.size === 'sm', 'input-lg': _vm.size === 'lg'},attrs:{"type":_vm.type,"id":_vm.id,"name":_vm.name ? _vm.name : _vm.id,"aria-label":!_vm.label ? _vm.placeholder : !_vm.label,"placeholder":_vm.placeholder,"title":_vm.title,"required":_vm.required,"disabled":_vm.disabled,"readonly":_vm.readonly,"min":_vm.min,"max":_vm.max,"autofocus":_vm.autofocus},domProps:{"value":_vm.value},on:{"input":_vm.updateValue,"blur":function($event){_vm.$emit('blur');},"focus":function($event){_vm.$emit('focus');}}})])};
 var __vue_staticRenderFns__$7 = [];
 
   /* style */
   const __vue_inject_styles__$7 = function (inject) {
     if (!inject) return
-    inject("data-v-0848ac9a_0", { source: "@keyframes SPIN-data-v-0848ac9a{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.zr-input input[data-v-0848ac9a]{display:block;font-size:1rem;padding:.75em 1em;border:1px solid #8c8a7e;width:100%;color:#181817;font-family:sans-serif;transition:all .25s ease-out}.zr-input input[data-v-0848ac9a]::placeholder{color:rgba(24,24,23,.5)}.zr-input input[data-v-0848ac9a]:focus{border-color:#2a2928;outline:0}.zr-input input.input-sm[data-v-0848ac9a]{padding:.5em .5em}.zr-input input.input-lg[data-v-0848ac9a]{padding:1em 1.5em;font-size:1.125rem}.invalid .zr-input input[data-v-0848ac9a]{border-color:#d23838}.zr-input label[data-v-0848ac9a]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1rem}.zr-input label.visually-hidden[data-v-0848ac9a]{display:none}", map: undefined, media: undefined });
+    inject("data-v-1ee3f509_0", { source: "@keyframes SPIN-data-v-1ee3f509{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.zr-input input[data-v-1ee3f509]{display:block;font-size:1rem;padding:.75em 1em;border:1px solid #8c8a7e;width:100%;color:#181817;font-family:sans-serif;transition:all .25s ease-out}.zr-input input[data-v-1ee3f509]::placeholder{color:rgba(24,24,23,.5)}.zr-input input[data-v-1ee3f509]:focus{border-color:#2a2928;outline:0}.zr-input input.input-sm[data-v-1ee3f509]{padding:.5em .5em}.zr-input input.input-lg[data-v-1ee3f509]{padding:1em 1.5em;font-size:1.125rem}.invalid .zr-input input[data-v-1ee3f509]{border-color:#d23838}.zr-input label[data-v-1ee3f509]{display:inline-block;padding-bottom:.25em;cursor:pointer;user-select:none;font-size:.75rem;text-transform:uppercase;font-family:sans-serif;font-weight:700;line-height:1.2em;letter-spacing:.0833em;line-height:1rem}.zr-input label.visually-hidden[data-v-1ee3f509]{display:none}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$7 = "data-v-0848ac9a";
+  const __vue_scope_id__$7 = "data-v-1ee3f509";
   /* module identifier */
   const __vue_module_identifier__$7 = undefined;
   /* functional template */
