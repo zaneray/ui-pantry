@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="zr-image">
     <img v-if="lazy" v-lazy-load="{rootMargin: rootMargin}" :data-src="imageSrc"
          :src="lazyImage" :alt="altText" :class="[imageClass, {'fade-image': fade}]" :style="fadeStyle" />
-    <img v-else :src="imageSrc" :alt="altText" :class="imageClass"/>
+    <img v-else :src="imageSrc" :width="width" :height="height" :alt="altText" :class="imageClass"/>
     <noscript inline-template>
       <img :src="imageSrc" :alt="altText" :class="imageClass"/>
     </noscript>
@@ -39,7 +39,24 @@
       imageClass: {
         type: String,
         required: false
+      },
+
+      /**
+       * width for responsive images
+       */
+      width: {
+        type: Number,
+        required: false
+      },
+
+      /**
+       * Height for responsive images
+       */
+      height: {
+        type: Number,
+        required: false
       }
+
     },
     computed: {
       lazyImage() {
@@ -50,8 +67,12 @@
 </script>
 
 <style scoped lang="scss">
+
+
+
   img {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
 
     &.lazy-image.fade-image {
       opacity: 0;
