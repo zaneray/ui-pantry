@@ -90,9 +90,12 @@
         type: [Date, String],
         default: ''
       },
+      /**
+       * Value for autocomplete
+       */
       autocomplete: {
         type: String,
-        default: ''
+        default: null
       }
     },
     methods: {
