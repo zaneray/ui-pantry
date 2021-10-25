@@ -14,6 +14,7 @@
            :readonly="readonly"
            :min="min"
            :max="max"
+           :autocomplete="autocomplete"
            @input="updateValue"
            @blur="$emit('blur')"
            @focus="$emit('focus')"
@@ -89,6 +90,13 @@
         type: [Date, String],
         default: ''
       },
+      /**
+       * Value for autocomplete
+       */
+      autocomplete: {
+        type: String,
+        default: null
+      }
     },
     methods: {
       updateValue(event) {
@@ -289,6 +297,16 @@
       label="Pick a Date"
       min="2021-11-22"
       max="2022-12-01"
+  >
+  </ZrInput>
+  ```
+
+  ### Address Input - Autocomplete off
+  ```jsx
+  <ZrInput
+      id="address1"
+      label="Address Line 1"
+      autocomplete="chrome-off"
   >
   </ZrInput>
   ```
