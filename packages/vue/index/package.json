@@ -1,6 +1,6 @@
 {
   "name": "@zaneray/vue-components",
-  "version": "2.1.3",
+  "version": "2.1.33",
   "publishConfig": {
     "access": "public"
   },

@@ -54,7 +54,7 @@ export default [
       }),
       vue({
         template: {
-          isProduction: true,
+          isProduction: true
         },
         style: {
           map: false

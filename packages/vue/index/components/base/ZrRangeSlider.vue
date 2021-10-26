@@ -1,8 +1,10 @@
 <template>
 
   <div class="range" :class="{'dual-range': isDualSlider}">
-
+    <label :class="{'visually-hidden': hideLabel}" v-if="label" :for="id">{{label}}</label>
+    <label :class="{'visually-hidden': hideLabel2}" v-if="label2" :for="id2">{{label2}}</label>
     <input
+      :id="id"
       type="range"
       :min="rangeSlideMin"
       :max="rangeSlideMax"
@@ -10,12 +12,14 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range1Model"
+      :aria-valuetext="range1ModelText"
       v-model.number="range1Model"
       @change="rangeChanged"
       @input="isDualSlider ? checkRangeValid('min') : ''"
     >
 
     <input
+      :id="id2"
       v-if="isDualSlider"
       type="range"
       :min="rangeSlideMin"
@@ -24,6 +28,7 @@
       :aria-valuemin="rangeSlideMin"
       :aria-valuemax="rangeSlideMax"
       :aria-valuenow="range2Model"
+      :aria-valuetext="range2ModelText"
       v-model.number="range2Model"
       @change="rangeChanged"
       @input="checkRangeValid('max')"
@@ -61,10 +66,47 @@
         range2Model: 0,
         range1Display: 0,
         range2Display: 0,
-        rangePercentageRatio: 1
+        rangePercentageRatio: 1,
+        range1ModelText: null,
+        range2ModelText: null,
       }
     },
     props: {
+      /** Label to be displayed */
+      label: {
+        type: String,
+        required: false
+      },
+      /** Label to be displayed */
+      label2: {
+        type: String,
+        required: false
+      },
+      /** Required to associate a label to the first range input */
+      id: {
+        type: String,
+        required: false
+      }, /** Required to associate a label to the first range input */
+      id2: {
+        type: String,
+        required: false
+      },
+      /**
+       * In some cases it makes sense to not show a label. ADA still required it to be in the code.
+       * This boolean turns it on an off visually.
+       */
+      hideLabel: {
+        type: Boolean,
+        required: false
+      },
+      /**
+       * In some cases it makes sense to not show a label. ADA still required it to be in the code.
+       * This boolean turns it on an off visually.
+       */
+      hideLabel2: {
+        type: Boolean,
+        required: false
+      },
       /** Value for Range 1 */
       minValue: {
         type: Number,
@@ -129,20 +171,28 @@
         type: String,
         required: false,
         default: ''
+      },
+      ariaValueText: {
+        type: Array,
+        required: false
       }
     },
     watch: {
       minValue() {
         this.range1Model = this.minValue
+        this.range1ModelText = this.getFinalAriaValueText(this.minValue)
       },
       maxValue() {
         this.range2Model = this.maxValue
+        this.range2ModelText = this.getFinalAriaValueText(this.maxValue)
       },
       range1Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
+        this.range1ModelText = this.getFinalAriaValueText(this.range1Model)
       },
       range2Model(val) {
         this.formatRangeValues(this.range1Model, this.range2Model)
+        this.range2ModelText = this.getFinalAriaValueText(this.range2Model)
       }
     },
     computed: {
@@ -163,12 +213,17 @@
     },
     beforeMount() {
       this.range1Model = this.minValue;
+      this.range1ModelText = this.getFinalAriaValueText(this.minValue)
       this.range2Model = this.maxValue;
+      this.range2ModelText = this.getFinalAriaValueText(this.maxValue)
       this.formatRangeValues()
       this.rangePercentageRatio = 100 / (this.rangeSlideMax - this.rangeSlideMin);
     },
     methods: {
-      calcualteFtInches(inches, unitLabels){
+      getFinalAriaValueText(index, elseReturn = null) {
+        return this.ariaValueText && this.ariaValueText[index] ? this.ariaValueText[index] : elseReturn
+      },
+      calculateFtInches(inches, unitLabels){
         return `${Math.floor(inches / 12)}${unitLabels.foot} ${inches % 12}${unitLabels.inches}`
       },
       formatRangeValues(minValue, maxValue) {
@@ -186,13 +241,13 @@
             break
           case 'foot-inch-short':
             // format range labels as length in ' and "
-            minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {foot: '\'', inches: '\"'}) : ''
-            maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {foot: '\'', inches: '\"'}) : ''
+            minValue || minValue === 0 ? minValueDisplay = this.calculateFtInches(minValue, {foot: '\'', inches: '\"'}) : ''
+            maxValue ? maxValueDisplay = this.calculateFtInches(maxValue, {foot: '\'', inches: '\"'}) : ''
             break
           case 'foot-inch-long':
             // format range labels as length in ft and in
-            minValue || minValue === 0 ? minValueDisplay = this.calcualteFtInches(minValue, {foot: 'ft', inches: 'in'}) : ''
-            maxValue ? maxValueDisplay = this.calcualteFtInches(maxValue, {foot: 'ft', inches: 'in'}) : ''
+            minValue || minValue === 0 ? minValueDisplay = this.calculateFtInches(minValue, {foot: 'ft', inches: 'in'}) : ''
+            maxValue ? maxValueDisplay = this.calculateFtInches(maxValue, {foot: 'ft', inches: 'in'}) : ''
             break
           default:
             // no formatting needed
@@ -200,8 +255,8 @@
             maxValueDisplay = maxValue
         }
 
-        this.range1Display = minValueDisplay;
-        this.range2Display = maxValueDisplay;
+        this.range1Display = this.getFinalAriaValueText(minValueDisplay, minValueDisplay)
+        this.range2Display = this.getFinalAriaValueText(maxValueDisplay, maxValueDisplay)
 
       },
       rangeChanged() {
@@ -220,11 +275,13 @@
         // case min range active
         if (activeRangeSlider === 'min' && minValueCurrent >= maxValueCurrent) {
           this.range1Model = maxValueCurrent - this.stepSize
+          this.range1ModelText = this.getFinalAriaValueText(this.range1Model) //this.ariaValueText && this.ariaValueText[this.range1Model] ? this.ariaValueText[this.range1Model] : null
         }
 
         // case max range active
         if (activeRangeSlider === 'max' && maxValueCurrent <= minValueCurrent) {
           this.range2Model = minValueCurrent + this.stepSize;
+          this.range2ModelText = this.getFinalAriaValueText(this.range2Model) //this.ariaValueText && this.ariaValueText[this.range2Model] ? this.ariaValueText[this.range2Model] : null
         }
 
       }
@@ -233,7 +290,7 @@
 </script>
 
 <style scoped lang="scss">
-
+  @import '../../styles/imports';
   $trackBackGround: rgb(153, 153, 153);
   $trackColor: rgb(0, 113, 186);
   $trackHeight: 4px;
@@ -245,6 +302,16 @@
     width: 100%;
     height: 34px; /* thumb height + label font size */
     position: relative;
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+    }
 
     /* track styling */
     input[type="range"] {
@@ -366,6 +433,16 @@
       z-index: 1;
     }
 
+    label {
+      display: inline-block;
+      padding-bottom: 0.25em;
+      cursor: pointer;
+      user-select: none;
+
+      @include font-label();
+      line-height: 1em;
+    }
+
   }
 
 
@@ -377,6 +454,16 @@
   #### Default Range Slider
   ```jsx
   <ZrRangeSlider/>
+  ```
+
+  #### Default Range Slider with Aria value text object
+  ```jsx
+  <ZrRangeSlider :range-slide-min="0" :range-slide-max="6" :min-value="2" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
+  ```
+
+  #### Default Range Slider with Aria value text object dual
+  ```jsx
+  <ZrRangeSlider :range-slide-min="0" :range-slide-max="6" :min-value="2" :max-value="5" :aria-value-text="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"/>
   ```
 
   #### Slider Dual preset values
@@ -409,6 +496,17 @@
   #### Slider Dual preset values with ft in formatting
   ```jsx
   <ZrRangeSlider :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
+                 :unit-type="'foot-inch-long'"/>
+  ```
+
+  #### Default Range Slider with label
+  ```jsx
+  <ZrRangeSlider label="Rangeslider label" />
+  ```
+
+  #### Slider Dual preset values with ft in formatting with visually hidden label
+  ```jsx
+  <ZrRangeSlider :label="'My Label'" :id="'ranger-1'" :hide-label="true" :label2="'My Label2'" :id2="'ranger-2'" :hide-label2="true" :min-value="1" :max-value="2500" :range-slide-min="0" :range-slide-max="2500"
                  :unit-type="'foot-inch-long'"/>
   ```
 

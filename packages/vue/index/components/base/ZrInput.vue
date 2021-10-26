@@ -1,5 +1,5 @@
 <template>
-  <base-input-wrapper v-bind="$props">
+  <base-input-wrapper v-bind="$props" class="zr-input">
     <label v-if="label" :class="{'visually-hidden': labelHidden}" :for="id">{{label}}</label>
     <input :type="type"
            :id="id"
@@ -11,9 +11,14 @@
            :required="required"
            :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
            :disabled="disabled"
+           :readonly="readonly"
+           :min="min"
+           :max="max"
+           :autocomplete="autocomplete"
            @input="updateValue"
            @blur="$emit('blur')"
            @focus="$emit('focus')"
+           :autofocus="autofocus"
     />
   </base-input-wrapper>
 </template>
@@ -31,20 +36,20 @@
     props: {
       ...inputShared.props,
       /**
-       * input type options. `text` (default), `email`, `password`, `search`, `number`
+       * input type options. `text` (default), `email`, `password`, `search`, `number`, `tel`, `date`
        */
       type: {
         type: String,
         default: 'text',
         validator: function (value) {
-          return ['text', 'email', 'password', 'search', 'number'].indexOf(value) !== -1
+          return ['text', 'email', 'password', 'search', 'number', 'tel', 'date'].indexOf(value) !== -1
         }
       },
       /**
        * predefined value of the input
        */
       value: {
-        type: [String, Number],
+        type: [String, Number, Date],
         default: ''
       },
       /**
@@ -70,6 +75,27 @@
       placeholder: {
         type: String,
         default: ''
+      },
+      /**
+       * Minimum allowed value for date inputs
+       */
+      min: {
+        type: [Date, String],
+        default: ''
+      },
+      /**
+       * Maximum allowed value for date inputs
+       */
+      max: {
+        type: [Date, String],
+        default: ''
+      },
+      /**
+       * Value for autocomplete
+       */
+      autocomplete: {
+        type: String,
+        default: null
       }
     },
     methods: {
@@ -83,52 +109,52 @@
 <style scoped lang="scss">
   @import '../../styles/imports';
 
-  input {
-    display: block;
-    font-size: $font-size-base;
-    padding: $input-padding;
-    border: 1px solid $input-border-color;
-    width: 100%;
-    color: $color-darkest;
-    font-family: sans-serif;
-    transition: $transition-base;
-    background-color: rgba($color-white, .36);
+  .zr-input {
+    input {
+      display: block;
+      font-size: $font-size-base;
+      padding: $input-padding;
+      border: 1px solid $input-border-color;
+      width: 100%;
+      color: $color-darkest;
+      font-family: sans-serif;
+      transition: $transition-base;
 
-    &::placeholder {
-      color: rgba($color-darkest, .5);
+      &::placeholder {
+        color: rgba($color-darkest, .5);
+      }
+
+      &:focus {
+        border-color: $input-border-color-focus;
+        outline: none;
+      }
+
+      &.input-sm {
+        padding: $input-padding-sm;
+      }
+
+      &.input-lg {
+        padding: $input-padding-lg;
+        font-size: $font-size-medium;
+      }
+
+      .invalid & {
+        border-color: $color-warning;
+      }
     }
 
-    &:focus {
-      border-color: $input-border-color-focus;
-      outline: none;
-      background-color: rgba($color-white, .6);
-    }
+    label {
+      display: inline-block;
+      padding-bottom: 0.25em;
+      cursor: pointer;
+      user-select: none;
 
-    &.input-sm {
-      padding: $input-padding-sm;
-    }
+      @include font-label();
+      line-height: 1rem;
 
-    &.input-lg {
-      padding: $input-padding-lg;
-      font-size: $font-size-medium;
-    }
-
-    .invalid & {
-      border-color: $color-warning;
-    }
-  }
-
-  label {
-    display: inline-block;
-    padding-bottom: 0.25em;
-    cursor: pointer;
-    user-select: none;
-
-    @include font-label();
-    line-height: 1rem;
-
-    &.visually-hidden {
-      display: none;
+      &.visually-hidden {
+        display: none;
+      }
     }
   }
 </style>
@@ -235,6 +261,18 @@
   </ZrInput>
   ```
 
+  ### readonly Input
+  ```jsx
+  <ZrInput
+      placeholder="Readonly input"
+      id="read-only"
+      label="Read Only"
+      readonly
+      full
+  >
+  </ZrInput>
+  ```
+
   ### Stacked inputs with a submit
   ```jsx
   <form>
@@ -251,4 +289,25 @@
   </form>
   ```
 
+  ### Date Input
+  ```jsx
+  <ZrInput
+      type="date"
+      id="date-picker"
+      label="Pick a Date"
+      min="2021-11-22"
+      max="2022-12-01"
+  >
+  </ZrInput>
+  ```
+
+  ### Address Input - Autocomplete off
+  ```jsx
+  <ZrInput
+      id="address1"
+      label="Address Line 1"
+      autocomplete="chrome-off"
+  >
+  </ZrInput>
+  ```
 </docs>

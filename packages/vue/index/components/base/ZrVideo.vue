@@ -8,6 +8,7 @@
     :loop="loop"
     :muted="muted"
     :playsinline="playsinline"
+    :poster="poster"
     :style="fadeStyle"
   >
     <source :data-src="videoUrl" :type="videoType" />
@@ -19,6 +20,7 @@
     :loop="loop"
     :muted="muted"
     :playsinline="playsinline"
+    :poster="poster"
   >
     <source :src="videoUrl" :type="videoType" />
   </video>
@@ -69,6 +71,12 @@
         default: true
       },
       /**
+       * An image to display while the video loads
+       */
+      poster: {
+        type: String
+      },
+      /**
        * Whether or not the video should play inline (must be true to autoplay at mobile)
        */
       playsinline: {
@@ -107,7 +115,7 @@
 
   #### Default video with lazy loading
   ```jsx
-  <zr-video :video-url="video.url" />
+  <zr-video :video-url="video.url" poster="https://via.placeholder.com/1920x1080.png"/>
   ```
 
   #### Video with custom lazy loading

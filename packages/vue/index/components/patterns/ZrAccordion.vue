@@ -3,6 +3,7 @@
         <button :class="['accordion-header', {'expanded': accordionExpanded}]"
                 @click="toggleAccordion"
                 :aria-controls="contentId"
+                type="button"
                 :aria-expanded="accordionExpanded  ? 'true' : 'false'">
             {{header}}
             <span class="accordion-indicator"></span>
@@ -12,11 +13,11 @@
                     v-on:before-leave="beforeLeave" v-on:leave="leave">
             <div class="accordion-content"
                  v-show="accordionExpanded"
-                 ref="content"
+                 ref="accordionContent"
                  :aria-hidden="!accordionExpanded ? 'true' : 'false'"
                  :style="accordionTransition"
                  :id="contentId">
-                <div class="accordion-content-inner">
+                <div class="accordion-content-inner" ref="accordionContentInner">
                     <slot></slot>
                 </div>
             </div>
@@ -91,6 +92,11 @@
       }
     },
     methods: {
+      setContentHeight() {
+        if (this.$refs.accordionContent) {
+          this.$refs.accordionContent.style.height = this.$refs.accordionContentInner.scrollHeight + 'px';
+        }
+      },
       toggleAccordion() {
         this.accordionExpanded = !this.accordionExpanded;
         this.$emit('toggle', this.accordionExpanded);
@@ -108,9 +114,10 @@
         el.style.height = '0';
       }
     },
-    mounted() {
-      const contentEl = this.$refs.content;
-      contentEl.style.height = contentEl.scrollHeight + 'px';
+    updated() {
+      if (this.accordionExpanded) {
+        this.setContentHeight();
+      }
     }
   }
 </script>
@@ -201,6 +208,16 @@
     ```jsx
     <zr-accordion name="test3" header="Custom transition" :duration="500" easing="cubic-bezier(0.250, 0.250, 0.785, 0.325)">
         <div v-html="text.paragraphs"></div>
+    </zr-accordion>
+    ```
+
+    #### Height updated when dynamic content comes in
+    ```jsx
+    let dynamicContent = false;
+    <button @click="dynamicContent = !dynamicContent">Toggle Dynamic Content</button>
+    <zr-accordion name="test3" header="Custom transition">
+      <div v-html="text.paragraphs"></div>
+      <h4 v-if="dynamicContent">Some New Content</h4>
     </zr-accordion>
     ```
 </docs>

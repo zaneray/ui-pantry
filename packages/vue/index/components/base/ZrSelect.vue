@@ -1,6 +1,6 @@
 <template>
-  <base-input-wrapper v-bind="$props">
-    <label v-if="label" :for="id">{{label}}</label>
+  <base-input-wrapper v-bind="$props" class="zr-select">
+    <label :class="{'visually-hidden': hideLabel}" v-if="label" :for="id">{{label}}</label>
     <div class="select-wrapper">
       <select :id="id"
               :name="name ? name : id"
@@ -8,10 +8,12 @@
               :class="{'input-sm': size === 'sm', 'input-lg': size === 'lg'}"
               :required="required"
               @change="updateValue"
-              :disabled="disabled">
+              :disabled="disabled"
+              :autofocus="autofocus">
         <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
         <option v-for="option of options"
                 :value="option.value"
+                :disabled="option.disabled"
                 :key="option.value">
           {{option.label}}
         </option>
@@ -50,7 +52,7 @@
       },
       /**
        * Array of options to display in the select.  Each option should be an object of this shape:
-       * { label: 'optionLabel', value: 'optionValue' }.
+       * { label: 'optionLabel', value: 'optionValue', disabled: true }.
        */
       options: {
         type: Array,
@@ -62,6 +64,14 @@
       placeholder: {
         type: String,
         default: ''
+      },
+      /**
+       * In some cases it makes sense to not show a label. ADA still requires it to be in the code.
+       * This boolean turns it on an off visually.
+       */
+      hideLabel: {
+        type: Boolean,
+        required: false
       }
     },
     methods: {
@@ -102,38 +112,49 @@
     }
   }
 
-  select {
-    display: block;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    font-size: $input-font-size;
-    padding: $input-padding;
-    padding-right: $select-icon-width + 1em;
-    border: 1px solid $input-border-color;
-    background-color: $color-white;
-    color: $color-darker;
-    border-radius: 0;
-    width: 100%;
-    cursor: pointer;
+  .zr-select {
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+    }
+    select {
+      display: block;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      font-size: $input-font-size;
+      padding: $input-padding;
+      padding-right: $select-icon-width + 1em;
+      border: 1px solid $input-border-color;
+      background-color: $color-white;
+      color: $color-darker;
+      border-radius: 0;
+      width: 100%;
+      cursor: pointer;
 
-    &.input-sm {
-      padding: $input-padding-sm;
+      &.input-sm {
+        padding: $input-padding-sm;
+      }
+
+      &.input-lg {
+        padding: $input-padding-lg;
+      }
     }
 
-    &.input-lg {
-      padding: $input-padding-lg;
+    label {
+      display: inline-block;
+      padding-bottom: 0.25em;
+      cursor: pointer;
+      user-select: none;
+
+      @include font-label();
+      line-height: 1em;
     }
-  }
-
-  label {
-    display: inline-block;
-    padding-bottom: 0.25em;
-    cursor: pointer;
-    user-select: none;
-
-    @include font-label();
-    line-height: 1em;
   }
 </style>
 
@@ -169,5 +190,17 @@
   ```jsx
   <ZrSelect label="Required Select" :options="selectOptions" placeholder="Placeholder text" id="Preselected-select"
             :required="true" :invalid="true"></ZrSelect>
+  ```
+
+  ### Disabled Select Options
+  ```jsx
+  <ZrSelect label="Select An Option" :options="disabledSelectOptions" placeholder="Placeholder text" id="Preselected-select"
+            :required="true"></ZrSelect>
+  ```
+
+  ### Disabled Select Options and hidden Label
+  ```jsx
+  <ZrSelect :hide-label="true" label="Select An Option" :options="disabledSelectOptions" placeholder="Placeholder text" id="Preselected-select"
+            :required="true"></ZrSelect>
   ```
 </docs>

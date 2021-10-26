@@ -5,7 +5,8 @@
             :type="type"
             v-bind="btnLinkProps"
             :title="title"
-            :disabled="disabled">
+            :disabled="disabled"
+            :autofocus="autofocus">
         <span class="label">
             <slot></slot>
         </span>
@@ -112,6 +113,27 @@
         validator: function (value) {
           return ['_self', '_blank', '_parent', '_top'].includes(value)
         }
+      },
+      /**
+       * Whether or not to force hover state
+       */
+      hovered: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Whether to render a div element or not
+       */
+      renderDiv: {
+        type: Boolean,
+        default: false
+      },
+      /**
+       * Whether the button should be autofocused
+       */
+      autofocus: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
@@ -123,7 +145,8 @@
             'active': this.active,
             'full-width': this.full,
             'inline': this.inline,
-            'loading': this.loading
+            'loading': this.loading,
+            'hovered': this.hovered
           }
         ];
       },
@@ -133,9 +156,11 @@
             return 'a'
           }
           return this.nuxt ? 'nuxt-link' : 'router-link'
-        } else {
-          return 'button'
+        } else if (this.renderDiv) {
+          return 'div'
         }
+
+        return 'button'
       },
       btnLinkProps() {
         const linkProps = {};
@@ -171,13 +196,12 @@
         padding: $button-padding;
         font-size: 1rem;
         color: $color-lightest;
-        cursor: pointer;
         user-select: none;
         background-color: $color-darker;
         border: 2px solid transparent;
         transition: all 0.25s ease-out;
 
-        &:hover, &.active {
+        &:hover, &.active, &.hovered {
             background-color: $color-darkest;
         }
 
@@ -186,7 +210,7 @@
     .btn-default {
         background-color: $color-primary;
 
-        &:hover, &.active {
+        &:hover, &.active, &.hovered {
             background-color: $color-primary-dark;
         }
     }
@@ -194,7 +218,7 @@
     .btn-action {
         background-color: $color-action;
 
-        &:hover, &.active {
+        &:hover, &.active, &.hovered {
             background-color: $color-action-dark;
         }
     }
@@ -202,7 +226,7 @@
     .btn-info {
         background-color: $color-info;
 
-        &:hover, &.active {
+        &:hover, &.active, &.hovered {
             background-color: darken($color-info, 10%);
         }
     }
@@ -211,7 +235,7 @@
         background-color: $color-white;
         color: $color-darkest;
 
-        &:hover, &.active {
+        &:hover, &.active, &.hovered {
             background-color: darken($color-white, 10%);
         }
     }
@@ -221,7 +245,7 @@
         border-color: $color-darker;
         color: $color-darker;
 
-        &:hover, &.active {
+        &:hover, &.active, &.hovered {
             background-color: rgba(0, 0, 0, .05);
         }
     }
@@ -319,6 +343,7 @@
     ```jsx
     <ZrButton disabled style="margin-bottom: 10px">Disabled</ZrButton>
     <ZrButton loading style="margin-bottom: 10px">Loading</ZrButton>
+    <ZrButton hovered style="margin-bottom: 10px">Hovered</ZrButton>
     ```
     #### Button Display Options
     ```jsx
@@ -332,6 +357,7 @@
     <ZrButton style="margin-bottom: 10px">Button</ZrButton>
     <ZrButton link-path="www.google.com" external-link style="margin-bottom: 10px">Standard Link</ZrButton>
     <ZrButton link-path="/product/path" style="margin-bottom: 10px">Router Link</ZrButton>
-    <ZrButton link-path="/product/path" nuxt>Nuxt Link</ZrButton>
+    <ZrButton link-path="/product/path" nuxt style="margin-bottom: 10px">Nuxt Link</ZrButton>
+    <ZrButton render-div>Div Element</ZrButton>
     ```
 </docs>
