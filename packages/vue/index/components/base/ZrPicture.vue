@@ -4,12 +4,14 @@
       <picture v-lazy-load="{rootMargin: rootMargin}">
         <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="lazyDesktopImg">
         <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="lazyTabletImg">
+        <source v-if="tabletImgPortrait" :data-src="tabletImgPortrait" :media="breakpointQueryTabletPortrait" :srcset="lazyTabletPortraitImg">
         <img :data-src="mobileImg" :alt="altText" :src="lazyMobileImg" :class="{'fade-image': fade}" :style="fadeStyle" />
       </picture>
       <noscript inline-template>
         <picture>
           <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop"/>
           <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
+          <source v-if="tabletImgPortrait" :srcset="lazyTabletPortraitImg" :media="breakpointQueryTabletPortrait">
           <img :src="mobileImg" :alt="altText" />
         </picture>
       </noscript>
@@ -17,6 +19,7 @@
     <picture v-else>
       <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop" />
       <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet" />
+      <source v-if="tabletImgPortrait" :srcset="tabletImgPortrait" :media="breakpointQueryTabletPortrait">
       <img :src="mobileImg" :alt="altText" />
     </picture>
   </div>
@@ -50,6 +53,14 @@
        * Tablet image url to render
        */
       tabletImg: {
+        type: String,
+        required: false,
+        default: null
+      },
+      /**
+       * Tablet portrait image url to render
+       */
+      tabletImgPortrait: {
         type: String,
         required: false,
         default: null
@@ -89,6 +100,9 @@
       },
       breakpointQueryTablet() {
         return `(min-width: ${this.breakpointTablet}px)`;
+      },
+      breakpointQueryTabletPortrait() {
+        return `(min-width: ${this.breakpointTablet}px) and (orientation: portrait)`;
       }
     }
   }
@@ -165,6 +179,16 @@
              fade-duration="0.8"
              fade-easing="linear"
              root-margin="-500px"
+  />
+  ```
+
+  #### Picture with tablet portrait option
+  ```jsx
+  <ZrPicture :mobile-img="images.banner_image.mobile.url"
+             :tablet-img="images.banner_image.half.url"
+             :tablet-img-portrait="images.banner_image.url"
+             :desktop-img="images.banner_image.url"
+             :alt-text="images.banner_image.alt"
   />
   ```
 
