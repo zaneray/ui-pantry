@@ -3294,6 +3294,9 @@ var script$9 = {
     lazyTabletImg: function lazyTabletImg() {
       return this.lazyLoaded ? this.tabletImg : this.defaultImage;
     },
+    lazyTabletPortraitImg: function lazyTabletPortraitImg() {
+      return this.lazyLoaded ? this.tabletImgPortrait : this.defaultImage;
+    },
     lazyMobileImg: function lazyMobileImg() {
       return this.lazyLoaded ? this.mobileImg : this.defaultImage;
     },
@@ -3313,17 +3316,17 @@ var script$9 = {
 const __vue_script__$9 = script$9;
 
 /* template */
-var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?[_c('picture',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}]},[(_vm.desktopImg)?_c('source',{attrs:{"data-src":_vm.desktopImg,"media":_vm.breakpointQueryDesktop,"srcset":_vm.lazyDesktopImg}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"data-src":_vm.tabletImg,"media":_vm.breakpointQueryTablet,"srcset":_vm.lazyTabletImg}}):_vm._e(),_vm._v(" "),(_vm.tabletImgPortrait)?_c('source',{attrs:{"data-src":_vm.tabletImgPortrait,"media":_vm.breakpointQueryTabletPortrait,"srcset":_vm.lazyTabletPortraitImg}}):_vm._e(),_vm._v(" "),_c('img',{class:{'fade-image': _vm.fade},style:(_vm.fadeStyle),attrs:{"data-src":_vm.mobileImg,"alt":_vm.altText,"src":_vm.lazyMobileImg}})]),_vm._v(" "),_c('noscript',{inlineTemplate:{render:function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),(_vm.tabletImgPortrait)?_c('source',{attrs:{"srcset":_vm.lazyTabletPortraitImg,"media":_vm.breakpointQueryTabletPortrait}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])},staticRenderFns:[]}})]:_c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),(_vm.tabletImgPortrait)?_c('source',{attrs:{"srcset":_vm.tabletImgPortrait,"media":_vm.breakpointQueryTabletPortrait}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])],2)};
+var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.lazy)?[_c('picture',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}]},[(_vm.desktopImg)?_c('source',{attrs:{"data-src":_vm.desktopImg,"media":_vm.breakpointQueryDesktop,"srcset":_vm.lazyDesktopImg}}):_vm._e(),_vm._v(" "),(_vm.tabletImgPortrait)?_c('source',{attrs:{"data-src":_vm.tabletImgPortrait,"media":_vm.breakpointQueryTabletPortrait,"srcset":_vm.lazyTabletPortraitImg}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"data-src":_vm.tabletImg,"media":_vm.breakpointQueryTablet,"srcset":_vm.lazyTabletImg}}):_vm._e(),_vm._v(" "),_c('img',{class:{'fade-image': _vm.fade},style:(_vm.fadeStyle),attrs:{"data-src":_vm.mobileImg,"alt":_vm.altText,"src":_vm.lazyMobileImg}})]),_vm._v(" "),_c('noscript',{inlineTemplate:{render:function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImgPortrait)?_c('source',{attrs:{"srcset":_vm.lazyTabletPortraitImg,"media":_vm.breakpointQueryTabletPortrait}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])},staticRenderFns:[]}})]:_c('picture',[(_vm.desktopImg)?_c('source',{attrs:{"srcset":_vm.desktopImg,"media":_vm.breakpointQueryDesktop}}):_vm._e(),_vm._v(" "),(_vm.tabletImgPortrait)?_c('source',{attrs:{"srcset":_vm.tabletImgPortrait,"media":_vm.breakpointQueryTabletPortrait}}):_vm._e(),_vm._v(" "),(_vm.tabletImg)?_c('source',{attrs:{"srcset":_vm.tabletImg,"media":_vm.breakpointQueryTablet}}):_vm._e(),_vm._v(" "),_c('img',{attrs:{"src":_vm.mobileImg,"alt":_vm.altText}})])],2)};
 var __vue_staticRenderFns__$9 = [];
 
   /* style */
   const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
-    inject("data-v-45fd10e3_0", { source: "img[data-v-45fd10e3]{display:block;width:100%}img.lazy-image.fade-image[data-v-45fd10e3]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-45fd10e3]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-701dee08_0", { source: "img[data-v-701dee08]{display:block;width:100%}img.lazy-image.fade-image[data-v-701dee08]{opacity:0}img.lazy-image.fade-image.img-loaded[data-v-701dee08]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = "data-v-45fd10e3";
+  const __vue_scope_id__$9 = "data-v-701dee08";
   /* module identifier */
   const __vue_module_identifier__$9 = undefined;
   /* functional template */
@@ -3449,17 +3452,17 @@ var script$b = {
 const __vue_script__$b = script$b;
 
 /* template */
-var __vue_render__$b = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"zr-radio"},[_c('input',_vm._b({attrs:{"type":"radio","name":_vm.name,"id":_vm.id,"disabled":_vm.disabled,"autofocus":_vm.autofocus},domProps:{"value":_vm.value,"checked":_vm.selected},on:{"change":_vm.inputChanged}},'input',_vm.$attrs,false)),_vm._v(" "),_c('label',{attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))])])};
+var __vue_render__$b = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"zr-radio"},[_c('input',_vm._b({attrs:{"type":"radio","name":_vm.name,"id":_vm.id,"disabled":_vm.disabled,"autofocus":_vm.autofocus,"required":_vm.required},domProps:{"value":_vm.value,"checked":_vm.selected},on:{"change":_vm.inputChanged}},'input',_vm.$attrs,false)),_vm._v(" "),_c('label',{attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))])])};
 var __vue_staticRenderFns__$b = [];
 
   /* style */
   const __vue_inject_styles__$b = function (inject) {
     if (!inject) return
-    inject("data-v-1b71c4a6_0", { source: "@keyframes SPIN-data-v-1b71c4a6{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.zr-radio input[data-v-1b71c4a6]{position:absolute;width:0;height:0;opacity:0;margin:0;padding:0}.zr-radio input:checked+label[data-v-1b71c4a6]:after{opacity:1;transform:scale(1)}.zr-radio label[data-v-1b71c4a6]{position:relative;display:block;font-family:sans-serif;font-size:16px;line-height:1.5em;padding-left:2.25em;vertical-align:middle;cursor:pointer}.zr-radio label[data-v-1b71c4a6]:after,.zr-radio label[data-v-1b71c4a6]:before{content:\"\";position:absolute;display:block;border-radius:50%}.zr-radio label[data-v-1b71c4a6]:before{top:50%;left:0;width:1.5em;height:1.5em;border:1px solid #2a2928;transform:translateY(-50%)}.zr-radio label[data-v-1b71c4a6]:after{opacity:0;left:calc((1.5em - 1em + 2px)/ 2);top:calc((1.5em - 1em)/ 2);width:1em;height:1em;background-color:#595755;transform:scale(0);transition:all .25s ease-out}", map: undefined, media: undefined });
+    inject("data-v-007ea886_0", { source: "@keyframes SPIN-data-v-007ea886{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.zr-radio input[data-v-007ea886]{position:absolute;width:0;height:0;opacity:0;margin:0;padding:0}.zr-radio input:checked+label[data-v-007ea886]:after{opacity:1;transform:scale(1)}.zr-radio label[data-v-007ea886]{position:relative;display:block;font-family:sans-serif;font-size:16px;line-height:1.5em;padding-left:2.25em;vertical-align:middle;cursor:pointer}.zr-radio label[data-v-007ea886]:after,.zr-radio label[data-v-007ea886]:before{content:\"\";position:absolute;display:block;border-radius:50%}.zr-radio label[data-v-007ea886]:before{top:50%;left:0;width:1.5em;height:1.5em;border:1px solid #2a2928;transform:translateY(-50%)}.zr-radio label[data-v-007ea886]:after{opacity:0;left:calc((1.5em - 1em + 2px)/ 2);top:calc((1.5em - 1em)/ 2);width:1em;height:1em;background-color:#595755;transform:scale(0);transition:all .25s ease-out}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$b = "data-v-1b71c4a6";
+  const __vue_scope_id__$b = "data-v-007ea886";
   /* module identifier */
   const __vue_module_identifier__$b = undefined;
   /* functional template */
