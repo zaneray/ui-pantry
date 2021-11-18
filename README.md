@@ -35,8 +35,14 @@ All packages must be bundled before publsihing.  To do this, run
 npm run bundle
 ```
 
-and then:
+and then run
 
 ```jsx
-npm run publish
+npm publish
+```
+
+from the directory
+
+```jsx
+/packages/vue/index
 ```

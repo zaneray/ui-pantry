@@ -3,23 +3,23 @@
     <template v-if="lazy">
       <picture v-lazy-load="{rootMargin: rootMargin}">
         <source v-if="desktopImg" :data-src="desktopImg" :media="breakpointQueryDesktop" :srcset="lazyDesktopImg">
-        <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="lazyTabletImg">
         <source v-if="tabletImgPortrait" :data-src="tabletImgPortrait" :media="breakpointQueryTabletPortrait" :srcset="lazyTabletPortraitImg">
+        <source v-if="tabletImg" :data-src="tabletImg" :media="breakpointQueryTablet" :srcset="lazyTabletImg">
         <img :data-src="mobileImg" :alt="altText" :src="lazyMobileImg" :class="{'fade-image': fade}" :style="fadeStyle" />
       </picture>
       <noscript inline-template>
         <picture>
           <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop"/>
-          <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
           <source v-if="tabletImgPortrait" :srcset="lazyTabletPortraitImg" :media="breakpointQueryTabletPortrait">
+          <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet"/>
           <img :src="mobileImg" :alt="altText" />
         </picture>
       </noscript>
     </template>
     <picture v-else>
       <source v-if="desktopImg" :srcset="desktopImg" :media="breakpointQueryDesktop" />
-      <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet" />
       <source v-if="tabletImgPortrait" :srcset="tabletImgPortrait" :media="breakpointQueryTabletPortrait">
+      <source v-if="tabletImg" :srcset="tabletImg" :media="breakpointQueryTablet" />
       <img :src="mobileImg" :alt="altText" />
     </picture>
   </div>
@@ -91,6 +91,9 @@
       },
       lazyTabletImg() {
         return this.lazyLoaded ? this.tabletImg : this.defaultImage;
+      },
+      lazyTabletPortraitImg() {
+        return this.lazyLoaded ? this.tabletImgPortrait : this.defaultImage;
       },
       lazyMobileImg() {
         return this.lazyLoaded ? this.mobileImg : this.defaultImage;
@@ -199,7 +202,7 @@
   ```jsx
   <ZrPicture :mobile-img="images.banner_image.mobile.url"
              :tablet-img="images.banner_image.half.url"
-             :tablet-img-portrait="images.banner_image.url"
+             :tablet-img-portrait="images.banner_image_light.url"
              :desktop-img="images.banner_image.url"
              :alt-text="images.banner_image.alt"
   />
