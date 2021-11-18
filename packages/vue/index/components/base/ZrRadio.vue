@@ -9,6 +9,7 @@
            v-bind="$attrs"
            :disabled="disabled"
            :autofocus="autofocus"
+           :required="required"
     />
     <label :for="id">{{label}}</label>
 </div>
@@ -133,5 +134,14 @@
     ```jsx
     <ZrRadio label="Label Here" value="2" id="radio3" :autofocus="true"></ZrRadio>
     ```
+
+  #### Required Radio
+  ```jsx
+  <ZrRadio :required="true" label="Label Here1" value="2" id="radio4" name="required-radio-group"></ZrRadio>
+  <ZrRadio label="Label Here2" value="2" id="radio5" name="required-radio-group"></ZrRadio>
+  <ZrRadio label="Label Here3" value="2" id="radio6" name="required-radio-group"></ZrRadio>
+  <ZrRadio label="Label Here4" value="2" id="radio7" name="required-radio-group"></ZrRadio>
+  <ZrRadio label="Label Here5" value="2" id="radio8" name="required-radio-group"></ZrRadio>
+  ```
 </docs>
 
