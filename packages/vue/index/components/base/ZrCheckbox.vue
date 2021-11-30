@@ -89,6 +89,11 @@
                 }
             }
         }
+
+        &:focus + label::before {
+            outline: 1px dotted #212121;
+            outline: 5px auto -webkit-focus-ring-color;
+        }
     }
 
     label {
@@ -161,6 +166,16 @@
     #### Readonly Unselected Checkbox
     ```jsx
     <ZrCheckbox label="Readonly Unselected" value="4" id="check4" readonly></ZrCheckbox>
+    ```
+
+    #### Group of checkboxes
+    ```jsx
+        <fieldset>
+          <legend>Group of Checkboxes</legend>
+          <ZrCheckbox label="First Option" name="checkboxExampleGroup" id="groupOpt1"></ZrCheckbox>
+          <ZrCheckbox label="Second Option" name="checkboxExampleGroup" id="groupOpt2"></ZrCheckbox>
+          <ZrCheckbox label="Third Option" name="checkboxExampleGroup" id="groupOpt3"></ZrCheckbox>
+        </fieldset>
     ```
 </docs>
 
