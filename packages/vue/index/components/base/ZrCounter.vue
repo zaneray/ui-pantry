@@ -217,6 +217,10 @@
       border-right: 1.5rem solid transparent;
     }
   }
+
+  .visually-hidden {
+    display: none;
+  }
 </style>
 
 <docs>
