@@ -1,34 +1,14 @@
 <template>
   <div class="counter-wrapper-outer">
     <div class="counter-wrapper">
-      <span
-        id="decrementAriaLabel"
-        class="visually-hidden"
-        aria-hidden="true"
-        >{{ decrementBtnAriaLabel }}</span
-      >
-      <button
-        class="stepper stepper-negative"
-        @click="increment(-1)"
-        :disabled="minDisabled"
-        aria-labelledby="decrementAriaLabel"
-      >
-        <slot name="decrementSymbol">-</slot>
+      <button class="stepper stepper-negative" @click="increment(-1)" :disabled="minDisabled">
+        <span class="visually-hidden">{{ decrementBtnAriaLabel }}</span>
+        <slot name="decrementSymbol"><span aria-hidden="true">-</span></slot>
       </button>
-      <div class="total">{{count}}{{displayLabel}}</div>
-      <span
-        id="incrementAriaLabel"
-        class="visually-hidden"
-        aria-hidden="true"
-        >{{ incrementBtnAriaLabel }}</span
-      >
-      <button
-        class="stepper stepper-positive"
-        @click="increment(1)"
-        :disabled="maxDisabled"
-        aria-labelledby="incrementAriaLabel"
-      >
-        <slot name="incrementSymbol">+</slot>
+      <div class="total">{{ count }}{{ displayLabel }}</div>
+      <button class="stepper stepper-positive" @click="increment(1)" :disabled="maxDisabled">
+        <span class="visually-hidden">{{ incrementBtnAriaLabel }}</span>
+        <slot name="incrementSymbol"><span aria-hidden="true">+</span></slot>
       </button>
     </div>
     <div v-if="showError" class="counter-error">
