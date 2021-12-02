@@ -303,16 +303,6 @@
     height: 34px; /* thumb height + label font size */
     position: relative;
 
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      overflow: hidden;
-      border: 0;
-    }
-
     /* track styling */
     input[type="range"] {
       width: 100%;
