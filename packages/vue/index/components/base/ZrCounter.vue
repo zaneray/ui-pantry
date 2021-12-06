@@ -2,11 +2,13 @@
   <div class="counter-wrapper-outer">
     <div class="counter-wrapper">
       <button class="stepper stepper-negative" @click="increment(-1)" :disabled="minDisabled">
-        <slot name="decrementSymbol">-</slot>
+        <span class="visually-hidden">{{ decrementBtnAriaLabel }}</span>
+        <slot name="decrementSymbol"><span aria-hidden="true">-</span></slot>
       </button>
-      <div class="total">{{count}}{{displayLabel}}</div>
+      <div class="total">{{ count }}{{ displayLabel }}</div>
       <button class="stepper stepper-positive" @click="increment(1)" :disabled="maxDisabled">
-        <slot name="incrementSymbol">+</slot>
+        <span class="visually-hidden">{{ incrementBtnAriaLabel }}</span>
+        <slot name="incrementSymbol"><span aria-hidden="true">+</span></slot>
       </button>
     </div>
     <div v-if="showError" class="counter-error">
@@ -61,6 +63,20 @@
       errorMessage: {
         type: String,
         default: 'That is too many.'
+      },
+      /**
+       * Aria label for negative stepper button (decrement)
+       */
+      decrementBtnAriaLabel: {
+        type: String,
+        default: "Decrease count",
+      },
+      /**
+       * Aria label for positive stepper button (increment)
+       */
+      incrementBtnAriaLabel: {
+        type: String,
+        default: "Increase count",
       }
     },
     data() {
