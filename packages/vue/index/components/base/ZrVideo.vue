@@ -10,6 +10,7 @@
     :playsinline="playsinline"
     :poster="poster"
     :style="fadeStyle"
+    :controls="controls"
   >
     <source :data-src="videoUrl" :type="videoType" />
   </video>
@@ -21,6 +22,7 @@
     :muted="muted"
     :playsinline="playsinline"
     :poster="poster"
+    :controls="controls"
   >
     <source :src="videoUrl" :type="videoType" />
   </video>
@@ -89,6 +91,13 @@
       videoType: {
         type: String,
         default: 'video/mp4'
+      },
+      /**
+       * Whether or not to show the video controls
+       */
+      controls: {
+        type: Boolean,
+        default: false
       }
     }
   };
@@ -126,5 +135,10 @@
   #### Video with no lazy loading
   ```jsx
   <zr-video :video-url="video.url" :lazy="false" />
+  ```
+
+  #### Video with controls
+  ```jsx
+  <zr-video :video-url="video.url" :lazy="true" :autoplay="false" :controls="true" />
   ```
 </docs>
