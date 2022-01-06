@@ -4021,6 +4021,14 @@ var script$e = {
     videoType: {
       type: String,
       default: 'video/mp4'
+    },
+
+    /**
+     * Whether or not to show the video controls
+     */
+    controls: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -4029,17 +4037,17 @@ var script$e = {
 const __vue_script__$e = script$e;
 
 /* template */
-var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.videoUrl && _vm.lazy)?_c('video',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],staticClass:"video",class:{'fade-video': _vm.fade},style:(_vm.fadeStyle),attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline,"poster":_vm.poster},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"data-src":_vm.videoUrl,"type":_vm.videoType}})]):(_vm.videoUrl)?_c('video',{staticClass:"video",attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline,"poster":_vm.poster},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"src":_vm.videoUrl,"type":_vm.videoType}})]):_vm._e()};
+var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.videoUrl && _vm.lazy)?_c('video',{directives:[{name:"lazy-load",rawName:"v-lazy-load",value:({rootMargin: _vm.rootMargin}),expression:"{rootMargin: rootMargin}"}],staticClass:"video",class:{'fade-video': _vm.fade},style:(_vm.fadeStyle),attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline,"poster":_vm.poster,"controls":_vm.controls},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"data-src":_vm.videoUrl,"type":_vm.videoType}})]):(_vm.videoUrl)?_c('video',{staticClass:"video",attrs:{"autoplay":_vm.autoplay,"loop":_vm.loop,"playsinline":_vm.playsinline,"poster":_vm.poster,"controls":_vm.controls},domProps:{"muted":_vm.muted}},[_c('source',{attrs:{"src":_vm.videoUrl,"type":_vm.videoType}})]):_vm._e()};
 var __vue_staticRenderFns__$e = [];
 
   /* style */
   const __vue_inject_styles__$e = function (inject) {
     if (!inject) return
-    inject("data-v-6f06533d_0", { source: ".video[data-v-6f06533d]{width:100%;height:100%;object-fit:cover}.video.lazy-video.fade-video[data-v-6f06533d]{opacity:0}.video.lazy-video.fade-video.video-loaded[data-v-6f06533d]{opacity:1}", map: undefined, media: undefined });
+    inject("data-v-26df6b54_0", { source: ".video[data-v-26df6b54]{width:100%;height:100%;object-fit:cover}.video.lazy-video.fade-video[data-v-26df6b54]{opacity:0}.video.lazy-video.fade-video.video-loaded[data-v-26df6b54]{opacity:1}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$e = "data-v-6f06533d";
+  const __vue_scope_id__$e = "data-v-26df6b54";
   /* module identifier */
   const __vue_module_identifier__$e = undefined;
   /* functional template */
